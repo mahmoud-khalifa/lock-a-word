@@ -95,6 +95,7 @@
     [self addButtons];
     
     self.isTouchEnabled=YES;
+//    self.scaleX = -1; 
 }
 
 - (void)addBgImages {

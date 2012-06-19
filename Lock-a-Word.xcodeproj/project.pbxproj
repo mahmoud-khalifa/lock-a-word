@@ -202,7 +202,6 @@
 		347C4F001562C97400DC8B02 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E0C1562C97300DC8B02 /* Icon-Small@2x.png */; };
 		347C4F011562C97400DC8B02 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E0D1562C97300DC8B02 /* Icon.png */; };
 		347C4F021562C97400DC8B02 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E0E1562C97300DC8B02 /* Icon@2x.png */; };
-		347C4F031562C97400DC8B02 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E0F1562C97300DC8B02 /* Info.plist */; };
 		347C4F041562C97400DC8B02 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E101562C97300DC8B02 /* iTunesArtwork.png */; };
 		347C4F051562C97400DC8B02 /* alien.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E121562C97300DC8B02 /* alien.mp3 */; };
 		347C4F061562C97400DC8B02 /* alien_vision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 347C4E131562C97300DC8B02 /* alien_vision.mp3 */; };
@@ -1610,7 +1609,6 @@
 				347C4F001562C97400DC8B02 /* Icon-Small@2x.png in Resources */,
 				347C4F011562C97400DC8B02 /* Icon.png in Resources */,
 				347C4F021562C97400DC8B02 /* Icon@2x.png in Resources */,
-				347C4F031562C97400DC8B02 /* Info.plist in Resources */,
 				347C4F041562C97400DC8B02 /* iTunesArtwork.png in Resources */,
 				347C4F051562C97400DC8B02 /* alien.mp3 in Resources */,
 				347C4F061562C97400DC8B02 /* alien_vision.mp3 in Resources */,
@@ -1807,7 +1805,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
@@ -1815,6 +1813,7 @@
 				PROVISIONING_PROFILE = "305F7D6A-42CB-4519-837C-D3C59241DECD";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "305F7D6A-42CB-4519-837C-D3C59241DECD";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
 		};
@@ -1823,7 +1822,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
 				COPY_PHASE_STRIP = YES;
@@ -1844,8 +1843,9 @@
 				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "Lock-a-Word";
-				PROVISIONING_PROFILE = "F4A055AC-4FD7-4C97-8091-3F018D640873";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F4A055AC-4FD7-4C97-8091-3F018D640873";
+				PROVISIONING_PROFILE = "ADD4346D-1205-4481-B05A-504FBB5C9F58";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ADD4346D-1205-4481-B05A-504FBB5C9F58";
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1865,13 +1865,14 @@
 					"COCOS2D_DEBUG=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				PROVISIONING_PROFILE = "1C009416-E7EC-46CC-9877-783BE4441829";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1C009416-E7EC-46CC-9877-783BE4441829";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1883,7 +1884,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
@@ -1891,6 +1892,8 @@
 				PROVISIONING_PROFILE = "305F7D6A-42CB-4519-837C-D3C59241DECD";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "305F7D6A-42CB-4519-837C-D3C59241DECD";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1920,8 +1923,9 @@
 				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "Lock-a-Word";
-				PROVISIONING_PROFILE = "A93EDCF6-E01D-44EA-A629-0B0C0DC93B45";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93EDCF6-E01D-44EA-A629-0B0C0DC93B45";
+				PROVISIONING_PROFILE = "0198A8B0-C1C9-4C28-BAE4-F015A17FCDA1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0198A8B0-C1C9-4C28-BAE4-F015A17FCDA1";
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
@@ -1954,8 +1958,9 @@
 				);
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "Lock-a-Word";
-				PROVISIONING_PROFILE = "9F7F325C-88F7-471A-B2EE-728FADE3504F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F7F325C-88F7-471A-B2EE-728FADE3504F";
+				PROVISIONING_PROFILE = "AAA00383-D162-4899-817A-F5E73493331E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AAA00383-D162-4899-817A-F5E73493331E";
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
