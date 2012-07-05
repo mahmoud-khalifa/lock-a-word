@@ -126,126 +126,126 @@ static Controller *instanceOfController;
     return [array autorelease];
 }
 
--(NSMutableArray*)getAvailableLettersImages{
-    return [self getLettersImagesNames:availableLetters withLettersType:LettersTypesSmall];
-}
-
--(NSMutableArray*)generateRandomBoardImagesWithIsPanicMode:(BOOL)isPanicMode{
-    [randomBoardLetters removeAllObjects];
-    for (int i=0; i<kBOARD_SIZE;i++ ) {
-        [randomBoardLetters addObject:[availableLetters objectAtIndex:arc4random()%[availableLetters count]]];
-        
-    }   
-    LettersTypes type;
-    if (isPanicMode) {
-        type=LettersTypesPanic;
-    }else{
-        type=LettersTypesNormal;
-    }
-    return [self getLettersImagesNames:randomBoardLetters withLettersType:type];
-    
-}
-
-
--(NSArray*)swapLettersAtTouchedIndex:(int)index{
-    int index1,index2;
-    
-    NSArray*indexes=[[NSArray alloc]init];
-    if ((int)(index/5)!=0 &&(int)(index/5)!=4 &&isSwappingVertical) { //Swap Vertical
-        
-        index1=index-5;
-        index2=index+5;
-        
-        indexes=[NSArray arrayWithObjects:[NSNumber numberWithInt:index1],[NSNumber numberWithInt:index2], nil];
-        
-        if (gameMode==GameModeBoth ||gameMode== GameModeDropAll) {
-            isSwappingVertical=!isSwappingVertical;
-        }
-        
-    }else if(index%5!=0 && index%5!=4 && !isSwappingVertical){ //Swap Horizontal
-        
-        index1=index-1;
-        index2=index+1;
-        
-        indexes=[NSArray arrayWithObjects:[NSNumber numberWithInt:index1],[NSNumber numberWithInt:index2], nil];
-        if (gameMode==GameModeBoth ||gameMode== GameModeDropAll) {
-            isSwappingVertical=!isSwappingVertical;
-        }
-    }
-    
-    if ([indexes count]>0) {
-        
-        [self swapTwoLettersAtIndex1:index1 andIndex2:index2];
-    }
-    
-    
-    return indexes ;
-    
-}
--(void)swapTwoLettersAtIndex1:(int)index1 andIndex2:(int)index2{
-    NSString* letter1=[randomBoardLetters objectAtIndex:index1];
-    NSString* letter2=[randomBoardLetters objectAtIndex:index2];
-    
-    [randomBoardLetters replaceObjectAtIndex:index1 withObject:letter2];
-    
-    [randomBoardLetters replaceObjectAtIndex:index2 withObject:letter1];
-    
-    
-}
-
--(BOOL)checkWordWithLettersIndexes:(NSMutableArray*)places{
-    
-    NSString* word=[[NSString alloc]init];
-    for (NSNumber* place in places) {
-        word=[NSString stringWithFormat:@"%@%@",word,[randomBoardLetters objectAtIndex:[place intValue]]];
-    }
-    NSLog(@"collected Word:%@",word);
-    
-    bool isSameLetters=[self checkSameLetters:word];
-    
-    if (!isSameLetters) {
-        
-        UITextChecker *checker = [[UITextChecker alloc] init];
-        NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
-        NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
-        NSRange searchRange = NSMakeRange(0, [word length]);
-        
-        NSRange misspelledRange = [checker rangeOfMisspelledWordInString:word range: searchRange startingAt:0 wrap:NO language: currentLanguage ];
-        return misspelledRange.location == NSNotFound;
-    }else{
-        
-        return NO;
-    }
-}
-
-
--(void)dropLettersAtIndexSet:(NSIndexSet*)indexSet{
-    [removedLetters addObjectsFromArray:[availableLetters objectsAtIndexes:indexSet]];
-    [availableLetters removeObjectsAtIndexes:indexSet];
-}
-
-
--(BOOL)checkSameLetters:(NSString*)word{
-    
-    bool sameLetters=NO;
-    
-    NSUInteger length = [word length];
-    NSMutableArray *chars=[[NSMutableArray alloc]initWithCapacity:length];
-    for (int i = 0; i < length; ++i) {
-        [chars addObject:[NSString stringWithFormat:@"%c",[word characterAtIndex:i]]];
-    }
-    for (int i=0; i<length-1; i++) {
-        if ([[chars objectAtIndex:i] isEqualToString:[chars objectAtIndex:i+1]]) {
-            sameLetters=YES;
-        }else{
-            sameLetters=NO;
-            break;
-        }
-    }
-    
-    
-    return sameLetters;
-}
+//-(NSMutableArray*)getAvailableLettersImages{
+//    return [self getLettersImagesNames:availableLetters withLettersType:LettersTypesSmall];
+//}
+//
+//-(NSMutableArray*)generateRandomBoardImagesWithIsPanicMode:(BOOL)isPanicMode{
+//    [randomBoardLetters removeAllObjects];
+//    for (int i=0; i<kBOARD_SIZE;i++ ) {
+//        [randomBoardLetters addObject:[availableLetters objectAtIndex:arc4random()%[availableLetters count]]];
+//        
+//    }   
+//    LettersTypes type;
+//    if (isPanicMode) {
+//        type=LettersTypesPanic;
+//    }else{
+//        type=LettersTypesNormal;
+//    }
+//    return [self getLettersImagesNames:randomBoardLetters withLettersType:type];
+//    
+//}
+//
+//
+//-(NSArray*)swapLettersAtTouchedIndex:(int)index{
+//    int index1,index2;
+//    
+//    NSArray*indexes=[[NSArray alloc]init];
+//    if ((int)(index/5)!=0 &&(int)(index/5)!=4 &&isSwappingVertical) { //Swap Vertical
+//        
+//        index1=index-5;
+//        index2=index+5;
+//        
+//        indexes=[NSArray arrayWithObjects:[NSNumber numberWithInt:index1],[NSNumber numberWithInt:index2], nil];
+//        
+//        if (gameMode==GameModeBoth ||gameMode== GameModeDropAll) {
+//            isSwappingVertical=!isSwappingVertical;
+//        }
+//        
+//    }else if(index%5!=0 && index%5!=4 && !isSwappingVertical){ //Swap Horizontal
+//        
+//        index1=index-1;
+//        index2=index+1;
+//        
+//        indexes=[NSArray arrayWithObjects:[NSNumber numberWithInt:index1],[NSNumber numberWithInt:index2], nil];
+//        if (gameMode==GameModeBoth ||gameMode== GameModeDropAll) {
+//            isSwappingVertical=!isSwappingVertical;
+//        }
+//    }
+//    
+//    if ([indexes count]>0) {
+//        
+//        [self swapTwoLettersAtIndex1:index1 andIndex2:index2];
+//    }
+//    
+//    
+//    return indexes ;
+//    
+//}
+//-(void)swapTwoLettersAtIndex1:(int)index1 andIndex2:(int)index2{
+//    NSString* letter1=[randomBoardLetters objectAtIndex:index1];
+//    NSString* letter2=[randomBoardLetters objectAtIndex:index2];
+//    
+//    [randomBoardLetters replaceObjectAtIndex:index1 withObject:letter2];
+//    
+//    [randomBoardLetters replaceObjectAtIndex:index2 withObject:letter1];
+//    
+//    
+//}
+//
+//-(BOOL)checkWordWithLettersIndexes:(NSMutableArray*)places{
+//    
+//    NSString* word=[[NSString alloc]init];
+//    for (NSNumber* place in places) {
+//        word=[NSString stringWithFormat:@"%@%@",word,[randomBoardLetters objectAtIndex:[place intValue]]];
+//    }
+//    NSLog(@"collected Word:%@",word);
+//    
+//    bool isSameLetters=[self checkSameLetters:word];
+//    
+//    if (!isSameLetters) {
+//        
+//        UITextChecker *checker = [[UITextChecker alloc] init];
+//        NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
+//        NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
+//        NSRange searchRange = NSMakeRange(0, [word length]);
+//        
+//        NSRange misspelledRange = [checker rangeOfMisspelledWordInString:word range: searchRange startingAt:0 wrap:NO language: currentLanguage ];
+//        return misspelledRange.location == NSNotFound;
+//    }else{
+//        
+//        return NO;
+//    }
+//}
+//
+//
+//-(void)dropLettersAtIndexSet:(NSIndexSet*)indexSet{
+//    [removedLetters addObjectsFromArray:[availableLetters objectsAtIndexes:indexSet]];
+//    [availableLetters removeObjectsAtIndexes:indexSet];
+//}
+//
+//
+//-(BOOL)checkSameLetters:(NSString*)word{
+//    
+//    bool sameLetters=NO;
+//    
+//    NSUInteger length = [word length];
+//    NSMutableArray *chars=[[NSMutableArray alloc]initWithCapacity:length];
+//    for (int i = 0; i < length; ++i) {
+//        [chars addObject:[NSString stringWithFormat:@"%c",[word characterAtIndex:i]]];
+//    }
+//    for (int i=0; i<length-1; i++) {
+//        if ([[chars objectAtIndex:i] isEqualToString:[chars objectAtIndex:i+1]]) {
+//            sameLetters=YES;
+//        }else{
+//            sameLetters=NO;
+//            break;
+//        }
+//    }
+//    
+//    
+//    return sameLetters;
+//}
 
 #pragma mark preload resources
 -(void)preloadResources{
@@ -269,8 +269,15 @@ static Controller *instanceOfController;
 -(void)generateRandomGameLetters{
     [randomBoardLetters removeAllObjects];
     [randomBoardLettersImages removeAllObjects];
-    for (int i=0; i<kBOARD_SIZE;i++ ) {
-        [randomBoardLetters addObject:[allLetters objectAtIndex:arc4random()%[allLetters count]]];
+    
+    [randomBoardLetters addObject:[allLetters objectAtIndex:arc4random()%[allLetters count]]];
+    [randomBoardLetters addObject:[allLetters objectAtIndex:arc4random()%[allLetters count]]];
+    for (int i=2; i<kBOARD_SIZE;i++ ) {
+        NSString *newLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
+        while ([newLetter isEqualToString:[randomBoardLetters objectAtIndex:i-1]] || [newLetter isEqualToString:[randomBoardLetters objectAtIndex:i-2]]) {
+            newLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
+        }
+        [randomBoardLetters addObject:newLetter];
     }   
     randomBoardLettersImages = [[NSMutableArray alloc] initWithArray:[self getLettersImagesNames:randomBoardLetters withLettersType:LettersTypesNormal]];
     

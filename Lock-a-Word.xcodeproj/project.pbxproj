@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		319E0DEC14E31A77005CF21D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 319E0DEB14E31A77005CF21D /* Entitlements.plist */; };
 		34030067157229CF004750F5 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 34030066157229CF004750F5 /* grid.png */; };
-		3403006A15724AD5004750F5 /* GameSceneOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 3403006915724AD5004750F5 /* GameSceneOld.m */; };
 		342B13AB1511F4BC006DCEBF /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 342B13AA1511F4BC006DCEBF /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		347A0752151F3452001E9452 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347A0751151F3452001E9452 /* GameKit.framework */; };
 		347A0756151F34BF001E9452 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347A0755151F34BF001E9452 /* SystemConfiguration.framework */; };
@@ -257,8 +256,6 @@
 /* Begin PBXFileReference section */
 		319E0DEB14E31A77005CF21D /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = SOURCE_ROOT; };
 		34030066157229CF004750F5 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
-		3403006815724AD5004750F5 /* GameSceneOld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSceneOld.h; sourceTree = "<group>"; };
-		3403006915724AD5004750F5 /* GameSceneOld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSceneOld.m; sourceTree = "<group>"; };
 		342B13AA1511F4BC006DCEBF /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		347A0751151F3452001E9452 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		347A0755151F34BF001E9452 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1425,8 +1422,6 @@
 		347C4E2F1562C97300DC8B02 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				3403006815724AD5004750F5 /* GameSceneOld.h */,
-				3403006915724AD5004750F5 /* GameSceneOld.m */,
 				347C4E301562C97300DC8B02 /* GameScene.h */,
 				347C4E311562C97300DC8B02 /* GameScene.m */,
 				347C4E321562C97300DC8B02 /* InstructionsScene.h */,
@@ -1790,7 +1785,6 @@
 				347C4F271562C97400DC8B02 /* FBViewController.m in Sources */,
 				347C4F281562C97400DC8B02 /* RootViewController.m in Sources */,
 				347C4F291562C97400DC8B02 /* TwitterRushViewController.m in Sources */,
-				3403006A15724AD5004750F5 /* GameSceneOld.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1822,6 +1816,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
@@ -1902,6 +1900,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Developer: Con Roditis (VLTMWCEA63)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Con Roditis (VLTMWCEA63)";
 				COPY_PHASE_STRIP = NO;
@@ -1937,6 +1939,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";

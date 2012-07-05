@@ -30,15 +30,19 @@
 
 
 - (void)insertNewLetter;
+- (void)useBonusLetter:(int)row;
+- (void)addCurentLetterToExtraColumnWithBonus;
 - (void)addCurrentLetterToMatrix:(int)row;
 - (void)addBonusLetter:(int)row;
-- (void)useBonusLetter:(int)row;
--(void)boardLetterTouchedAtRow:(NSNumber*)row;
+//-(void)boardLetterTouchedAtRow:(NSNumber*)row;
 -(void)bounsLetterTouchedAtRow:(NSNumber*)row;
 -(void)checkIsWordCorrect;
 -(void)shiftSprite:(CCSprite*)sprite;
 -(void)calculateRowStatus:(int)row;
 
+
+-(void)disableTouches;
+-(void)enableTouches;
 @end
 // GameScene implementation
 @implementation GameScene
@@ -168,7 +172,7 @@
     
 }
 -(void)drawBoardWithAnimation:(BOOL)animated{
-    
+    /*
     if (!isGameOver) {
         CCSprite* letterSprite;
         CGFloat xPos;
@@ -215,7 +219,7 @@
         }
         
     }
-    
+    */
 }
 -(void)removeSpritesInArray:(NSMutableArray*)spritesArray{
 
@@ -229,18 +233,33 @@
 #pragma mark Lock A Word
 
 - (void)addCurrentLetterToMatrix:(int)row {
-    [self removeSpritesInArray:newLetters];
     int column = [gameController getFirstColumnIndexOfRow:row];
+    if (column > 4) {
+        return;
+    }
+    
+    [self removeSpritesInArray:newLetters];
     [gameController addCurrentLetterToMatrix:row];
     
     CCSprite* letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
     letterSprite.userData = currentLetter;
-    float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
+    float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*column);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
+    
+    
     letterSprite.color=ccYELLOW;
     letterSprite.position=ccp(xPos,yPos);
     [self addChild:letterSprite z:100 tag:(row*5+column)];
     [boardLetters addObject:letterSprite];
+    
+    
+    xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
+    yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
+    float duration = kANIMATION_DURATION*(5-column);
+    CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
+    [letterSprite runAction:move];
+    
+    
     if (bonusLetterSelected) {
         bonusLetterSelected = NO;
     }else {
@@ -249,104 +268,6 @@
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
     
     [self calculateRowStatus:row];
-}
-
-
-- (void)insertNewLetter
-{
-    
-    currentLetterImage = [gameController getCurrentLetterImage];
-    currentLetter = [gameController getCurrentLetter];
-    CCSprite* letterSprite;
-    CGFloat xPos;
-    CGFloat yPos;
-    
-    [newLetters removeAllObjects];
-    // add the grid letters
-    for (int j=0; j<5; j++) {
-        int i = [gameController getFirstColumnIndexOfRow:j];
-        if (i>4) {
-            continue;
-        }
-        letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
-        letterSprite.userData = currentLetter;
-        xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
-        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
-        
-        
-        letterSprite.color=ccBLUE;
-        letterSprite.position=ccp(xPos,yPos);
-        letterSprite.scale = .75;
-        [newLetters addObject:letterSprite];
-        [self addChild:letterSprite z:100 tag:j+100];
-        
-    }
-    // add the extra column letters
-    letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
-    letterSprite.userData = currentLetter;
-    xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+5)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*5);
-    
-    for (int j=0; j<5; j++) {
-        letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
-        letterSprite.userData = currentLetter;
-        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
-        
-        
-        letterSprite.color=ccBLUE;
-        letterSprite.position=ccp(xPos,yPos);
-        letterSprite.scale = .75;
-        [newLetters addObject:letterSprite];
-        [self addChild:letterSprite z:100 tag:j+105];
-        
-    }
-
-}
-
-- (void)useBonusLetter:(int)row {
-    if (bonusLetterSelected) {
-        return;
-    }
-    bonusLetterSelected = YES;
-    [self removeSpritesInArray:newLetters];
-    
-    CCSprite* letterSprite;
-    CGFloat xPos;
-    CGFloat yPos;
-    
-    for (int i=0; i<[bonusLetters count]; i++) {
-        letterSprite = [bonusLetters objectAtIndex:i];
-        if (letterSprite.tag-200 ==row) {
-            currentLetterImage = [bonusLettersImages objectAtIndex:i];
-            currentLetter = [[bonusLetters objectAtIndex:i] userData];
-            [letterSprite removeFromParentAndCleanup:YES];
-            [bonusLetters removeObjectAtIndex:i];
-            [bonusLettersImages removeObjectAtIndex:i];
-            [gameController removeLetterFromBonus:row];
-            break;
-        }
-    }
-       
-    [newLetters removeAllObjects];
-    // add the grid letters
-    for (int j=0; j<5; j++) {
-        int i = [gameController getFirstColumnIndexOfRow:j];
-        if (i>4) {
-            continue;
-        }
-        letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
-        letterSprite.userData = currentLetter;
-        xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
-        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
-        
-        
-        letterSprite.color=ccBLUE;
-        letterSprite.position=ccp(xPos,yPos);
-        letterSprite.scale = .75;
-        [newLetters addObject:letterSprite];
-        [self addChild:letterSprite z:100 tag:j+100];
-        
-    }
-    
 }
 
 
@@ -360,8 +281,8 @@
     
     CCSprite* letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
     letterSprite.userData = currentLetter;
-    float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+5)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
-    float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
+    float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
+    float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
     letterSprite.color=ccRED;
     letterSprite.position=ccp(xPos,yPos);
     
@@ -374,20 +295,150 @@
     [bonusLettersImages addObject:currentLetterImage];
     [gameController addCurrentLetterToBonus:i];
     
-    xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+30)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
+    xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
     yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
-    CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:ccp(xPos, yPos)];
+    float duration = kANIMATION_DURATION*(5-i);
+    CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
     [letterSprite runAction:move];
     
     [gameController prepareNextLetter];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
     
 }
--(void)boardLetterTouchedAtRow:(NSNumber*)row{
-    [self addCurrentLetterToMatrix:[row intValue]];
+
+
+
+- (void)insertNewLetter
+{
+    
+    currentLetterImage = [gameController getCurrentLetterImage];
+    currentLetter = [gameController getCurrentLetter];
+    
+    [newLetters removeAllObjects];
+    
+    // add the extra column letter
+    [self addCurentLetterToExtraColumnWithBonus:YES];
+    
+
 }
+
+- (void)useBonusLetter:(int)row
+{
+    if (bonusLetterSelected) {
+        //restore the old one to first free space
+        int i = [gameController getFirstBonusIndex];
+        
+        CCSprite* letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
+        letterSprite.userData = currentLetter;
+        letterSprite.color=ccRED;
+        float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+30)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
+        float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
+        letterSprite.position=ccp(xPos,yPos);
+        
+        
+        
+        [self addChild:letterSprite z:100 tag:i+200];
+        [bonusLetters addObject:letterSprite];
+        [bonusLettersImages addObject:currentLetterImage];
+        [gameController addCurrentLetterToBonus:i];
+    }
+    // ge the new selected one
+    bonusLetterSelected = YES;
+    
+    CCSprite* letterSprite;
+    
+    for (int i=0; i<[bonusLetters count]; i++) {
+        letterSprite = [bonusLetters objectAtIndex:i];
+        if (letterSprite.tag-200 ==row) {
+            currentLetterImage = [bonusLettersImages objectAtIndex:i];
+            currentLetter = [[bonusLetters objectAtIndex:i] userData];
+            [letterSprite removeFromParentAndCleanup:YES];
+            [bonusLetters removeObjectAtIndex:i];
+            [bonusLettersImages removeObjectAtIndex:i];
+            [gameController removeLetterFromBonus:row];
+            break;
+        }
+    }
+    
+    [self removeSpritesInArray:newLetters];
+    [newLetters removeAllObjects];
+    
+    // add the grid extra column
+    [self addCurentLetterToExtraColumnWithBonus:NO];
+    
+}
+
+- (void)addCurentLetterToExtraColumnWithBonus:(BOOL)bonus
+{
+//    [self disableTouches];
+    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
+    [actions addObject:@""];
+    CCSprite* letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
+    
+    float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+5)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*5);
+    float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+    
+    
+    for (int j=0; j<5; j++) {
+        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+        
+        letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
+        letterSprite.userData = currentLetter;
+        letterSprite.color=ccBLUE;
+        letterSprite.position=ccp(xPos,yPos);
+        letterSprite.scale = .75;
+        [newLetters addObject:letterSprite];
+        [self addChild:letterSprite z:100 tag:j+105];
+        
+        if (j>0) {
+            yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
+            CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:ccp(xPos, yPos)];
+            [actions addObject:move];
+        }
+        
+    }
+    
+    if (bonus) {
+        xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+5)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*5);
+        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+        
+        letterSprite =[CCSprite spriteWithSpriteFrame:[frameCache spriteFrameByName:currentLetterImage]];
+        letterSprite.userData = currentLetter;
+        letterSprite.color=ccBLUE;
+        letterSprite.position=ccp(xPos,yPos);
+        letterSprite.scale = .75;
+        [newLetters addObject:letterSprite];
+        [self addChild:letterSprite z:100 tag:5+105];
+         letterSprite.position=ccp(xPos,yPos);
+       
+        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
+        CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:ccp(xPos, yPos)];
+        [actions addObject:move];
+    }
+    
+    for (int i = 1; i< [actions count]; i++) {
+        
+        for (int j=i; j<[newLetters count]; j++)  {
+            letterSprite = [newLetters objectAtIndex:j];
+            CCMoveTo* move = [[actions objectAtIndex:i] copy];
+            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:3*i*kANIMATION_DURATION];
+        }
+    }
+    
+    
+//    [self performSelector:@selector(enableTouches) withObject:nil afterDelay:5*[actions count]*kANIMATION_DURATION ];
+}
+
+//-(void)boardLetterTouchedAtRow:(NSNumber*)row{
+//    [self addCurrentLetterToMatrix:[row intValue]];
+//}
 -(void)extraColumnLetterTouchedAtRow:(NSNumber*)row{
-    [self addBonusLetter:[row intValue]];
+    int rowValue = [row intValue];
+    if (rowValue < 5){
+        [self addCurrentLetterToMatrix:[row intValue]];
+    } else {
+        [self addBonusLetter:[row intValue]];
+    }
 }
 -(void)bounsLetterTouchedAtRow:(NSNumber*)row{
     [self useBonusLetter:[row intValue]];
@@ -443,8 +494,10 @@
                 yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
                 
                 letterSprite.tag = newIndex;
-                CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:ccp(xPos, yPos)];
+                float duration = kANIMATION_DURATION*wordLength;
+                CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
                 [letterSprite runAction:move];
+
                 
             }
         }
@@ -458,6 +511,7 @@
 
 -(void)shiftSprite:(CCSprite*)sprite
 {
+    [self disableTouches];
     CCSprite* sprite2 = (CCSprite*)[self getChildByTag:sprite.tag-1];
     
     int tag = sprite.tag;
@@ -467,11 +521,16 @@
     CGPoint pos = sprite.position;
     CGPoint pos2 = sprite2.position;
     
-    CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:pos2];
+    CCMoveTo* move=[CCMoveTo actionWithDuration:2*kANIMATION_DURATION position:pos2];
     [sprite runAction:move];
     
-    CCMoveTo* move2=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:pos];
+    CCMoveTo* move2=[CCMoveTo actionWithDuration:2*kANIMATION_DURATION position:pos];
     [sprite2 runAction:move2];
+    
+    int row = sprite.tag/5;
+    [self calculateRowStatus:row];
+    [self performSelector:@selector(enableTouches) withObject:nil afterDelay:2*kANIMATION_DURATION ];
+//    [self enableTouches];
        
 }
 
@@ -587,11 +646,11 @@
         for (CCSprite* letterSprite in newLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
             if (CGRectContainsPoint(letterArea, location)) {
-                if (letterSprite.tag < 105) {
-                    [self performSelector:@selector(boardLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-100] afterDelay:.01 ];
-                }else {
+//                if (letterSprite.tag < 105) {
+//                    [self performSelector:@selector(boardLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-100] afterDelay:.01 ];
+//                }else {
                     [self performSelector:@selector(extraColumnLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-105] afterDelay:.01 ];
-                }
+//                }
                 return;
             }
         }
@@ -607,13 +666,21 @@
         for (CCSprite* letterSprite in boardLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
             //locked row
-            if ([[rowsStatus objectAtIndex:letterSprite.tag/5] intValue] == CompletedRow) {
-                if (CGRectContainsPoint(letterArea, location)) {
-                    int colunm = letterSprite.tag%5;
-                    if (colunm > 0) {
-                        [self shiftSprite:letterSprite];
-                        return;
-                    }
+//            if ([[rowsStatus objectAtIndex:letterSprite.tag/5] intValue] == CompletedRow) {
+//                if (CGRectContainsPoint(letterArea, location)) {
+//                    int colunm = letterSprite.tag%5;
+//                    if (colunm > 0) {
+//                        [self shiftSprite:letterSprite];
+//                        return;
+//                    }
+//                }
+//            }
+            if (CGRectContainsPoint(letterArea, location)) {
+                int colunm = letterSprite.tag%5;
+                int row = letterSprite.tag/5;
+                if (colunm > 0 && [[rowsStatus objectAtIndex:row] intValue] != LockedRow) {
+                    [self shiftSprite:letterSprite];
+                    return;
                 }
             }
             
@@ -649,12 +716,18 @@
 }
 
 
--(void)disableTouches{
+-(void)disableTouches
+{
     self.isTouchEnabled=NO;
     ((CCMenu*)[self getChildByTag:GameSceneTagButtons]).isTouchEnabled=NO;
     
 }
 
+-(void)enableTouches
+{
+    self.isTouchEnabled=YES;
+    ((CCMenu*)[self getChildByTag:GameSceneTagButtons]).isTouchEnabled=YES;
+}
 
 #pragma mark ShareAlert
 -(void)showShareAlert{

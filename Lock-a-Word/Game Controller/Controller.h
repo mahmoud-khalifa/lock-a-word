@@ -62,20 +62,20 @@ typedef enum
 
 
 -(NSMutableArray*)getLettersImagesNames:(NSArray*)lettersArray  withLettersType:(LettersTypes)type;
--(NSMutableArray*)getAvailableLettersImages;
--(NSMutableArray*)generateRandomBoardImagesWithIsPanicMode:(BOOL)isPanicMode;
--(NSArray*)swapLettersAtTouchedIndex:(int)index;
+//-(NSMutableArray*)getAvailableLettersImages;
+//-(NSMutableArray*)generateRandomBoardImagesWithIsPanicMode:(BOOL)isPanicMode;
+//-(NSArray*)swapLettersAtTouchedIndex:(int)index;
 
--(void)swapTwoLettersAtIndex1:(int)index1 andIndex2:(int)index2;
+//-(void)swapTwoLettersAtIndex1:(int)index1 andIndex2:(int)index2;
 
--(BOOL)checkWordWithLettersIndexes:(NSMutableArray*)places;
--(void)dropLettersAtIndexSet:(NSIndexSet*)indexSet;
+//-(BOOL)checkWordWithLettersIndexes:(NSMutableArray*)places;
+//-(void)dropLettersAtIndexSet:(NSIndexSet*)indexSet;
 
 -(void)startGameWithMode:(GameModes)newGameMode;
 
 
 
--(BOOL)checkSameLetters:(NSString*)word;
+//-(BOOL)checkSameLetters:(NSString*)word;
 -(void)preloadResources;
 -(void)loadResources;
 
