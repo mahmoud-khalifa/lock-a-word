@@ -1,9 +1,9 @@
 //
 //  main.m
-//  Word9
+//  Lock-A-Word
 //
-//  Created by Log n Labs on 1/3/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Created by Mohamed  Saleh on 7/5/12.
+//  Copyright NOE 2012. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,7 +11,7 @@
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, @"AppDelegate");
+    int retVal = UIApplicationMain(argc, argv, nil, @"AppController");
     [pool release];
     return retVal;
 }

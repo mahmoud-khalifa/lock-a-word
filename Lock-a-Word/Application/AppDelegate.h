@@ -1,32 +1,24 @@
 //
 //  AppDelegate.h
-//  Word9
+//  Lock-A-Word
 //
-//  Created by Log n Labs on 1/3/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Created by Mohamed  Saleh on 7/5/12.
+//  Copyright NOE 2012. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
-#import "Controller.h"
-@class RootViewController;
+#import "cocos2d.h"
 
-@interface AppDelegate : NSObject <UIApplicationDelegate,FBRequestDelegate,
-FBDialogDelegate,
-FBSessionDelegate,NSURLConnectionDelegate> {
-	UIWindow			*window;
-	RootViewController	*viewController;
-      Facebook *facebook;
-    
-    Controller* gameController;
+@interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
+{
+	UIWindow *window_;
+	UINavigationController *navController_;
+
+	CCDirectorIOS	*director_;							// weak ref
 }
 
 @property (nonatomic, retain) UIWindow *window;
-@property (nonatomic, retain) Facebook *facebook;
-
-
-#pragma mark facebook Methods
-- (void)connectToFacebook:(NSString *)msg; 
-- (void)postFacebookMessage;
+@property (readonly) UINavigationController *navController;
+@property (readonly) CCDirectorIOS *director;
 
 @end
