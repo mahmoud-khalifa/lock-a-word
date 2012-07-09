@@ -10,8 +10,16 @@
 #import "GameScene.h"
 #import "LevelSelectionScene.h"
 #import "Controller.h"
+#import "GameData.h"
+#import "GameDataParser.h"
 
-@implementation GameModesScene
+
+@interface GameModesScene ()
+
+- (void)selectChapter:(int)chapter;
+@end
+
+@implementation GameModesScene 
 
 +(id)scene {
     CCScene *scene = [CCScene node];
@@ -66,6 +74,7 @@
 // the Go to free plastic lock levels [free]
 
 - (void) goToPlasticLock : (id) sender {
+    [self selectChapter:1];
     [[CCDirector sharedDirector] pushScene:(CCScene*)[[GameScene alloc]initWithGameMode:PlasticLock andLevel:0]];
     NSLog(@"Plastic Lock button has been pressed !!");
 }
@@ -73,6 +82,7 @@
 // the Go to Bronze lock levels [free]
 
 - (void) goToBronzeLock: (id) sender {
+    [self selectChapter:2];
     [[CCDirector sharedDirector] pushScene:(CCScene*)[[LevelSelectionScene alloc]initWithGameMode:BronzeLock]];
     NSLog(@"Bronze Lock button has been pressed !!");
 }
@@ -80,18 +90,24 @@
 // the Go to Silver lock levels [free]
 
 - (void) goToSilverLock: (id) sender {
+    [self selectChapter:3];
     [[CCDirector sharedDirector] pushScene:(CCScene*)[[LevelSelectionScene alloc]initWithGameMode:SilverLock]];
     NSLog(@"Silver Lock button has been pressed !!");
 }
 // the Go to Gold lock levels [free]
 
 - (void) goToGoldLock: (id) sender {
+    [self selectChapter:4];
     [[CCDirector sharedDirector] pushScene:(CCScene*)[[LevelSelectionScene alloc]initWithGameMode:GoldLock]];
     NSLog(@"Gold Lock button has been pressed !!");
 }
 
 
-
+- (void)selectChapter:(int)chapter {
+    GameData *gameData = [GameDataParser loadData];
+    [gameData setSelectedChapter:chapter];
+    [GameDataParser saveData:gameData];
+}
 
 
 

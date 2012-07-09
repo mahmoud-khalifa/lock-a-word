@@ -15,6 +15,6 @@
 }
 
 
-+(id) scene;
+//+(id) scene;
 -(id) initWithGameMode:(GameMode)aGameMode andLevel:(int)aLevel;  
 @end

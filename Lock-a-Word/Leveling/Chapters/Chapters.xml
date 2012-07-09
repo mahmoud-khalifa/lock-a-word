@@ -1,0 +1,19 @@
+<Chapters>
+	<Chapter>
+		<Name>PlasticLock</Name>
+		<Number>1</Number>
+	</Chapter>
+	<Chapter>
+		<Name>BronzeLock</Name>
+		<Number>2</Number>		
+	</Chapter>
+	<Chapter>
+		<Name>SilverLock</Name>
+		<Number>3</Number>
+	</Chapter>
+	<Chapter>
+		<Name>GoldLock</Name>
+		<Number>4</Number>
+	</Chapter>
+</Chapters>
+

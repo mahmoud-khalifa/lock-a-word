@@ -19,15 +19,15 @@
 }
 
 
-+(id)scene {
-    CCScene *scene = [CCScene node];
-    
-    GameScene *layer = [GameScene node];
-    
-    [scene addChild:layer];
-    
-    return scene;
-}
+//+(id)scene {
+//    CCScene *scene = [CCScene node];
+//    
+//    GameScene *layer = [GameScene node];
+//    
+//    [scene addChild:layer];
+//    
+//    return scene;
+//}
 
 
 -(id) initWithGameMode:(GameMode)aGameMode andLevel:(int)aLevel{    
@@ -62,7 +62,6 @@
     if (CGRectContainsPoint(backButtonRect, location)) {
         [[CCDirector sharedDirector] popScene];
     }
-    CCLOG(@"Touches Happens !!");
 }
 
 

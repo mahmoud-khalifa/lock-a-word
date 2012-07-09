@@ -51,6 +51,7 @@
         
         // Creating Menu Items
         // Normal images and selected are the same 
+        
         CCMenuItemImage *menuItem1 =[CCMenuItemImage itemFromNormalImage:@"main_btn_play.png" selectedImage:@"main_btn_play.png" target:self selector:@selector(goToGameModeScene:)];
           CCMenuItemImage *menuItem2 =[CCMenuItemImage itemFromNormalImage:@"main_btn_instr.png" selectedImage:@"main_btn_instr.png" target:self selector:@selector(goToInstructions)];
           CCMenuItemImage *menuItem3=[CCMenuItemImage itemFromNormalImage:@"main_btn_full.png" selectedImage:@"main_btn_full.png" target:self selector:@selector(goTofull)];

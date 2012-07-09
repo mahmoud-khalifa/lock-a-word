@@ -14,7 +14,9 @@
     
 }
 
-+(id) scene;
+@property (nonatomic, assign) NSString *device;
+
+//+(id) scene;
 -(id) initWithGameMode:(GameMode)aGameMode;
 
 
