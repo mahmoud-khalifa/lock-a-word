@@ -7,11 +7,13 @@
 //
 
 #import "GameScene.h"
+#import "LevelSelectionScene.h"
 
 
 @implementation GameScene {
     GameMode gameMode;
     int level;
+    CCSprite *backButton;
 }
 
 
@@ -42,10 +44,14 @@
         [self addChild:backgroundImage];
         
         // Creating Back button with only dimensions it has no view element
-        CCSprite *backButton = [CCSprite alloc];
+        backButton = [CCSprite alloc];
         backButton.anchorPoint= ccp(0,0);
-        backButton.position = (CGPoint *)CGRectMake(0, 0,((.5375*size.width/2)-(.125*size.width/2)), ((.908*size.height/2)-(.791*size.height/2)));
+        backButton.contentSize = CGSizeMake(.4125*size.width/2, .125*size.height/2);
+        backButton.position = ccp(.05, .895);
+        backButton.tag=1;
        
+        
+        [self addChild:backButton];
       // Incomplete waiting for logic things      
 		
         
@@ -54,13 +60,24 @@
 }
 
 // Check if Back button is clicked 
--(BOOL) ccTouchBegan:(UITouch *)touch  withEvent:(UIEvent *)event{
-    
+//- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+//    
+//    CGPoint location = [touch locationInView:[touch view]];     
+//    location = [[CCDirector sharedDirector] convertToGL:location];
+//    if (CGRectContainsPoint(backButton.textureRect, location)) {
+//        [[CCDirector sharedDirector] popScene];
+//    }
+//    
+//}
+
+-(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];     
     location = [[CCDirector sharedDirector] convertToGL:location];
-    
-    
-    return YES;
+    if (CGRectContainsPoint(backButton.boundingBox, location)) {
+        [[CCDirector sharedDirector] popScene];
+    }
+    CCLOG(@"Touches Happens !!");
 }
 
 
