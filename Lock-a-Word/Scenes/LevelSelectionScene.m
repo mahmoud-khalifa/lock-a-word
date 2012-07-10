@@ -52,23 +52,21 @@
         
         //Enable Touches
         self.isTouchEnabled=YES;
-        // Get Gamemode
+        
         // Get the screen size
         CGSize size =[[CCDirector sharedDirector] winSize];
         
         // Creating an entry background image
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"board_bg.png"];
         backgroundImage.position =ccp(size.width/2, size.height/2);
-        [self addChild:backgroundImage z:-4];
-        
-        
+        [self addChild:backgroundImage z:-4];      
+         
+        // We have created a rectangle to be behind the back button in the background        
         backButtonRect = CGRectMake(.05*size.width, .895*size.height,.4125*size.width/2, .125*size.height/2);
-        // Incomplete waiting for logic things     
-		
-        
+            
+		       
         int smallFont = [CCDirector sharedDirector].winSize.height / 12; 
-        GameData *gameData = [GameDataParser loadData];
-        
+        GameData *gameData = [GameDataParser loadData];        
         int selectedChapter = gameData.selectedChapter;
         
         
@@ -112,15 +110,14 @@
 
              
          }
+        
         [levelMenu alignItemsInColumns:
          [NSNumber numberWithInt:4],
          [NSNumber numberWithInt:4],
          [NSNumber numberWithInt:4],
          [NSNumber numberWithInt:4],
          [NSNumber numberWithInt:4],
-         nil];
-        
-
+         nil]; 
         
         [self addChild:levelMenu z:-3];
         

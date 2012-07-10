@@ -42,9 +42,11 @@
         backgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:backgroundImage];
         
-        
-        backButtonRect = CGRectMake(.05*size.width, .895*size.height,.4125*size.width/2, .125*size.height/2);
-        // Incomplete waiting for logic things      
+        /* 
+         We have created a rectangle to be behind the back button in the background 
+         */
+         backButtonRect = CGRectMake(.05*size.width, .895*size.height,.4125*size.width/2, .125*size.height/2);
+             
 		
         
 	}

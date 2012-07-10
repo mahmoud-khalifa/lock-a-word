@@ -28,7 +28,7 @@
 		<Data>3,3,3,3,6,6,3,3,3,3,1,1,4,3,6,6,3,4,1,1,8,1,4,3,6,6,3,4,1,8,1,1,4,3,6,6,3,4,1,1,3,3,3,3,6,6,3,3,3,3</Data>
 	</Level>    
 	<Level>
-        <Name>E</Name>
+        <Name>F</Name>
 		<Number>5</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
@@ -56,35 +56,35 @@
 		<Data>8,6,3,3,3,3,3,3,6,8,1,8,6,2,2,2,2,6,8,1,3,1,8,6,6,6,6,8,1,3,1,8,6,2,2,2,2,6,8,1,8,6,3,3,3,3,3,3,6,8</Data>
 	</Level>    
 	<Level>
-        <Name>K</Name>
+        <Name>J</Name>
 		<Number>9</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>8,1,8,4,8,8,4,8,1,8,3,4,3,1,3,3,1,3,4,3,8,1,8,4,8,8,4,8,1,8,3,4,3,1,3,3,1,3,4,3,8,1,8,4,8,8,4,8,1,8</Data>
 	</Level>    
 	<Level>
-        <Name>L</Name>
+        <Name>K</Name>
 		<Number>10</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>8,2,2,2,2,2,2,2,2,8,1,2,6,6,1,1,6,6,2,1,1,2,1,1,6,6,1,1,2,1,1,2,6,6,1,1,6,6,2,1,8,2,2,2,2,2,2,2,2,8</Data>
 	</Level>    
 	<Level>
-        <Name>M</Name>
+        <Name>L</Name>
 		<Number>11</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>8,2,2,2,6,6,2,2,2,8,2,3,3,6,1,1,6,3,3,2,2,3,6,1,1,1,1,6,3,2,2,3,3,6,1,1,6,3,3,2,8,2,2,2,6,6,2,2,2,8</Data>
 	</Level>    
 	<Level>
-        <Name>N</Name>
+        <Name>M</Name>
 		<Number>12</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>3,2,6,4,6,6,4,6,2,3,2,4,4,8,1,1,8,4,4,2,2,4,6,1,4,4,1,6,4,2,2,4,4,8,1,1,8,4,4,2,3,2,6,4,6,6,4,6,2,3</Data>
 	</Level>    
 	<Level>
-        <Name>O</Name>
+        <Name>N</Name>
 		<Number>13</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
@@ -98,42 +98,42 @@
 		<Data>6,1,1,1,6,6,1,1,1,6,1,6,8,6,1,1,6,8,6,1,1,8,6,8,1,1,8,6,8,1,1,6,8,6,1,1,6,8,6,1,6,1,1,1,6,6,1,1,1,6</Data>
 	</Level>    
 	<Level>
-        <Name>R</Name>
+        <Name>Q</Name>
 		<Number>15</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>1,1,6,6,6,6,6,6,1,1,6,1,4,8,4,4,8,4,1,6,6,6,4,4,4,4,4,4,6,6,6,1,4,8,4,4,8,4,1,6,1,1,6,6,6,6,6,6,1,1</Data>
 	</Level>    
 	<Level>
-        <Name>S</Name>
+        <Name>R</Name>
 		<Number>16</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>1,2,2,2,6,1,2,2,2,1,1,2,2,2,6,1,2,2,2,1,8,4,4,4,6,6,4,4,4,8,1,2,2,2,1,6,2,2,2,1,1,2,2,2,1,6,2,2,2,1</Data>
 	</Level>    
 	<Level>
-        <Name>T</Name>
+        <Name>S</Name>
 		<Number>17</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>4,4,4,6,6,6,6,4,4,4,2,2,6,1,1,1,1,6,2,2,8,2,6,1,1,1,1,6,2,8,2,2,6,1,1,1,1,6,2,2,4,4,4,6,6,6,6,4,4,4</Data>
 	</Level>    
 	<Level>
-        <Name>U</Name>
+        <Name>T</Name>
 		<Number>18</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>3,3,3,3,6,6,3,3,3,3,1,2,2,6,4,4,6,2,2,1,1,8,6,1,1,1,1,6,8,1,1,2,2,6,4,4,6,2,2,1,3,3,3,3,6,6,3,3,3,3</Data>
 	</Level>    
     <Level>
-        <Name>V</Name>
+        <Name>U</Name>
 		<Number>19</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
 		<Data>8,8,8,8,8,8,8,8,8,8,4,6,1,1,1,1,1,1,6,4,8,8,8,8,8,8,8,8,8,8,4,6,1,1,1,1,1,1,6,4,8,8,8,8,8,8,8,8,8,8</Data>
 	</Level>   
     <Level>
-        <Name>Z</Name>
+        <Name>V</Name>
 		<Number>20</Number>
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
