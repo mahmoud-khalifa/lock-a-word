@@ -11,32 +11,29 @@
 
 
 @implementation GameScene {
-    GameMode gameMode;
-    int level;
     CCSprite *backButton;
     CGRect backButtonRect;
     CGSize size;
 }
 
 
-//+(id)scene {
-//    CCScene *scene = [CCScene node];
-//    
-//    GameScene *layer = [GameScene node];
-//    
-//    [scene addChild:layer];
-//    
-//    return scene;
-//}
++(id)scene {
+    CCScene *scene = [CCScene node];
+    
+    GameScene *layer = [GameScene node];
+    
+    [scene addChild:layer];
+    
+    return scene;
+}
 
 
--(id) initWithGameMode:(GameMode)aGameMode andLevel:(int)aLevel{    
+-(id) init {    
 	if( (self=[super init] )) {
         //Enable Touches
         self.isTouchEnabled=YES;
-        // Get Gamemode and level 
-        gameMode = aGameMode;
-        level = aLevel;
+        
+        
         // Get the screen size
         size =[[CCDirector sharedDirector] winSize];
         

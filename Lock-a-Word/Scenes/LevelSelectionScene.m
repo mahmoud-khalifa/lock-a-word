@@ -7,6 +7,7 @@
 //
 
 #import "LevelSelectionScene.h"
+#import "GameScene.h"
 
 #import "GameData.h"
 #import "GameDataParser.h"
@@ -20,25 +21,24 @@
 #import "ChapterParser.h"
 
 @implementation LevelSelectionScene {
-    GameMode gameMode;
     CGRect backButtonRect;
 }
 
 @synthesize device;
 
 
-//+(id)scene {
-//    CCScene *scene = [CCScene node];
-//    
-//    LevelSelectionScene *layer = [LevelSelectionScene node];
-//    
-//    [scene addChild:layer];
-//    
-//    return scene;
-//}
++(id)scene {
+    CCScene *scene = [CCScene node];
+    
+    LevelSelectionScene *layer = [LevelSelectionScene node];
+    
+    [scene addChild:layer];
+    
+    return scene;
+}
 
 
--(id) initWithGameMode:(GameMode)aGameMode {
+-(id) init{
     
 	if( (self=[super init] )) {
         
@@ -53,7 +53,6 @@
         //Enable Touches
         self.isTouchEnabled=YES;
         // Get Gamemode
-        gameMode = aGameMode;
         // Get the screen size
         CGSize size =[[CCDirector sharedDirector] winSize];
         
@@ -93,7 +92,7 @@
         
          for (Level *level in selectedLevels.levels) {
              
-             CCMenuItemImage *item = [CCMenuItemImage itemFromNormalImage:normal
+             CCMenuItemImage *item = [CCMenuItemImage itemWithNormalImage:normal
                                                             selectedImage:selected
                                                                    target:self 
                                                                  selector:@selector(onPlay:)];
@@ -131,10 +130,6 @@
         for (int i=0 ; i<[selectedLevels.levels count]; i++) {
             Level *level = [selectedLevels.levels objectAtIndex:i];
             CCMenuItem *item = [levelMenu.children objectAtIndex:i];
-//        }
-//        for (CCMenuItem *item in levelMenu.children) {
-            
-            // create a label for every level
             
             CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@",level.name] 
                                                    fontName:@"Marker Felt" 
@@ -190,14 +185,12 @@
     int selectedLevel = sender.tag;
     
     // store the selected level in GameData
-    GameData *gameData = [GameDataParser loadData];
-    gameData.selectedLevel = selectedLevel;
-    [GameDataParser saveData:gameData];
+    [Controller selectLevel:selectedLevel];
     
     // load the game scene
     //    [SceneManager goGameScene];
     
-//    [[CCDirector sharedDirector] replaceScene: [GameScene scene]];
+    [[CCDirector sharedDirector] pushScene:[GameScene scene]];
     
     
 }

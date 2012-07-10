@@ -10,14 +10,8 @@
 #import "GameScene.h"
 #import "LevelSelectionScene.h"
 #import "Controller.h"
-#import "GameData.h"
-#import "GameDataParser.h"
 
 
-@interface GameModesScene ()
-
-- (void)selectChapter:(int)chapter;
-@end
 
 @implementation GameModesScene 
 
@@ -46,10 +40,12 @@
         
         // Creating Menu Items
         // Normal images and selected are the same 
-        CCMenuItemImage *menuItem1 =[CCMenuItemImage itemFromNormalImage:@"main_btn_plast.png" selectedImage:@"main_btn_plast.png" target:self selector:@selector(goToPlasticLock:)];
-        CCMenuItemImage *menuItem2 =[CCMenuItemImage itemFromNormalImage:@"main_btn_bronz.png" selectedImage:@"main_btn_bronz.png" target:self selector:@selector(goToBronzeLock:)];
-        CCMenuItemImage *menuItem3 =[CCMenuItemImage itemFromNormalImage:@"main_btn_silver.png" selectedImage:@"main_btn_silver.png" target:self selector:@selector(goToSilverLock:)];
-        CCMenuItemImage *menuItem4 =[CCMenuItemImage itemFromNormalImage:
+       
+        
+        CCMenuItemImage *menuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_plast.png" selectedImage:@"main_btn_plast.png" target:self selector:@selector(goToPlasticLock:)];
+        CCMenuItemImage *menuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_bronz.png" selectedImage:@"main_btn_bronz.png" target:self selector:@selector(goToBronzeLock:)];
+        CCMenuItemImage *menuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_silver.png" selectedImage:@"main_btn_silver.png" target:self selector:@selector(goToSilverLock:)];
+        CCMenuItemImage *menuItem4 =[CCMenuItemImage itemWithNormalImage:
             @"main_btn_gold.png" selectedImage:@"main_btn_gold.png" target:self selector:@selector(goToGoldLock:)];
         
               
@@ -74,39 +70,33 @@
 // the Go to free plastic lock levels [free]
 
 - (void) goToPlasticLock : (id) sender {
-    [self selectChapter:1];
-    [[CCDirector sharedDirector] pushScene:(CCScene*)[[GameScene alloc]initWithGameMode:PlasticLock andLevel:0]];
+    [Controller selectChapter:1];
+    [Controller selectLevel:1];
+    [[CCDirector sharedDirector] pushScene:[GameScene scene]];
     NSLog(@"Plastic Lock button has been pressed !!");
 }
 
 // the Go to Bronze lock levels [free]
 
 - (void) goToBronzeLock: (id) sender {
-    [self selectChapter:2];
-    [[CCDirector sharedDirector] pushScene:(CCScene*)[[LevelSelectionScene alloc]initWithGameMode:BronzeLock]];
+    [Controller selectChapter:2];
+    [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Bronze Lock button has been pressed !!");
 }
 
 // the Go to Silver lock levels [free]
 
 - (void) goToSilverLock: (id) sender {
-    [self selectChapter:3];
-    [[CCDirector sharedDirector] pushScene:(CCScene*)[[LevelSelectionScene alloc]initWithGameMode:SilverLock]];
+    [Controller selectChapter:3];
+    [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Silver Lock button has been pressed !!");
 }
 // the Go to Gold lock levels [free]
 
 - (void) goToGoldLock: (id) sender {
-    [self selectChapter:4];
-    [[CCDirector sharedDirector] pushScene:(CCScene*)[[LevelSelectionScene alloc]initWithGameMode:GoldLock]];
+    [Controller selectChapter:4];
+    [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Gold Lock button has been pressed !!");
-}
-
-
-- (void)selectChapter:(int)chapter {
-    GameData *gameData = [GameDataParser loadData];
-    [gameData setSelectedChapter:chapter];
-    [GameDataParser saveData:gameData];
 }
 
 

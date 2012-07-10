@@ -16,8 +16,8 @@
 
 @property (nonatomic, assign) NSString *device;
 
-//+(id) scene;
--(id) initWithGameMode:(GameMode)aGameMode;
++(id) scene;
+-(id) init;
 
 
 @end
