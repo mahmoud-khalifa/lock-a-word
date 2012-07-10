@@ -47,7 +47,6 @@
     BOOL unlocked;
     int stars;
     NSString *data;
-    BOOL goldenTileFound;
     Levels *levels = [[[Levels alloc] init] autorelease];
 
     // Create NSData instance from xml in filePath
@@ -80,8 +79,7 @@
         NSArray *unlockedArray = [element elementsForName:@"Unlocked"];
         NSArray *starsArray = [element elementsForName:@"Stars"];
         NSArray *dataArray= [element elementsForName:@"Data"];
-        NSArray *goldenTileFoundArray=[element elementsForName:@"GoldenTileFound"];
-        
+               
         // name
         if (nameArray.count > 0) {
             GDataXMLElement *nameElement = (GDataXMLElement *) [nameArray objectAtIndex:0];
@@ -111,18 +109,14 @@
             GDataXMLElement *dataElement = (GDataXMLElement *) [dataArray objectAtIndex:0];
             data = [dataElement stringValue];
         }
-        //GoldenTileFound
-        if (goldenTileFoundArray.count > 0) {
-            GDataXMLElement *goldenTileFoundElement = (GDataXMLElement *) [goldenTileFoundArray objectAtIndex:0];
-            goldenTileFound = [[goldenTileFoundElement stringValue] boolValue];
-        } 
+        
 
         
         Level *level = [[Level alloc] initWithName:name 
                                             number:number 
                                           unlocked:unlocked 
                                              stars:stars 
-                                              data:data   goldenTileFound:goldenTileFound];
+                                              data:data   ];
         [levels.levels addObject:level];
     }
     
@@ -169,16 +163,14 @@
         // create the <Data> element
         GDataXMLElement *dataElement = [GDataXMLNode elementWithName:@"Data"
                                                          stringValue:level.data];  
-        // create the <GoldenTileFound> element
-        GDataXMLElement *goldenTileFoundElement = [GDataXMLNode elementWithName:@"GoldenTileFound"   
-                        stringValue:[[NSNumber numberWithBool:level.goldenTileFound] stringValue]];
+        
         // enclose variable elements into a <Level> element
         [levelElement addChild:nameElement];
         [levelElement addChild:numberElement];
         [levelElement addChild:unlockedElement];
         [levelElement addChild:starsElement];
         [levelElement addChild:dataElement];
-        [levelElement addChild:goldenTileFoundElement];
+        
         
         // enclose each <Level> into the <Levels> element
         [levelsElement addChild:levelElement];
