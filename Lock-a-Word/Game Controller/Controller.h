@@ -6,14 +6,21 @@
 //  Copyright (c) 2012 NOE. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
+
+#define kBOARD_SIZE 100
+
 typedef enum
 {
-    PlasticLock,
-    BronzeLock,
-    SilverLock,
-    GoldLock
+    PlasticLock = 1,
+    BronzeLock = 2,
+    SilverLock = 3,
+    GoldLock = 4
 }GameMode;
-#import <Foundation/Foundation.h>
+
+
+
 
 @interface Controller : NSObject
 
@@ -24,5 +31,10 @@ typedef enum
 - (void)selectLevel:(int)level;
 
 
+- (void)newGame;
+- (void)resetBoard;
+
+
+- (void)printBoard;
 @end
 

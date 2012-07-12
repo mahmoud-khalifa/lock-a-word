@@ -75,7 +75,7 @@
 // the Go to free plastic lock levels [free]
 
 - (void) goToPlasticLock : (id) sender {
-    [controller selectChapter:1];
+    [controller selectChapter:PlasticLock];
     [controller selectLevel:1];
     [[CCDirector sharedDirector] pushScene:[GameScene scene]];
     NSLog(@"Plastic Lock button has been pressed !!");
@@ -84,7 +84,7 @@
 // the Go to Bronze lock levels [free]
 
 - (void) goToBronzeLock: (id) sender {
-    [controller selectChapter:2];
+    [controller selectChapter:BronzeLock];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Bronze Lock button has been pressed !!");
 }
@@ -92,14 +92,14 @@
 // the Go to Silver lock levels [free]
 
 - (void) goToSilverLock: (id) sender {
-    [controller selectChapter:3];
+    [controller selectChapter:SilverLock];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Silver Lock button has been pressed !!");
 }
 // the Go to Gold lock levels [free]
 
 - (void) goToGoldLock: (id) sender {
-    [controller selectChapter:4];
+    [controller selectChapter:GoldLock];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Gold Lock button has been pressed !!");
 }
