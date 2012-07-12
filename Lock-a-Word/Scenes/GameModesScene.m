@@ -34,9 +34,11 @@
         CGSize size =[[CCDirector sharedDirector] winSize];
         
         // Creating an entry background image
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"main_bg.png"];
         backgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:backgroundImage];
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         // Creating Menu Items
         // Normal images and selected are the same 

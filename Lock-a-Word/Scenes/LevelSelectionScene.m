@@ -57,10 +57,12 @@
         CGSize size =[[CCDirector sharedDirector] winSize];
         
         // Creating an entry background image
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"board_bg.png"];
         backgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:backgroundImage z:-4];      
-         
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        
         // We have created a rectangle to be behind the back button in the background        
         backButtonRect = CGRectMake(.05*size.width, .895*size.height,.4125*size.width/2, .125*size.height/2);
             
