@@ -10,10 +10,13 @@
 #import "GameScene.h"
 #import "LevelSelectionScene.h"
 #import "Controller.h"
+#import "GameConfig.h"
 
 
 
-@implementation GameModesScene 
+@implementation GameModesScene {
+    Controller *controller;
+}
 
 +(id)scene {
     CCScene *scene = [CCScene node];
@@ -29,14 +32,14 @@
 -(id) init {
     
 	if( (self=[super init] )) {
-       
-        // Get the screen size
-        CGSize size =[[CCDirector sharedDirector] winSize];
+        // get shared controller
+        controller = [Controller sharedController];
+        
         
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"main_bg.png"];
-        backgroundImage.position =ccp(size.width/2, size.height/2);
+        backgroundImage.position =ccp(screenSize.width/2, screenSize.height/2);
         [self addChild:backgroundImage];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
@@ -55,7 +58,7 @@
         CCMenu *gameModesSceneMenu = [CCMenu menuWithItems:menuItem1,menuItem2,menuItem3,menuItem4,nil];
        
         [gameModesSceneMenu alignItemsVerticallyWithPadding:0];
-        gameModesSceneMenu.position=ccp(size.width/2,size.height/2 - (.380 *size.height/2));       
+        gameModesSceneMenu.position=ccp(screenSize.width/2,screenSize.height/2 - (.380 *screenSize.height/2));       
         
         
         
@@ -72,8 +75,8 @@
 // the Go to free plastic lock levels [free]
 
 - (void) goToPlasticLock : (id) sender {
-    [Controller selectChapter:1];
-    [Controller selectLevel:1];
+    [controller selectChapter:1];
+    [controller selectLevel:1];
     [[CCDirector sharedDirector] pushScene:[GameScene scene]];
     NSLog(@"Plastic Lock button has been pressed !!");
 }
@@ -81,7 +84,7 @@
 // the Go to Bronze lock levels [free]
 
 - (void) goToBronzeLock: (id) sender {
-    [Controller selectChapter:2];
+    [controller selectChapter:2];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Bronze Lock button has been pressed !!");
 }
@@ -89,14 +92,14 @@
 // the Go to Silver lock levels [free]
 
 - (void) goToSilverLock: (id) sender {
-    [Controller selectChapter:3];
+    [controller selectChapter:3];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Silver Lock button has been pressed !!");
 }
 // the Go to Gold lock levels [free]
 
 - (void) goToGoldLock: (id) sender {
-    [Controller selectChapter:4];
+    [controller selectChapter:4];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     NSLog(@"Gold Lock button has been pressed !!");
 }

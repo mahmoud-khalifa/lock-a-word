@@ -13,19 +13,58 @@
 @implementation Controller
 
 
+static Controller *instanceOfController;
 
-+ (void)selectChapter:(int)chapter {
-    GameData *gameData = [GameDataParser loadData];
-    [gameData setSelectedChapter:chapter];
-    [GameDataParser saveData:gameData];
+-(void)dealloc {
+    
+    [super dealloc];
+}
+-(id)init {
+    if (self=[super init]) {
+        
+    }
+    return self;
+}
+#pragma mark Singleton stuff
++(id) alloc {
+	@synchronized(self) {
+		NSAssert(instanceOfController == nil, @"Attempted to allocate a second instance of the singleton: Game Controller");
+		instanceOfController = [[super alloc] retain];
+        
+		return instanceOfController;
+	}
+	// to avoid compiler warning
+	return nil;
+}
+
++ (Controller*) sharedController {
+	@synchronized(self) {
+		if (instanceOfController == nil) {
+			instanceOfController = [[Controller alloc] init];
+		}
+        return instanceOfController;
+	}
+	// to avoid compiler warning
+	return nil;
 }
 
 
 
-+ (void)selectLevel:(int)level {
+#pragma mark - Leveling
+- (void)selectChapter:(int)chapter {
+    GameData *gameData = [GameDataParser loadData];
+    [gameData setSelectedChapter:chapter];
+    [GameDataParser saveData:gameData];
+    [gameData release];
+}
+
+
+
+- (void)selectLevel:(int)level {
     GameData *gameData = [GameDataParser loadData];
     [gameData setSelectedLevel:level];
     [GameDataParser saveData:gameData];
+    [gameData release];
 }
 
 @end

@@ -243,6 +243,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3128F1BF15AEEC3D003ADBFF /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConfig.h; path = "Lock-a-Word/Application/GameConfig.h"; sourceTree = SOURCE_ROOT; };
 		31CEA28C15AB3BA600A6512D /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
 		31CEA28D15AB3BA600A6512D /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		31CEA28E15AB3BA600A6512D /* ChapterParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterParser.h; sourceTree = "<group>"; };
@@ -867,6 +868,7 @@
 			children = (
 				34DB2F8315A8BC9700998A76 /* AppDelegate.h */,
 				34DB2F8415A8BC9700998A76 /* AppDelegate.m */,
+				3128F1BF15AEEC3D003ADBFF /* GameConfig.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";

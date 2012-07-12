@@ -18,8 +18,11 @@ typedef enum
 @interface Controller : NSObject
 
 
-+ (void)selectChapter:(int)chapter;
-+ (void)selectLevel:(int)level;
++ (Controller*) sharedController;
+
+- (void)selectChapter:(int)chapter;
+- (void)selectLevel:(int)level;
+
 
 @end
 

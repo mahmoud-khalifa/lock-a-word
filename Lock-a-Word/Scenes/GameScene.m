@@ -8,12 +8,12 @@
 
 #import "GameScene.h"
 #import "LevelSelectionScene.h"
-
+#import "Controller.h"
+#import "GameConfig.h"
 
 @implementation GameScene {
     CCSprite *backButton;
-    CGRect backButtonRect;
-    CGSize size;
+    Controller *controller;
 }
 
 
@@ -30,26 +30,20 @@
 
 -(id) init {    
 	if( (self=[super init] )) {
+        
+        // get shared controller
+        controller = [Controller sharedController];
+        
         //Enable Touches
         self.isTouchEnabled=YES;
-        
-        
-        // Get the screen size
-        size =[[CCDirector sharedDirector] winSize];
         
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"board_bg.png"];
-        backgroundImage.position =ccp(size.width/2, size.height/2);
+        backgroundImage.position =ccp(screenSize.width/2, screenSize.height/2);
         [self addChild:backgroundImage];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        
-        /* 
-         We have created a rectangle to be behind the back button in the background 
-         */
-         backButtonRect = CGRectMake(.05*size.width, .895*size.height,.4125*size.width/2, .125*size.height/2);
-             
-		
+         
         
 	}
 	return self;
@@ -60,6 +54,8 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];     
     location = [[CCDirector sharedDirector] convertToGL:location];
+
+    // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
         [[CCDirector sharedDirector] popScene];
     }

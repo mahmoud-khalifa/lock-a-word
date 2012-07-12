@@ -9,6 +9,8 @@
 #import "LevelSelectionScene.h"
 #import "GameScene.h"
 
+#import "GameConfig.h"
+
 #import "GameData.h"
 #import "GameDataParser.h"
 
@@ -21,7 +23,7 @@
 #import "ChapterParser.h"
 
 @implementation LevelSelectionScene {
-    CGRect backButtonRect;
+    Controller *controller;
 }
 
 @synthesize device;
@@ -42,29 +44,21 @@
     
 	if( (self=[super init] )) {
         
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            self.device = @"iPad";
-        }
-        else {
-            self.device = @"iPhone";
-        }
+        // get shared controller
+        controller = [Controller sharedController];
+        
+        self.device = (IS_IPAD() == YES) ?  @"iPad" : @"iPhone";
         
         
         //Enable Touches
         self.isTouchEnabled=YES;
         
-        // Get the screen size
-        CGSize size =[[CCDirector sharedDirector] winSize];
-        
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"board_bg.png"];
-        backgroundImage.position =ccp(size.width/2, size.height/2);
+        backgroundImage.position =ccp(screenSize.width/2, screenSize.height/2);
         [self addChild:backgroundImage z:-4];      
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        
-        // We have created a rectangle to be behind the back button in the background        
-        backButtonRect = CGRectMake(.05*size.width, .895*size.height,.4125*size.width/2, .125*size.height/2);
             
 		       
         int smallFont = [CCDirector sharedDirector].winSize.height / 12; 
@@ -158,9 +152,10 @@
         [labels setPosition:levelMenu.position];
         [self addChild:overlays];
         [self addChild:labels];
+        [overlay release];
         [overlays release];
         [labels release];
-        
+        [gameData release];
 	}
 	return self;
 }
@@ -171,10 +166,11 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];     
     location = [[CCDirector sharedDirector] convertToGL:location];
+
+    // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
         [[CCDirector sharedDirector] popScene];
     }
-    CCLOG(@"Touches Happens !!");
 }
 
 
@@ -184,11 +180,9 @@
     int selectedLevel = sender.tag;
     
     // store the selected level in GameData
-    [Controller selectLevel:selectedLevel];
+    [controller selectLevel:selectedLevel];
     
     // load the game scene
-    //    [SceneManager goGameScene];
-    
     [[CCDirector sharedDirector] pushScene:[GameScene scene]];
     
     
