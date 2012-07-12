@@ -25,9 +25,9 @@
     NSString *documentsPath = [documentsDirectory stringByAppendingPathComponent:xmlFileNameWithExtension];
     if (forSave || [[NSFileManager defaultManager] fileExistsAtPath:documentsPath]) {
         return documentsPath;   
-        NSLog(@"%@ opened for read/write",documentsPath);
+//        NSLog(@"%@ opened for read/write",documentsPath);
     } else {
-        NSLog(@"Created/copied in default %@",xmlFileNameWithExtension);
+//        NSLog(@"Created/copied in default %@",xmlFileNameWithExtension);
         return [[NSBundle mainBundle] pathForResource:xmlFileName ofType:@"xml"];
     }    
 }
@@ -52,7 +52,7 @@
     NSError *error;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData options:0 error:&error];
     if (doc == nil) { return nil; NSLog(@"xml file is empty!");}
-    NSLog(@"Loading %@", filePath);
+//    NSLog(@"Loading %@", filePath);
     
     /*************************************************************************** 
      This next line will usually have the most customisation applied because 
@@ -60,7 +60,7 @@
      ***************************************************************************/
     
     NSArray *dataArray = [doc nodesForXPath:@"//Chapters/Chapter" error:nil];
-    NSLog(@"Array Contents = %@", dataArray);
+//    NSLog(@"Array Contents = %@", dataArray);
     
     /*************************************************************************** 
      We use dataArray to populate variables created at the start of this 

@@ -1001,7 +1001,6 @@
 				31CEA28B15AB3BA600A6512D /* Chapters */,
 				31CEA29315AB3BA600A6512D /* GameData */,
 				31CEA29915AB3BA600A6512D /* Levels */,
-				31CEA2A615AB3BA600A6512D /* Template */,
 			);
 			name = Leveling;
 			path = "Lock-a-Word/Leveling";
@@ -1048,13 +1047,6 @@
 				31CEA2A515AB3BA600A6512D /* Levels.m */,
 			);
 			path = Levels;
-			sourceTree = "<group>";
-		};
-		31CEA2A615AB3BA600A6512D /* Template */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Template;
 			sourceTree = "<group>";
 		};
 		31CEA2B815AB3BFD00A6512D /* XMLSupport */ = {
