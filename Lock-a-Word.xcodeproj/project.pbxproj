@@ -2118,6 +2118,55 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		3106A65D15B61871000EA482 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					"NS_BLOCK_ASSERTIONS=1",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AdHoc;
+		};
+		3106A65E15B61871000EA482 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Lock-A-Word/Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/include/libxml2",
+					"\"Lock-A-Word/libs/kazmath/include\"",
+				);
+				INFOPLIST_FILE = "Lock-A-Word/Resources/Info.plist";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F4A055AC-4FD7-4C97-8091-3F018D640873";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F4A055AC-4FD7-4C97-8091-3F018D640873";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = AdHoc;
+		};
 		BB2CC11615A63EB0001CC30F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2162,6 +2211,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Developer: Con Roditis (VLTMWCEA63)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Con Roditis (VLTMWCEA63)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2176,6 +2231,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A93EDCF6-E01D-44EA-A629-0B0C0DC93B45";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A93EDCF6-E01D-44EA-A629-0B0C0DC93B45";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2184,6 +2241,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lock-A-Word/Prefix.pch";
@@ -2197,6 +2260,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9F7F325C-88F7-471A-B2EE-728FADE3504F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F7F325C-88F7-471A-B2EE-728FADE3504F";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2210,6 +2275,7 @@
 			buildConfigurations = (
 				BB2CC11615A63EB0001CC30F /* Debug */,
 				BB2CC11715A63EB0001CC30F /* Release */,
+				3106A65D15B61871000EA482 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2219,6 +2285,7 @@
 			buildConfigurations = (
 				BB2CC11915A63EB0001CC30F /* Debug */,
 				BB2CC11A15A63EB0001CC30F /* Release */,
+				3106A65E15B61871000EA482 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
