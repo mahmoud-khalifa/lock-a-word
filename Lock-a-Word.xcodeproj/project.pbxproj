@@ -112,6 +112,9 @@
 		3128F29415AEFFB5003ADBFF /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3128F27A15AEFFB5003ADBFF /* x.png */; };
 		3128F29515AEFFB5003ADBFF /* y.png in Resources */ = {isa = PBXBuildFile; fileRef = 3128F27B15AEFFB5003ADBFF /* y.png */; };
 		3128F29615AEFFB5003ADBFF /* z.png in Resources */ = {isa = PBXBuildFile; fileRef = 3128F27C15AEFFB5003ADBFF /* z.png */; };
+		314CC2C215B41E8300E65F85 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C115B41E8300E65F85 /* Twitter.framework */; };
+		314CC2C515B41E8B00E65F85 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C415B41E8B00E65F85 /* Accounts.framework */; };
+		314CC2C715B41E9A00E65F85 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */; };
 		31CEA2A715AB3BA700A6512D /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CEA28D15AB3BA600A6512D /* Chapter.m */; };
 		31CEA2A815AB3BA700A6512D /* ChapterParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CEA28F15AB3BA600A6512D /* ChapterParser.m */; };
 		31CEA2A915AB3BA700A6512D /* Chapters.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CEA29115AB3BA600A6512D /* Chapters.m */; };
@@ -454,6 +457,9 @@
 		3128F27A15AEFFB5003ADBFF /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
 		3128F27B15AEFFB5003ADBFF /* y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = y.png; sourceTree = "<group>"; };
 		3128F27C15AEFFB5003ADBFF /* z.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = z.png; sourceTree = "<group>"; };
+		314CC2C115B41E8300E65F85 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		314CC2C415B41E8B00E65F85 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31CEA28C15AB3BA600A6512D /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
 		31CEA28D15AB3BA600A6512D /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		31CEA28E15AB3BA600A6512D /* ChapterParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterParser.h; sourceTree = "<group>"; };
@@ -841,6 +847,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314CC2C715B41E9A00E65F85 /* SystemConfiguration.framework in Frameworks */,
+				314CC2C515B41E8B00E65F85 /* Accounts.framework in Frameworks */,
+				314CC2C215B41E8300E65F85 /* Twitter.framework in Frameworks */,
 				31CEA2BD15AB3C3F00A6512D /* libxml2.dylib in Frameworks */,
 				BB2CBF8E15A63EAB001CC30F /* QuartzCore.framework in Frameworks */,
 				BB2CBF9015A63EAB001CC30F /* OpenGLES.framework in Frameworks */,
@@ -1258,6 +1267,9 @@
 			isa = PBXGroup;
 			children = (
 				31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */,
+				314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */,
+				314CC2C415B41E8B00E65F85 /* Accounts.framework */,
+				314CC2C115B41E8300E65F85 /* Twitter.framework */,
 				BB2CBF8D15A63EAB001CC30F /* QuartzCore.framework */,
 				BB2CBF8F15A63EAB001CC30F /* OpenGLES.framework */,
 				BB2CBF9115A63EAB001CC30F /* OpenAL.framework */,

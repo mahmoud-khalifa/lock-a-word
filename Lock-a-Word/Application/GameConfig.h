@@ -19,5 +19,44 @@
 #endif
 
 
+#define kBOARD_LETTERS_X_OFFSET IS_IPAD() == YES ? 5 : 20
+#define kBOARD_LETTERS_Y_OFFSET IS_IPAD() == YES ? 225 : 152
+#define kLETTERS_SPACING 1
+
+/*  NORMAL DETAILS */
+#define kScreenHeight       480
+#define kScreenWidth        320
+
+/* OFFSETS TO ACCOMMODATE IPAD */
+#define kXoffsetiPad        64
+#define kYoffsetiPad        32
+
+#define kANIMATION_DURATION 0.1
+
+#define ADJUST_CCP(__p__)       \
+(IS_IPAD() == YES ?             \
+ccp( ( __p__.x * 2 ) + kXoffsetiPad, ( __p__.y * 2 ) + kYoffsetiPad ) : \
+__p__)
+
+#define REVERSE_CCP(__p__)      \
+(IS_IPAD() == YES ?             \
+ccp( ( __p__.x - kXoffsetiPad ) / 2, ( __p__.y - kYoffsetiPad ) / 2 ) : \
+__p__)
+
+#define ADJUST_XY(__x__, __y__)     \
+(IS_IPAD() == YES ?                     \
+ccp( ( __x__ * 2 ) + kXoffsetiPad, ( __y__ * 2 ) + kYoffsetiPad ) : \
+ccp(__x__, __y__))
+
+#define ADJUST_X(__x__)         \
+(IS_IPAD() == YES ?             \
+( __x__ * 2 ) + kXoffsetiPad :      \
+__x__)
+
+#define ADJUST_Y(__y__) (IS_IPAD() == YES ? ( __y__ * 2 ) + kYoffsetiPad : __y__)
+
+#define ADJUST_DOUBLE(__x__) (IS_IPAD() == YES ? ( __x__ * 2 )  : __x__)
+
+
 
 #endif

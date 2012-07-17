@@ -23,9 +23,12 @@ static Controller *instanceOfController;
     
     BOOL board[25];         // 0 -> free, 1-> busy
     BOOL lockedBoard[25];   // 0 -> unlocked, 1-> locked
+    BOOL bonusRow[5];
+    int numOfBonusLetters;
+    int numOfGeneratedLetters;
+    NSString *currentLetter;
+    
 }
-
-
 
 -(void)dealloc {
     [allLetters release];
@@ -127,6 +130,20 @@ static Controller *instanceOfController;
     [self printBoard];
 }
 
+- (NSArray*)getLockedLetters {
+    NSMutableArray *lockedLetters;
+    if (currentGameMode == BronzeLock) {
+        lockedLetters = [[NSMutableArray alloc] initWithCapacity:3];
+    } else if (currentGameMode == SilverLock) {
+        lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
+        
+    } else if (currentGameMode == GoldLock) {
+        lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
+        
+    }   
+    
+    return lockedLetters;
+}
 
 - (void)resetBoard {
     
@@ -142,9 +159,107 @@ static Controller *instanceOfController;
     lockedBoard[15]=0;lockedBoard[16]=0;lockedBoard[17]=0;lockedBoard[18]=0;lockedBoard[19]=0;
     lockedBoard[20]=0;lockedBoard[21]=0;lockedBoard[22]=0;lockedBoard[23]=0;lockedBoard[24]=0;
 
+    
+    bonusRow[0]=0;bonusRow[1]=0;bonusRow[2]=0;bonusRow[3]=0;bonusRow[4]=0;
+    numOfBonusLetters = 0;
+    
+    numOfGeneratedLetters = 0;
 }
 
+#pragma mark - validation
+- (BOOL)isCorrectWord:(NSString*)word {
+    UITextChecker *checker = [[UITextChecker alloc] init];
+    NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
+    NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
+    NSRange searchRange = NSMakeRange(0, [word length]);
+    
+    NSRange misspelledRange = [checker rangeOfMisspelledWordInString:word range:searchRange startingAt:0 wrap:NO language: currentLanguage];
+    return misspelledRange.location == NSNotFound;
+
+}
+
+- (BOOL)isNewLetterAvailable {
+    return numOfGeneratedLetters < KStreamLength ;
+}
+
+
+# pragma mark - letters generations
+
+- (void)prepareCurrentLetter {
+    currentLetter = [allLetters randomObject];
+}
+
+- (NSString*)getCurrentLetter {
+    return currentLetter;
+}
+#pragma mark - locking & board management
+
+- (BOOL)isLockedPosition:(int)index {
+    return lockedBoard[index];
+}
+
+- (void)lockRow:(int)row {
+    for (int i=0; i<5; i++) {
+        lockedBoard[row*5+i] = 1;
+    }
+}
+
+- (void)addLetterAtIndex:(int)index {
+    board[index] = 1;
+}
+
+- (void)removeWordAtIndex:(int)index lenght:(int)lenght {
+    int i;
+    for (i=0; i<lenght; i++) {
+        board[index+i] = 0;
+    }
+    while ((index+i)%5 != 0) {
+        board[index+i-lenght] = board[index+i];
+        board[index+i] = 0;
+        i++;
+    }
+}
+
+
+- (int)getFirstColumnIndexOfRow:(int)row {
+    for (int i=0; i<5; i++) {
+        if (!board[row*5+i]) {
+            return i;
+        }
+    }
+    return 5;
+}
+
+#pragma mark - Bonus
+
+- (void)addBonusLetterAtIndex:(int)index {
+    bonusRow[index] = 1;
+    numOfBonusLetters++;
+}
+
+- (void)removeBonusLetterAtIndex:(int)index {
+    bonusRow[index] = 0;
+    numOfBonusLetters--;
+}
+
+
+- (int)getFirstBonusIndex {
+    for (int i=0; i<5; i++) {
+        if (!bonusRow[i]) {
+            return i;
+        }
+    }
+    return 5;
+}
+
+- (BOOL)canAddBonusLetter
+{
+    return numOfBonusLetters < 5;
+}
+
+
 #pragma mark - Testing
+
 - (void)printBoard {
     CCLOG(@"board");
     for (int i=0; i<5; i++) {

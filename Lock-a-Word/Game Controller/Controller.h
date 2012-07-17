@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UITextChecker.h>
 
 
-#define kBOARD_SIZE 100
+#define KStreamLength 100
 
 typedef enum
 {
@@ -32,8 +33,29 @@ typedef enum
 
 
 - (void)newGame;
+- (NSArray*)getLockedLetters;
 - (void)resetBoard;
 
+
+- (void)prepareCurrentLetter;
+- (NSString*)getCurrentLetter;
+
+
+- (BOOL)isCorrectWord:(NSString*)word;
+- (BOOL)isNewLetterAvailable;
+
+
+- (BOOL)isLockedPosition:(int)index;
+- (void)lockRow:(int)row;
+- (void)addLetterAtIndex:(int)index;
+- (void)removeWordAtIndex:(int)index lenght:(int)lenght;
+- (int)getFirstColumnIndexOfRow:(int)row;
+
+
+- (void)addBonusLetterAtIndex:(int)index;
+- (void)removeBonusLetterAtIndex:(int)index;
+- (int)getFirstBonusIndex;
+- (BOOL)canAddBonusLetter;
 
 - (void)printBoard;
 @end

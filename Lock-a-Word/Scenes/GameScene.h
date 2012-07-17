@@ -10,11 +10,8 @@
 #import "cocos2d.h"
 #import "Controller.h"
 
-@interface GameScene : CCLayer {
-    
-}
+@interface GameScene : CCLayer 
 
-
-+(id) scene;
++ (id)scene;
  
 @end
