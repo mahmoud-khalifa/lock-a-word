@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3106A63F15B61520000EA482 /* high_score_bitmapfont-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63715B61520000EA482 /* high_score_bitmapfont-hd.fnt */; };
+		3106A64015B61520000EA482 /* high_score_bitmapfont-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63815B61520000EA482 /* high_score_bitmapfont-hd.png */; };
+		3106A64115B61520000EA482 /* score_bitmapfont-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63915B61520000EA482 /* score_bitmapfont-hd.fnt */; };
+		3106A64215B61520000EA482 /* score_bitmapfont-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63A15B61520000EA482 /* score_bitmapfont-hd.png */; };
+		3106A64315B61520000EA482 /* high_score_bitmapfont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63B15B61520000EA482 /* high_score_bitmapfont.fnt */; };
+		3106A64415B61520000EA482 /* high_score_bitmapfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63C15B61520000EA482 /* high_score_bitmapfont.png */; };
+		3106A64515B61520000EA482 /* score_bitmapfont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63D15B61520000EA482 /* score_bitmapfont.fnt */; };
+		3106A64615B61520000EA482 /* score_bitmapfont.png in Resources */ = {isa = PBXBuildFile; fileRef = 3106A63E15B61520000EA482 /* score_bitmapfont.png */; };
 		3128F1C215AEFCDD003ADBFF /* all_letters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3128F1C115AEFCDD003ADBFF /* all_letters.plist */; };
 		3128F1DE15AEFF9B003ADBFF /* a-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3128F1C415AEFF9B003ADBFF /* a-ipad.png */; };
 		3128F1DF15AEFF9B003ADBFF /* b-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3128F1C515AEFF9B003ADBFF /* b-ipad.png */; };
@@ -351,6 +359,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3106A63715B61520000EA482 /* high_score_bitmapfont-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "high_score_bitmapfont-hd.fnt"; sourceTree = "<group>"; };
+		3106A63815B61520000EA482 /* high_score_bitmapfont-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "high_score_bitmapfont-hd.png"; sourceTree = "<group>"; };
+		3106A63915B61520000EA482 /* score_bitmapfont-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "score_bitmapfont-hd.fnt"; sourceTree = "<group>"; };
+		3106A63A15B61520000EA482 /* score_bitmapfont-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score_bitmapfont-hd.png"; sourceTree = "<group>"; };
+		3106A63B15B61520000EA482 /* high_score_bitmapfont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = high_score_bitmapfont.fnt; sourceTree = "<group>"; };
+		3106A63C15B61520000EA482 /* high_score_bitmapfont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = high_score_bitmapfont.png; sourceTree = "<group>"; };
+		3106A63D15B61520000EA482 /* score_bitmapfont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = score_bitmapfont.fnt; sourceTree = "<group>"; };
+		3106A63E15B61520000EA482 /* score_bitmapfont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score_bitmapfont.png; sourceTree = "<group>"; };
 		3128F1BF15AEEC3D003ADBFF /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConfig.h; path = "Lock-a-Word/Application/GameConfig.h"; sourceTree = SOURCE_ROOT; };
 		3128F1C115AEFCDD003ADBFF /* all_letters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = all_letters.plist; path = "Lock-a-Word/Resources/all_letters.plist"; sourceTree = SOURCE_ROOT; };
 		3128F1C415AEFF9B003ADBFF /* a-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "a-ipad.png"; sourceTree = "<group>"; };
@@ -866,6 +882,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3106A63515B61520000EA482 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3106A63615B61520000EA482 /* HD */,
+				3106A63B15B61520000EA482 /* high_score_bitmapfont.fnt */,
+				3106A63C15B61520000EA482 /* high_score_bitmapfont.png */,
+				3106A63D15B61520000EA482 /* score_bitmapfont.fnt */,
+				3106A63E15B61520000EA482 /* score_bitmapfont.png */,
+			);
+			name = fonts;
+			path = "Lock-a-Word/Resources/fonts";
+			sourceTree = SOURCE_ROOT;
+		};
+		3106A63615B61520000EA482 /* HD */ = {
+			isa = PBXGroup;
+			children = (
+				3106A63715B61520000EA482 /* high_score_bitmapfont-hd.fnt */,
+				3106A63815B61520000EA482 /* high_score_bitmapfont-hd.png */,
+				3106A63915B61520000EA482 /* score_bitmapfont-hd.fnt */,
+				3106A63A15B61520000EA482 /* score_bitmapfont-hd.png */,
+			);
+			path = HD;
+			sourceTree = "<group>";
+		};
 		3128F1C315AEFF9B003ADBFF /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -1301,6 +1341,7 @@
 		BB2CBFA015A63EAB001CC30F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3106A63515B61520000EA482 /* fonts */,
 				3128F1C115AEFCDD003ADBFF /* all_letters.plist */,
 				34DB2F5B15A8BB9400998A76 /* Ipad */,
 				34DB2F6015A8BB9400998A76 /* Ipad-hd */,
@@ -1939,6 +1980,14 @@
 				3128F29415AEFFB5003ADBFF /* x.png in Resources */,
 				3128F29515AEFFB5003ADBFF /* y.png in Resources */,
 				3128F29615AEFFB5003ADBFF /* z.png in Resources */,
+				3106A63F15B61520000EA482 /* high_score_bitmapfont-hd.fnt in Resources */,
+				3106A64015B61520000EA482 /* high_score_bitmapfont-hd.png in Resources */,
+				3106A64115B61520000EA482 /* score_bitmapfont-hd.fnt in Resources */,
+				3106A64215B61520000EA482 /* score_bitmapfont-hd.png in Resources */,
+				3106A64315B61520000EA482 /* high_score_bitmapfont.fnt in Resources */,
+				3106A64415B61520000EA482 /* high_score_bitmapfont.png in Resources */,
+				3106A64515B61520000EA482 /* score_bitmapfont.fnt in Resources */,
+				3106A64615B61520000EA482 /* score_bitmapfont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

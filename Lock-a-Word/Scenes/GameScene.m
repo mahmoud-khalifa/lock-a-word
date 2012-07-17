@@ -21,6 +21,7 @@
     BOOL correctWordFound;
     ccColor3B boardLettersColor;
     int wordsCollected;
+    CCLabelBMFont *wordsCollectedLabel;
     
 }
 
@@ -114,6 +115,10 @@
     self.collectedWord=[[NSMutableArray alloc]init];
     
     self.isTouchEnabled=YES;
+    
+    wordsCollectedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
+    wordsCollectedLabel.position=ADJUST_XY(50, 400);
+    [self addChild:wordsCollectedLabel];
     
     [self drawBoard];
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
@@ -442,6 +447,8 @@
                 }
             }
             [gameController removeWordAtIndex:firstIndex lenght:wordLength];
+            wordsCollected++;
+            [wordsCollectedLabel setString:[NSString stringWithFormat:@"%d",wordsCollected]];
 //            [self removeSpritesInArray:newLetters];
 //            [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:kANIMATION_DURATION];
         }

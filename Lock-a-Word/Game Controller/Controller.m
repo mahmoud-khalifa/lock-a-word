@@ -35,6 +35,7 @@ static Controller *instanceOfController;
     int numOfBonusLetters;
     int numOfGeneratedLetters;
     NSString *currentLetter;
+    NSString *lastLetter;
     
 }
 
@@ -144,7 +145,7 @@ static Controller *instanceOfController;
             break;
     }
     
-    
+    lastLetter = @"";
     [self printBoard];
 }
 
@@ -274,9 +275,10 @@ static Controller *instanceOfController;
 
 - (void)prepareCurrentLetterWithRestrictions:(NSString*)restriction {
     currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
-    while ([restriction rangeOfString:currentLetter].location != NSNotFound) {
+    while ([restriction rangeOfString:currentLetter].location != NSNotFound && ![currentLetter isEqualToString:lastLetter]) {
         currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
     }
+    lastLetter = currentLetter;
 }
 - (NSString*)getCurrentLetter {
     return currentLetter;
