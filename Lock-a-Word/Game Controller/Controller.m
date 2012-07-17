@@ -9,17 +9,25 @@
 #import "Controller.h"
 #import "GameData.h"
 #import "GameDataParser.h"
-#import "cocos2d.h"
+#import "Level.h"
+#import "Levels.h"
+#import "LevelParser.h"
+//#import "cocos2d.h"
 
 static Controller *instanceOfController;
 
+@interface Controller()
+@property (nonatomic,strong) NSArray *secondLetters;
+@end
 
 @implementation Controller {
-    CCArray *allLetters;
+    NSArray *allLetters;
     int currentIndex;
     int numberOfBonus;
     GameMode currentGameMode;
     int currentLevel;
+    NSString *lockedLetter;
+    NSArray *secondLetters;
     
     BOOL board[25];         // 0 -> free, 1-> busy
     BOOL lockedBoard[25];   // 0 -> unlocked, 1-> locked
@@ -30,6 +38,8 @@ static Controller *instanceOfController;
     
 }
 
+@synthesize secondLetters;
+
 -(void)dealloc {
     [allLetters release];
     [super dealloc];
@@ -38,7 +48,7 @@ static Controller *instanceOfController;
     if (self=[super init]) {
         // load all letters array weighted (vowels have greater weight)
         NSString *allLettersPlistPath = [[NSBundle mainBundle]  pathForResource:@"all_letters" ofType:@"plist"];
-        allLetters=[[CCArray alloc]initWithNSArray:[[NSArray alloc] initWithContentsOfFile:allLettersPlistPath]];
+        allLetters=[[NSArray alloc] initWithContentsOfFile:allLettersPlistPath];
         [self printBoard];
     }
     return self;
@@ -86,8 +96,16 @@ static Controller *instanceOfController;
     [gameData setSelectedLevel:level];
     [GameDataParser saveData:gameData];
     [gameData release];
-
     currentLevel = level;
+    
+    Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
+    for (Level *gameLevel in levels.levels) {
+        if (gameLevel.number == currentLevel) {
+            lockedLetter = gameLevel.name;
+            self.secondLetters = [gameLevel.data componentsSeparatedByString:@","];
+        }
+    }
+    
     [self newGame];
 }
 
@@ -95,16 +113,16 @@ static Controller *instanceOfController;
 #pragma mark init/preparations 
 - (void)newGame {
     [self resetBoard];
-    CCLOG(@"NewGame");
+    NSLog(@"NewGame");
     switch (currentGameMode) {
         case BronzeLock:
-            CCLOG(@"BronzeLock");
+            NSLog(@"BronzeLock");
             board[0]=1;board[6]=1;board[12]=1;
             lockedBoard[0]=1;lockedBoard[6]=1;lockedBoard[12]=1;
             break;
             
         case SilverLock:
-            CCLOG(@"SilverLock");
+            NSLog(@"SilverLock");
             board[0]=1;board[5]=1;board[10]=1;
             board[1]=1;board[6]=1;board[11]=1;
             
@@ -113,7 +131,7 @@ static Controller *instanceOfController;
             break;
             
         case GoldLock:
-            CCLOG(@"GoldLock");
+            NSLog(@"GoldLock");
             board[0]=1;board[5]=1;board[10]=1;
             board[4]=1;board[9]=1;board[14]=1;
             
@@ -122,7 +140,7 @@ static Controller *instanceOfController;
             break;
             
         default:
-            CCLOG(@"PlasticLock");
+            NSLog(@"PlasticLock");
             break;
     }
     
@@ -132,16 +150,81 @@ static Controller *instanceOfController;
 
 - (NSArray*)getLockedLetters {
     NSMutableArray *lockedLetters;
-    if (currentGameMode == BronzeLock) {
+    if (currentGameMode == PlasticLock) {
+        lockedLetters = nil;
+    } else if (currentGameMode == BronzeLock) {
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:3];
+        
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"6", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"12", @"index", nil];
+        [lockedLetters addObject:dic];
+        
     } else if (currentGameMode == SilverLock) {
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"5", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"10", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        int secondLetterscount = [secondLetters count];
+        NSString *secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"1", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"6", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"11", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
         
     } else if (currentGameMode == GoldLock) {
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
         
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"5", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"10", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        int secondLetterscount = [secondLetters count];
+        NSString *secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"4", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"9", @"index", nil];
+        [lockedLetters addObject:dic];
+        
+        
+        secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"14", @"index", nil];
+        [lockedLetters addObject:dic];
     }   
-    
     return lockedLetters;
 }
 
@@ -186,9 +269,15 @@ static Controller *instanceOfController;
 # pragma mark - letters generations
 
 - (void)prepareCurrentLetter {
-    currentLetter = [allLetters randomObject];
+    currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
 }
 
+- (void)prepareCurrentLetterWithRestrictions:(NSString*)restriction {
+    currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
+    while ([restriction rangeOfString:currentLetter].location != NSNotFound) {
+        currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
+    }
+}
 - (NSString*)getCurrentLetter {
     return currentLetter;
 }
@@ -261,13 +350,13 @@ static Controller *instanceOfController;
 #pragma mark - Testing
 
 - (void)printBoard {
-    CCLOG(@"board");
+    NSLog(@"board");
     for (int i=0; i<5; i++) {
-        CCLOG(@"%d %d %d %d %d",board[i*5+0],board[i*5+1],board[i*5+2],board[i*5+3],board[i*5+4]);
+        NSLog(@"%d %d %d %d %d",board[i*5+0],board[i*5+1],board[i*5+2],board[i*5+3],board[i*5+4]);
     }
-    CCLOG(@"lockedBoard");
+    NSLog(@"lockedBoard");
     for (int i=0; i<5; i++) {
-        CCLOG(@"%d %d %d %d %d",lockedBoard[i*5+0],lockedBoard[i*5+1],lockedBoard[i*5+2],lockedBoard[i*5+3],lockedBoard[i*5+4]);
+        NSLog(@"%d %d %d %d %d",lockedBoard[i*5+0],lockedBoard[i*5+1],lockedBoard[i*5+2],lockedBoard[i*5+3],lockedBoard[i*5+4]);
     }
 }
 

@@ -156,7 +156,7 @@
 		31CEA32B15AB411A00A6512D /* SilverLock-Selected-iPhone-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E215AB411A00A6512D /* SilverLock-Selected-iPhone-hd.png */; };
 		31CEA32C15AB411A00A6512D /* SilverLock-Selected-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E315AB411A00A6512D /* SilverLock-Selected-iPhone.png */; };
 		31CEA32D15AB411A00A6512D /* GoldLock-Normal-iPad-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E415AB411A00A6512D /* GoldLock-Normal-iPad-hd.png */; };
-		31CEA32E15AB411A00A6512D /* GoldLockNormal-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E515AB411A00A6512D /* GoldLockNormal-iPad.png */; };
+		31CEA32E15AB411A00A6512D /* GoldLock-Normal-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E515AB411A00A6512D /* GoldLock-Normal-iPad.png */; };
 		31CEA32F15AB411A00A6512D /* GoldLock-Normal-iPhone-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E615AB411A00A6512D /* GoldLock-Normal-iPhone-hd.png */; };
 		31CEA33015AB411A00A6512D /* GoldLock-Normal-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E715AB411A00A6512D /* GoldLock-Normal-iPhone.png */; };
 		31CEA33115AB411A00A6512D /* GoldLock-Selected-iPad-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 31CEA2E815AB411A00A6512D /* GoldLock-Selected-iPad-hd.png */; };
@@ -510,7 +510,7 @@
 		31CEA2E215AB411A00A6512D /* SilverLock-Selected-iPhone-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SilverLock-Selected-iPhone-hd.png"; sourceTree = "<group>"; };
 		31CEA2E315AB411A00A6512D /* SilverLock-Selected-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SilverLock-Selected-iPhone.png"; sourceTree = "<group>"; };
 		31CEA2E415AB411A00A6512D /* GoldLock-Normal-iPad-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoldLock-Normal-iPad-hd.png"; sourceTree = "<group>"; };
-		31CEA2E515AB411A00A6512D /* GoldLockNormal-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoldLockNormal-iPad.png"; sourceTree = "<group>"; };
+		31CEA2E515AB411A00A6512D /* GoldLock-Normal-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoldLock-Normal-iPad.png"; sourceTree = "<group>"; };
 		31CEA2E615AB411A00A6512D /* GoldLock-Normal-iPhone-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoldLock-Normal-iPhone-hd.png"; sourceTree = "<group>"; };
 		31CEA2E715AB411A00A6512D /* GoldLock-Normal-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoldLock-Normal-iPhone.png"; sourceTree = "<group>"; };
 		31CEA2E815AB411A00A6512D /* GoldLock-Selected-iPad-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GoldLock-Selected-iPad-hd.png"; sourceTree = "<group>"; };
@@ -1104,7 +1104,7 @@
 				31CEA2E215AB411A00A6512D /* SilverLock-Selected-iPhone-hd.png */,
 				31CEA2E315AB411A00A6512D /* SilverLock-Selected-iPhone.png */,
 				31CEA2E415AB411A00A6512D /* GoldLock-Normal-iPad-hd.png */,
-				31CEA2E515AB411A00A6512D /* GoldLockNormal-iPad.png */,
+				31CEA2E515AB411A00A6512D /* GoldLock-Normal-iPad.png */,
 				31CEA2E615AB411A00A6512D /* GoldLock-Normal-iPhone-hd.png */,
 				31CEA2E715AB411A00A6512D /* GoldLock-Normal-iPhone.png */,
 				31CEA2E815AB411A00A6512D /* GoldLock-Selected-iPad-hd.png */,
@@ -1807,7 +1807,7 @@
 				31CEA32B15AB411A00A6512D /* SilverLock-Selected-iPhone-hd.png in Resources */,
 				31CEA32C15AB411A00A6512D /* SilverLock-Selected-iPhone.png in Resources */,
 				31CEA32D15AB411A00A6512D /* GoldLock-Normal-iPad-hd.png in Resources */,
-				31CEA32E15AB411A00A6512D /* GoldLockNormal-iPad.png in Resources */,
+				31CEA32E15AB411A00A6512D /* GoldLock-Normal-iPad.png in Resources */,
 				31CEA32F15AB411A00A6512D /* GoldLock-Normal-iPhone-hd.png in Resources */,
 				31CEA33015AB411A00A6512D /* GoldLock-Normal-iPhone.png in Resources */,
 				31CEA33115AB411A00A6512D /* GoldLock-Selected-iPad-hd.png in Resources */,

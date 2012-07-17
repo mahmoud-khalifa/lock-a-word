@@ -20,6 +20,8 @@
     BOOL selectingWord;
     BOOL correctWordFound;
     ccColor3B boardLettersColor;
+    int wordsCollected;
+    
 }
 
 @property (nonatomic, retain) NSMutableArray *newLetters;
@@ -40,6 +42,8 @@
 
 - (void)removeCorrectWord; 
 - (void)cancelRemoveCorrectWord;
+
+- (NSString*)getBonusString;
 
 - (void)gameOver;
 - (void)showShareAlert;
@@ -102,6 +106,7 @@
 - (void)newGame {
     score=0;  
     isGameOver=NO;
+    wordsCollected = 0;
     
     self.newLetters = [[NSMutableArray alloc] init];
     self.bonusLetters = [[NSMutableArray alloc] init];
@@ -111,12 +116,33 @@
     self.isTouchEnabled=YES;
     
     [self drawBoard];
-    [gameController prepareCurrentLetter];
+    [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
 }
 
 - (void)drawBoard {
-    
+    NSArray * lockedLetters = [gameController getLockedLetters];
+    if (lockedLetters == nil) {
+        return;
+    }
+    for (NSDictionary *dic in lockedLetters) {
+        NSString *letter = [dic objectForKey:@"letter"];
+        int index = [[dic objectForKey:@"index"] intValue];
+        int row = index/5;
+        int column = index%5;
+        
+        CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",letter]];
+        letterSprite.userData = letter;
+        
+        float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
+        float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
+        letterSprite.color=ccYELLOW;
+        letterSprite.position=ccp(xPos,yPos);
+        [self addChild:letterSprite z:100 tag:(row*5+column)];
+        [boardLetters addObject:letterSprite];
+        
+        
+    }
 }
 
 #pragma mark - logic
@@ -229,7 +255,7 @@
         for (int j=i; j<[newLetters count]; j++)  {
             letterSprite = [newLetters objectAtIndex:j];
             CCMoveTo* move = [[actions objectAtIndex:i] copy];
-            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:3*i*kANIMATION_DURATION];
+            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:4*i*kANIMATION_DURATION];
         }
     }
     
@@ -268,7 +294,7 @@
     if (bonusLetterSelected) {
         bonusLetterSelected = NO;
     }else {
-        [gameController prepareCurrentLetter];
+        [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     }
     
     
@@ -307,7 +333,7 @@
     CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
     [letterSprite runAction:move];
     
-    [gameController prepareCurrentLetter];
+    [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
     
 }
@@ -380,7 +406,9 @@
 
 
 - (void)removeCorrectWord {
+    CCLOG(@"removeCorrectWord");
     @synchronized (collectedWord) {
+        CCLOG(@"removeCorrectWord->synchronized");
         if (correctWordFound) {
             correctWordFound = NO;
             int wordLength = [collectedWord count];
@@ -424,7 +452,10 @@
 
 - (void)cancelRemoveCorrectWord {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(removeCorrectWord) object:nil];
-    @synchronized (collectedWord) {        
+    CCLOG(@"cancelRemoveCorrectWord");
+    @synchronized (collectedWord) {
+        CCLOG(@"cancelRemoveCorrectWord->synchronized");
+        
         correctWordFound = NO;
         for (CCSprite* collectedLetter in collectedWord) {
             collectedLetter.color=boardLettersColor;
@@ -434,7 +465,13 @@
     
 }
 
-
+- (NSString*)getBonusString {
+    NSString *bonusString = @"";
+    for (CCSprite* letterSprite in bonusLetters) {
+        bonusString = [bonusString stringByAppendingString:[letterSprite userData]];
+    }
+    return bonusString;
+}
 #pragma mark - Scoring
 
 - (void)updateScoreWithWordLength:(int)wordLength {
@@ -530,14 +567,16 @@
     }
     
     if (correctWordFound) {
-        CGPoint location = [touch locationInView:[touch view]]; 
-        location = [[CCDirector sharedDirector] convertToGL:location];    
-        CGRect letterArea;
-        for (CCSprite* letterSprite in collectedWord) {
-            letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
-            if (CGRectContainsPoint(letterArea, location)) {
-                [self cancelRemoveCorrectWord];
-                return;
+        @synchronized (collectedWord) {
+            CCLOG(@"ccTouchEnded->synchronized");
+            CGPoint location = [touch locationInView:[touch view]]; 
+            location = [[CCDirector sharedDirector] convertToGL:location];    
+            CGRect letterArea;
+            for (CCSprite* letterSprite in collectedWord) {
+                letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
+                if (CGRectContainsPoint(letterArea, location)) {
+                    [self cancelRemoveCorrectWord];
+                }
             }
         }
     } else if (selectingWord) { //word collected

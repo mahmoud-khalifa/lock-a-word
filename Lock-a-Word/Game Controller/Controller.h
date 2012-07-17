@@ -38,6 +38,7 @@ typedef enum
 
 
 - (void)prepareCurrentLetter;
+- (void)prepareCurrentLetterWithRestrictions:(NSString*)restriction;
 - (NSString*)getCurrentLetter;
 
 
