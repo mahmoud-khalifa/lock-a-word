@@ -124,7 +124,7 @@
             Level *level = [selectedLevels.levels objectAtIndex:i];
             CCMenuItem *item = [levelMenu.children objectAtIndex:i];
             
-            CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@",level.name] 
+            CCLabelTTF *label = [CCLabelTTF labelWithString:[[NSString stringWithFormat:@"%@",level.name]uppercaseString]
                                                    fontName:@"Marker Felt" 
                                                    fontSize:smallFont];
             

@@ -305,6 +305,9 @@ static Controller *instanceOfController;
         board[index+i] = 0;
     }
     while ((index+i)%5 != 0) {
+        if (lockedBoard[index+i]) {
+            break;
+        }
         board[index+i-lenght] = board[index+i];
         board[index+i] = 0;
         i++;

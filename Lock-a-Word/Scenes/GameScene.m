@@ -22,6 +22,8 @@
     ccColor3B boardLettersColor;
     int wordsCollected;
     CCLabelBMFont *wordsCollectedLabel;
+    int lettersLoaded;
+    CCLabelBMFont *lettesLoadedLabel;
     
 }
 
@@ -108,6 +110,7 @@
     score=0;  
     isGameOver=NO;
     wordsCollected = 0;
+    lettersLoaded=0;
     
     self.newLetters = [[NSMutableArray alloc] init];
     self.bonusLetters = [[NSMutableArray alloc] init];
@@ -117,10 +120,16 @@
     self.isTouchEnabled=YES;
     
     wordsCollectedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    wordsCollectedLabel.position=ADJUST_XY(50, 400);
+    wordsCollectedLabel.position=ADJUST_XY(50, 390);
     [self addChild:wordsCollectedLabel];
     
+    
+    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
+    lettesLoadedLabel.position=ADJUST_XY(250, 390);
+    [self addChild:lettesLoadedLabel];
+    
     [self drawBoard];
+    lettersLoaded++;
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
 }
@@ -159,6 +168,7 @@
     
     [newLetters removeAllObjects];
     
+    [lettesLoadedLabel setString:[NSString stringWithFormat:@"%d",lettersLoaded]];
     // add the extra column letter
     [self addCurentLetterToExtraColumnWithBonus:YES];
 
@@ -299,6 +309,7 @@
     if (bonusLetterSelected) {
         bonusLetterSelected = NO;
     }else {
+        lettersLoaded++;
         [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     }
     
@@ -338,6 +349,7 @@
     CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
     [letterSprite runAction:move];
     
+    lettersLoaded++;
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
     
@@ -431,6 +443,9 @@
             int newIndex;
             int newColumn;
             for (int i=lastIndex+1; i/5 == row; i++) {
+                if ([gameController isLockedPosition:i]) {
+                    break;
+                }
                 letterSprite = (CCSprite*)[self getChildByTag:i];
                 newIndex = i-wordLength;
                 newColumn = newIndex%5;

@@ -29,7 +29,7 @@
 
 /* OFFSETS TO ACCOMMODATE IPAD */
 #define kXoffsetiPad        64
-#define kYoffsetiPad        32
+#define kYoffsetiPad        64
 
 #define kANIMATION_DURATION 0.1
 
@@ -45,7 +45,7 @@ __p__)
 
 #define ADJUST_XY(__x__, __y__)     \
 (IS_IPAD() == YES ?                     \
-ccp( ( __x__ * 2 ) + kXoffsetiPad, ( __y__ * 2 ) + kYoffsetiPad ) : \
+ccp( ( __x__ * 2 ), ( __y__ * 2 ) + kYoffsetiPad) : \
 ccp(__x__, __y__))
 
 #define ADJUST_X(__x__)         \
