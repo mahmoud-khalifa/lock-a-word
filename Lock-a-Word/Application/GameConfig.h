@@ -29,7 +29,7 @@
 
 /* OFFSETS TO ACCOMMODATE IPAD */
 #define kXoffsetiPad        64
-#define kYoffsetiPad        64
+#define kYoffsetiPad        35
 
 #define kANIMATION_DURATION 0.1
 

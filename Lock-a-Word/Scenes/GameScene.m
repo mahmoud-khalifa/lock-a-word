@@ -135,16 +135,16 @@
     self.isTouchEnabled=YES;
     
     wordsCollectedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    wordsCollectedLabel.position=ADJUST_XY(50, 390);
+    wordsCollectedLabel.position=ADJUST_XY(50, 410);
     [self addChild:wordsCollectedLabel];
     
     
     lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    lettesLoadedLabel.position=ADJUST_XY(250, 390);
+    lettesLoadedLabel.position=ADJUST_XY(250, 410);
     [self addChild:lettesLoadedLabel];
     
     countTimerLabel=[CCLabelBMFont labelWithString:@"00:00" fntFile:@"score_bitmapfont.fnt"];
-    countTimerLabel.position=ADJUST_XY(150, 390);
+    countTimerLabel.position=ADJUST_XY(150, 410);
     [self addChild:countTimerLabel];
     
     [self drawBoard];
