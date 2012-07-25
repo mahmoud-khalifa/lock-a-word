@@ -24,6 +24,10 @@
     CCLabelBMFont *wordsCollectedLabel;
     int lettersLoaded;
     CCLabelBMFont *lettesLoadedLabel;
+    int countTimerSeconds;
+    int countTimerMinutes;
+    CCLabelBMFont *countTimerLabel;
+    
     
 }
 
@@ -54,6 +58,7 @@
 - (void)disableTouches;
 - (void)enableTouches;
 
+- (void)countUp:(ccTime)delta; 
 
 - (void)removeSpritesInArray:(NSMutableArray*)spritesArray;
 
@@ -99,9 +104,16 @@
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
          
         boardLettersColor = ccYELLOW;
+        
+        // Here the code for the timer
+        // schedule timer
+        [self schedule:@selector(countUp:) interval:1.0f];       
+        
 	}
 	return self;
 }
+
+
 
 
 
@@ -111,6 +123,9 @@
     isGameOver=NO;
     wordsCollected = 0;
     lettersLoaded=0;
+    countTimerSeconds=0;
+    countTimerMinutes=0;
+    
     
     self.newLetters = [[NSMutableArray alloc] init];
     self.bonusLetters = [[NSMutableArray alloc] init];
@@ -128,10 +143,31 @@
     lettesLoadedLabel.position=ADJUST_XY(250, 390);
     [self addChild:lettesLoadedLabel];
     
+    countTimerLabel=[CCLabelBMFont labelWithString:@"00:00" fntFile:@"score_bitmapfont.fnt"];
+    countTimerLabel.position=ADJUST_XY(150, 390);
+    [self addChild:countTimerLabel];
+    
     [self drawBoard];
     lettersLoaded++;
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
+}
+
+
+
+-(void)countUp:(ccTime)delta {
+    
+     countTimerSeconds++;
+    [countTimerLabel setString:[NSString stringWithFormat:@"%02d:%02d", countTimerMinutes,countTimerSeconds]];
+    
+    if (countTimerSeconds >= 59) {
+        countTimerMinutes++;
+        countTimerSeconds=0;
+    }
+//    if (self.countTimer <= 0) {
+//        
+//        [self unschedule:@selector(countUp:)];
+//    }
 }
 
 - (void)drawBoard {
