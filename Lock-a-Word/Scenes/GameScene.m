@@ -11,6 +11,7 @@
 #import "Controller.h"
 #import "GameConfig.h"
 #import "SimpleAudioEngine.h"
+#import "TapForTap.h"
 
 @interface GameScene() {
     BOOL isGameOver;
@@ -27,6 +28,7 @@
     int countTimerSeconds;
     int countTimerMinutes;
     CCLabelBMFont *countTimerLabel;
+    TapForTapAdView *adView;
     
     
 }
@@ -107,7 +109,26 @@
         
         // Here the code for the timer
         // schedule timer
-        [self schedule:@selector(countUp:) interval:1.0f];       
+        [self schedule:@selector(countUp:) interval:1.0f]; 
+       
+        if (!IS_IPAD()) {
+            // This is for TapforTap
+            adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0,60, 320, 50)];
+            [[[CCDirector sharedDirector] view] addSubview:adView];       
+            // You don't have to do this if you set the default app ID in your app delegate
+            adView.appId = @"c91a3680-b956-012f-f6ff-4040d804a637";
+            
+            [adView loadAds];
+        }
+       
+//        // trial ads
+//        t = [[UITextView alloc] initWithFrame: CGRectMake(0,300, 320,50)];
+//        t.backgroundColor = [UIColor blackColor];
+//        t.textColor = [UIColor whiteColor];
+//        t.text = @"Hello UIKit!";
+//        t.editable = NO;
+//        
+//        [[[CCDirector sharedDirector] view] addSubview:t];
         
 	}
 	return self;
@@ -736,6 +757,8 @@
 }
 
 - (void)onExit {
+    adView.hidden=YES;
+    
     [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
 //    [[CDAudioManager sharedManager]stopBackgroundMusic];
     [super onExit];

@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "MainMenuScene.h"
+#import "TapForTap.h"
 
 @implementation AppController
 
@@ -17,7 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Create the main window
+	
+    // this is method for TapforTap
+    [TapForTap setDefaultAppId: @"c91a3680-b956-012f-f6ff-4040d804a637"];
+    [TapForTap checkIn];
+    
+    // Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 
@@ -85,6 +91,8 @@
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [MainMenuScene scene]]; 
+    
+      
 
 	return YES;
 }
@@ -148,4 +156,8 @@
 
 	[super dealloc];
 }
+
+
+
+
 @end

@@ -13,6 +13,9 @@
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 
+// Nedded to instert the TapforTap Ads
+#import "TapForTap.h"
+
 #pragma mark - MainMenuScene
 
 // MainMenuScene implementation
@@ -67,12 +70,18 @@
         CCMenu *gameMenu = [CCMenu menuWithItems:menuItem1,menuItem2,menuItem3, nil];
 //        gameMenu.anchorPoint=CGPointZero;
         [gameMenu alignItemsVertically];
-        gameMenu.position=ccp(size.width/2,size.height/2 - (.380 *size.height/2)); 
-        
-        
-       
+        gameMenu.position=ccp(size.width/2,size.height/2 - (.380 *size.height/2));      
        
         [self addChild:gameMenu];
+        
+//        // This is for TapforTap
+//        TapForTapAdView *adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0, 0, 320, 50)];
+//        [[[CCDirector sharedDirector] view] addSubview: adView];
+//        
+//        // You don't have to do this if you set the default app ID in your app delegate
+//        adView.appId = @"<YOUR APP ID>";
+//        
+//        [adView loadAds];
 	}
 	return self;
 }

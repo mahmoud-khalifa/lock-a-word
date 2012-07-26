@@ -328,6 +328,7 @@
 		BB2CC10815A63EB0001CC30F /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = BB2CC10715A63EB0001CC30F /* vec3.c */; };
 		BB2CC10A15A63EB0001CC30F /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = BB2CC10915A63EB0001CC30F /* vec4.c */; };
 		BB2CC10F15A63EB0001CC30F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2CC10E15A63EB0001CC30F /* main.m */; };
+		BB9BFAAD15C1955E003ABDD2 /* libTapForTapAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */; };
 		BBCA5A5315A653D000D0B4A8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BBCA5A5215A653D000D0B4A8 /* iTunesArtwork */; };
 		BBCA5A5715A65BD600D0B4A8 /* Default-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCA5A5415A65BD600D0B4A8 /* Default-portrait.png */; };
 		BBCA5A5815A65BD600D0B4A8 /* Default-portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCA5A5515A65BD600D0B4A8 /* Default-portrait@2x.png */; };
@@ -824,6 +825,9 @@
 		BB2CC10B15A63EB0001CC30F /* LICENSE_Kazmath.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_Kazmath.txt; path = libs/LICENSE_Kazmath.txt; sourceTree = "<group>"; };
 		BB2CC10D15A63EB0001CC30F /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		BB2CC10E15A63EB0001CC30F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTapForTapAds.a; sourceTree = "<group>"; };
+		BB9BFAAB15C1955E003ABDD2 /* TapForTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTap.h; sourceTree = "<group>"; };
+		BB9BFAAC15C1955E003ABDD2 /* TapForTapAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTapAdView.h; sourceTree = "<group>"; };
 		BBCA5A5215A653D000D0B4A8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		BBCA5A5415A65BD600D0B4A8 /* Default-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-portrait.png"; path = "Resources/Default-portrait.png"; sourceTree = "<group>"; };
 		BBCA5A5515A65BD600D0B4A8 /* Default-portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-portrait@2x.png"; path = "Resources/Default-portrait@2x.png"; sourceTree = "<group>"; };
@@ -876,6 +880,7 @@
 				BB2CBF9A15A63EAB001CC30F /* Foundation.framework in Frameworks */,
 				BB2CBF9C15A63EAB001CC30F /* CoreGraphics.framework in Frameworks */,
 				BB2CBF9E15A63EAB001CC30F /* GameKit.framework in Frameworks */,
+				BB9BFAAD15C1955E003ABDD2 /* libTapForTapAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,6 +1331,7 @@
 		BB2CBF9F15A63EAB001CC30F /* Lock-A-Word */ = {
 			isa = PBXGroup;
 			children = (
+				BB9BFAA915C1955E003ABDD2 /* TapForTap */,
 				3106A67515B6D551000EA482 /* Leveling */,
 				BBF9083015A9EC2E009BDB13 /* Game Controller */,
 				34DB2F8215A8BC9700998A76 /* Application */,
@@ -1704,6 +1710,16 @@
 				BB2CC10E15A63EB0001CC30F /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB9BFAA915C1955E003ABDD2 /* TapForTap */ = {
+			isa = PBXGroup;
+			children = (
+				BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */,
+				BB9BFAAB15C1955E003ABDD2 /* TapForTap.h */,
+				BB9BFAAC15C1955E003ABDD2 /* TapForTapAdView.h */,
+			);
+			path = TapForTap;
 			sourceTree = "<group>";
 		};
 		BBF9083015A9EC2E009BDB13 /* Game Controller */ = {
@@ -2156,6 +2172,10 @@
 				);
 				INFOPLIST_FILE = "Lock-A-Word/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Lock-A-Word/TapForTap\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -2228,6 +2248,10 @@
 				);
 				INFOPLIST_FILE = "Lock-A-Word/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Lock-A-Word/TapForTap\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -2258,6 +2282,10 @@
 				);
 				INFOPLIST_FILE = "Lock-A-Word/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Lock-A-Word/TapForTap\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",

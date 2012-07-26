@@ -11,11 +11,13 @@
 #import "LevelSelectionScene.h"
 #import "Controller.h"
 #import "GameConfig.h"
+#import "TapForTap.h"
 
 
 
 @implementation GameModesScene {
     Controller *controller;
+    UITextView* t;
 }
 
 +(id)scene {
@@ -28,7 +30,9 @@
     return scene;
 }
 
-
+//- (void)onExit {
+//    t.hidden = YES;
+//}
 -(id) init {
     
 	if( (self=[super init] )) {
@@ -63,6 +67,15 @@
         
         
         [self addChild:gameModesSceneMenu];
+
+//        t = [[UITextView alloc] initWithFrame: CGRectMake(0,300, 320,50)];
+//        t.backgroundColor = [UIColor blackColor];
+//        t.textColor = [UIColor whiteColor];
+//        t.text = @"Hello UIKit!";
+//        t.editable = NO;
+//        
+//        [[[CCDirector sharedDirector] view] addSubview:t];
+
 
 		
         
