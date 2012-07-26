@@ -81,18 +81,18 @@
         NSMutableArray *overlay = [NSMutableArray new];
         
         Levels *selectedLevels = [LevelParser loadLevelsForChapter:gameData.selectedChapter];
-        NSString *normal =   [NSString stringWithFormat:@"%@-Normal-%@.png", selectedChapterName, self.device];
-        NSString *selected = [NSString stringWithFormat:@"%@-Selected-%@.png", selectedChapterName, self.device];
+//        NSString *normal =   [NSString stringWithFormat:@"%@-Normal-%@.png", selectedChapterName, self.device];
+//        NSString *selected = [NSString stringWithFormat:@"%@-Selected-%@.png", selectedChapterName, self.device];
         
          for (Level *level in selectedLevels.levels) {
-//             NSString *normal =   [NSString stringWithFormat:@"%@.png", level.name];
-//             NSString *selected = [NSString stringWithFormat:@"%@.png", level.name];
+             NSString *normal =   [NSString stringWithFormat:@"%@.png", level.name];
+             NSString *selected = [NSString stringWithFormat:@"%@.png", level.name];
              
              CCMenuItemImage *item = [CCMenuItemImage itemWithNormalImage:normal
                                                             selectedImage:selected
                                                                    target:self 
                                                                  selector:@selector(onPlay:)];
-//             item.rotation=-15;
+             item.rotation=-10;
              [item setTag:level.number]; // note the number in a tag for later usage
              
 //             // This will change each level sprite color in RGB
@@ -117,7 +117,7 @@
 
              [item setIsEnabled:level.unlocked];  // ensure locked levels are inaccessible
              [levelMenu addChild:item];
-             
+             level.stars = arc4random()%3;
              if (level.stars) {
                  NSString *stars = [[NSNumber numberWithInt:level.stars] stringValue];
                  NSString *overlayImage = [NSString stringWithFormat:@"%@Star-Normal-%@.png",stars, self.device];
@@ -141,19 +141,19 @@
         [self addChild:levelMenu z:-3];
         
         CCLayer *overlays = [[CCLayer alloc] init];
-        CCLayer *labels = [[CCLayer alloc] init];
+//        CCLayer *labels = [[CCLayer alloc] init];
         
         for (int i=0 ; i<[selectedLevels.levels count]; i++) {
-            Level *level = [selectedLevels.levels objectAtIndex:i];
+//            Level *level = [selectedLevels.levels objectAtIndex:i];
             CCMenuItem *item = [levelMenu.children objectAtIndex:i];
             
-            CCLabelTTF *label = [CCLabelTTF labelWithString:[[NSString stringWithFormat:@"%@",level.name]uppercaseString]
-                                                   fontName:@"Marker Felt" 
-                                                   fontSize:smallFont];
-            
-            [label setAnchorPoint:item.anchorPoint];
-            [label setPosition:item.position];
-            [labels addChild:label];
+//            CCLabelTTF *label = [CCLabelTTF labelWithString:[[NSString stringWithFormat:@"%@",level.name]uppercaseString]
+//                                                   fontName:@"Marker Felt" 
+//                                                   fontSize:smallFont];
+//            
+//            [label setAnchorPoint:item.anchorPoint];
+//            [label setPosition:item.position];
+//            [labels addChild:label];
             
             
             // set position of overlay sprites
@@ -167,17 +167,18 @@
             }
         }
 
+
         // Put the overlays and labels layers on the screen at the same position as the levelMenu
         
         [overlays setAnchorPoint:levelMenu.anchorPoint];
-        [labels setAnchorPoint:levelMenu.anchorPoint];
+//        [labels setAnchorPoint:levelMenu.anchorPoint];
         [overlays setPosition:levelMenu.position];
-        [labels setPosition:levelMenu.position];
+//        [labels setPosition:levelMenu.position];
         [self addChild:overlays];
-        [self addChild:labels];
+//        [self addChild:labels];
         [overlay release];
         [overlays release];
-        [labels release];
+//        [labels release];
         [gameData release];
 	}
 	return self;

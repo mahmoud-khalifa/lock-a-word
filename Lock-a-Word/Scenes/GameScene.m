@@ -327,7 +327,7 @@
         for (int j=i; j<[newLetters count]; j++)  {
             letterSprite = [newLetters objectAtIndex:j];
             CCMoveTo* move = [[actions objectAtIndex:i] copy];
-            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:4*i*kANIMATION_DURATION];
+            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:5*i*kANIMATION_DURATION];
         }
     }
     
