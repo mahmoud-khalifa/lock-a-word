@@ -57,7 +57,7 @@ typedef enum
 - (void)removeBonusLetterAtIndex:(int)index;
 - (int)getFirstBonusIndex;
 - (BOOL)canAddBonusLetter;
-
+- (int)getPlasticModeStars;
 - (void)printBoard;
 @end
 

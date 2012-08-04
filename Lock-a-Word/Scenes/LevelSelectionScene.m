@@ -117,7 +117,7 @@
 
              [item setIsEnabled:level.unlocked];  // ensure locked levels are inaccessible
              [levelMenu addChild:item];
-             level.stars = arc4random()%3;
+//             level.stars = arc4random()%3;
              if (level.stars) {
                  NSString *stars = [[NSNumber numberWithInt:level.stars] stringValue];
                  NSString *overlayImage = [NSString stringWithFormat:@"%@Star-Normal-%@.png",stars, self.device];

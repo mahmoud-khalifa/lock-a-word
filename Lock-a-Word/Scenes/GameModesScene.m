@@ -18,6 +18,7 @@
 @implementation GameModesScene {
     Controller *controller;
     UITextView* t;
+    CCMenuItemImage *stars;
 }
 
 +(id)scene {
@@ -57,16 +58,35 @@
         CCMenuItemImage *menuItem4 =[CCMenuItemImage itemWithNormalImage:
             @"main_btn_gold.png" selectedImage:@"main_btn_gold.png" target:self selector:@selector(goToGoldLock:)];
         
-              
         // Adding items to the menu
         CCMenu *gameModesSceneMenu = [CCMenu menuWithItems:menuItem1,menuItem2,menuItem3,menuItem4,nil];
        
         [gameModesSceneMenu alignItemsVerticallyWithPadding:0];
-        gameModesSceneMenu.position=ccp(screenSize.width/2,screenSize.height/2 - (.380 *screenSize.height/2));       
-        
-        
+        gameModesSceneMenu.position=ccp(screenSize.width/2,screenSize.height/2 - (.380 *screenSize.height/2));   
         
         [self addChild:gameModesSceneMenu];
+        int numberOfStars = [controller getPlasticModeStars];
+        // Here we will add stars to Plastic level 
+        
+        if (numberOfStars == 0) {
+            stars =[CCMenuItemImage itemWithNormalImage:@"stars.png" selectedImage:@"stars.png"];
+        } else if (numberOfStars == 1)
+        {
+           stars =[CCMenuItemImage itemWithNormalImage:@"star1.png" selectedImage:@"star1.png"]; 
+        } else if (numberOfStars == 2)
+        {
+          stars =[CCMenuItemImage itemWithNormalImage:@"star2.png" selectedImage:@"star2.png"]; 
+        } else
+            
+        {
+           stars =[CCMenuItemImage itemWithNormalImage:@"star3.png" selectedImage:@"star3.png"]; 
+        }
+
+  
+//        stars.scale = 1.5 ;
+        stars.position=ADJUST_XY(.625*screenSize.width,.479*screenSize.height);
+        [self addChild:stars];
+    
 
 //        t = [[UITextView alloc] initWithFrame: CGRectMake(0,300, 320,50)];
 //        t.backgroundColor = [UIColor blackColor];
