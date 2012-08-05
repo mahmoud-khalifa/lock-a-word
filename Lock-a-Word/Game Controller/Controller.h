@@ -25,7 +25,7 @@ typedef enum
 
 @interface Controller : NSObject
 
-
+@property (readonly) GameMode currentGameMode;
 + (Controller*) sharedController;
 
 - (void)selectChapter:(int)chapter;

@@ -24,7 +24,6 @@ static Controller *instanceOfController;
     NSArray *allLetters;
     int currentIndex;
     int numberOfBonus;
-    GameMode currentGameMode;
     int currentLevel;
     NSString *lockedLetter;
     NSArray *secondLetters;
@@ -40,6 +39,7 @@ static Controller *instanceOfController;
 }
 
 @synthesize secondLetters;
+@synthesize currentGameMode;
 
 -(void)dealloc {
     [allLetters release];

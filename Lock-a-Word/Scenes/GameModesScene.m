@@ -13,12 +13,20 @@
 #import "GameConfig.h"
 #import "TapForTap.h"
 
+@interface GameModesScene()
+{
+    
+}
+
+-(CCMenuItemImage *) showStars :(int)gamemode;
+
+@end
 
 
 @implementation GameModesScene {
     Controller *controller;
     UITextView* t;
-    CCMenuItemImage *stars;
+    
 }
 
 +(id)scene {
@@ -50,13 +58,24 @@
         
         // Creating Menu Items
         // Normal images and selected are the same 
-       
+        CCMenuItemImage *menuItem1=[self showStars:PlasticLock];
+        CCMenuItemImage *menuItem2=[self showStars:BronzeLock];
+        CCMenuItemImage *menuItem3=[self showStars:SilverLock];
+        CCMenuItemImage *menuItem4=[self showStars:GoldLock];
         
-        CCMenuItemImage *menuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_plast.png" selectedImage:@"main_btn_plast.png" target:self selector:@selector(goToPlasticLock:)];
-        CCMenuItemImage *menuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_bronz.png" selectedImage:@"main_btn_bronz.png" target:self selector:@selector(goToBronzeLock:)];
-        CCMenuItemImage *menuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_silver.png" selectedImage:@"main_btn_silver.png" target:self selector:@selector(goToSilverLock:)];
-        CCMenuItemImage *menuItem4 =[CCMenuItemImage itemWithNormalImage:
-            @"main_btn_gold.png" selectedImage:@"main_btn_gold.png" target:self selector:@selector(goToGoldLock:)];
+        menuItem1.scale = 1.10;
+        menuItem2.scale = 1.10;
+        menuItem3.scale = 1.10;
+        menuItem4.scale = 1.10;
+        
+//        CCMenuItemImage *menuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_plast.png" selectedImage:@"main_btn_plast.png" target:self selector:@selector(goToPlasticLock:)];
+//        CCMenuItemImage *menuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_bronz.png" selectedImage:@"main_btn_bronz.png" target:self selector:@selector(goToBronzeLock:)];
+//        CCMenuItemImage *menuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_silver.png" selectedImage:@"main_btn_silver.png" target:self selector:@selector(goToSilverLock:)];
+//        CCMenuItemImage *menuItem4 =[CCMenuItemImage itemWithNormalImage:
+//            @"main_btn_gold.png" selectedImage:@"main_btn_gold.png" target:self selector:@selector(goToGoldLock:)];
+     
+        
+        
         
         // Adding items to the menu
         CCMenu *gameModesSceneMenu = [CCMenu menuWithItems:menuItem1,menuItem2,menuItem3,menuItem4,nil];
@@ -65,39 +84,6 @@
         gameModesSceneMenu.position=ccp(screenSize.width/2,screenSize.height/2 - (.380 *screenSize.height/2));   
         
         [self addChild:gameModesSceneMenu];
-        int numberOfStars = [controller getModeStars:PlasticLock];
-        // Here we will add stars to Plastic level 
-        
-        if (numberOfStars == 0) {
-            stars =[CCMenuItemImage itemWithNormalImage:@"stars.png" selectedImage:@"stars.png"];
-        } else if (numberOfStars == 1)
-        {
-           stars =[CCMenuItemImage itemWithNormalImage:@"star1.png" selectedImage:@"star1.png"]; 
-        } else if (numberOfStars == 2)
-        {
-          stars =[CCMenuItemImage itemWithNormalImage:@"star2.png" selectedImage:@"star2.png"]; 
-        } else
-            
-        {
-           stars =[CCMenuItemImage itemWithNormalImage:@"star3.png" selectedImage:@"star3.png"]; 
-        }
-
-  
-//        stars.scale = 1.5 ;
-        stars.position=ADJUST_XY(.625*screenSize.width,.479*screenSize.height);
-        [self addChild:stars];
-    
-
-//        t = [[UITextView alloc] initWithFrame: CGRectMake(0,300, 320,50)];
-//        t.backgroundColor = [UIColor blackColor];
-//        t.textColor = [UIColor whiteColor];
-//        t.text = @"Hello UIKit!";
-//        t.editable = NO;
-//        
-//        [[[CCDirector sharedDirector] view] addSubview:t];
-
-
-		
         
 	}
 	return self;
@@ -137,6 +123,53 @@
     CCLOG(@"Gold Lock button has been pressed !!");
 }
 
-
+-(CCMenuItemImage *) showStars :(int)gameMode 
+{   
+    
+    int numberOfStars = [controller getModeStars:gameMode];    
+               CCMenuItemImage *stars;
+               CCMenuItemImage *gameModeItemImage; 
+               CCMenuItemImage *finalItemImage; 
+    // This will get the stars images
+                switch (numberOfStars) {
+                    case 0:
+                        stars =[CCMenuItemImage itemWithNormalImage:@"stars.png" selectedImage:@"stars.png" ];
+                        break;
+                    case 1:
+                        stars =[CCMenuItemImage itemWithNormalImage:@"star1.png" selectedImage:@"star1.png"]; 
+                        break;
+                    case 2:
+                        stars =[CCMenuItemImage itemWithNormalImage:@"star2.png" selectedImage:@"star2.png"]; 
+                       break;
+                    case 3:
+                        stars =[CCMenuItemImage itemWithNormalImage:@"star3.png" selectedImage:@"star3.png"];
+                        break;                     
+                    default:
+                        break;
+                }
+  
+    // This will get the image item for the mode only without stars
+    
+            if (gameMode == PlasticLock)
+            {
+                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_plastic_new.png" selectedImage:@"btn_plastic_new.png" target:self selector:@selector(goToPlasticLock:)];
+            } else if (gameMode == BronzeLock) {
+                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_bronze_new.png" selectedImage:@"btn_bronze_new.png" target:self selector:@selector(goToBronzeLock:)];
+            } else if (gameMode == SilverLock){
+                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_silver_new.png" selectedImage:@"btn_silver_new.png" target:self selector:@selector(goToSilverLock:)];
+            } else {
+                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_gold_new.png" selectedImage:@"btn_gold_new.png"  target:self selector:@selector(goToGoldLock:)]; 
+            }
+    
+    
+    stars.anchorPoint=ccp(1,.5);
+    stars.position=ccp(gameModeItemImage.contentSize.width - stars.contentSize.width/3, gameModeItemImage.contentSize.height);
+//    gameModeItemImage.anchorPoint=ccp(1,.5);/
+    finalItemImage = gameModeItemImage;
+    [finalItemImage addChild:stars];    
+    return finalItemImage;
+       
+         
+}                                  
 
 @end

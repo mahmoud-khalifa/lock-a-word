@@ -111,7 +111,10 @@
         // schedule timer
         [self schedule:@selector(countUp:) interval:1.0f]; 
        
-        if (!IS_IPAD()) {
+        
+        // Check if it isn't an Ipad and it is in PlasticLock mode
+        
+        if (!IS_IPAD() && gameController.currentGameMode == PlasticLock ) {
             // This is for TapforTap
             adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0,60, 320, 50)];
             [[[CCDirector sharedDirector] view] addSubview:adView];       

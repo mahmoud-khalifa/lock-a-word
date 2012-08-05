@@ -16,7 +16,7 @@
 {
    CGSize size;
    CCSprite *backButton;
-    UITextView *text; 
+   UITextView * description;
 }
 
 @end
@@ -63,15 +63,19 @@
 //         CCLabelTTF *label4 = [CCLabelTTF labelWithString:@"* Any spare letter can be used at any time. Select the “available” letter to position it in that same row. " fontName:@"Arial" fontSize:25];
 //        CCLabelTTF *label5 = [CCLabelTTF labelWithString:@"* Select any unlocked letter to move it into place." fontName:@"Arial" fontSize:25];
 //        CCLabelTTF *label6 = [CCLabelTTF labelWithString:@" * If a 5 letter word is not possible, create/ eliminate 3 & 4 letter words to clear space. * When a 3 & 4 letter word is created,SWIPE across the word and if valid it will be eliminated." fontName:@"Arial" fontSize:25];
-        text= [[UITextView alloc] initWithFrame:CGRectMake(0,backButtonRect.size.height, 320, 480)];
-        text.text=@"Instructions\nThe object of this game is to create a 5 letter word in each of the 5 rows.\n* Select the next“available” letter generated in one of the 5 rows or in the spare letter row (bottom of screen).\n* Any spare letter can be used at any time. Select the “available” letter to position it in that same row.\n *Select any unlocked letter to move it into place.\n * If a 5 letter word is not possible, create/ eliminate 3 & 4 letter words to clear space.\n* When a 3 & 4 letter word is created,SWIPE across the word and if valid it will be eliminated.\n* To change your selection, select any letter(in the selected word) before 2 seconds to keep it.\n* When a valid 5 letter word is assembled then it will be LOCKED in.\n*All words must be readable (left to right only).\n * In trophy/level selections (Bronze, Silver & Gold), a number of chosen letters will be locked in specific positions when the game starts.\n* To achieve STARS, complete game using the lowest number of letters.\nHAVE FUN, GO PLAY !!!";
-        text.backgroundColor= [UIColor clearColor];
-        text.font=[UIFont fontWithName:@"Arial" size:15];
-        text.textColor=[UIColor whiteColor];
-        text.textAlignment=UITextAlignmentCenter ;
-        text.editable=NO;
-        text.userInteractionEnabled=NO;
-       [[[CCDirector sharedDirector] view] addSubview:text]; 
+        
+        
+//        text= [[UITextView alloc] initWithFrame:CGRectMake(0,backButtonRect.size.height, 320, 480)];
+//        text.text=@"Instructions\nThe object of this game is to create a 5 letter word in each of the 5 rows.\n* Select the next“available” letter generated in one of the 5 rows or in the spare letter row (bottom of screen).\n* Any spare letter can be used at any time. Select the “available” letter to position it in that same row.\n *Select any unlocked letter to move it into place.\n * If a 5 letter word is not possible, create/ eliminate 3 & 4 letter words to clear space.\n* When a 3 & 4 letter word is created,SWIPE across the word and if valid it will be eliminated.\n* To change your selection, select any letter(in the selected word) before 2 seconds to keep it.\n* When a valid 5 letter word is assembled then it will be LOCKED in.\n*All words must be readable (left to right only).\n * In trophy/level selections (Bronze, Silver & Gold), a number of chosen letters will be locked in specific positions when the game starts.\n* To achieve STARS, complete game using the lowest number of letters.\nHAVE FUN, GO PLAY !!!";
+//        text.backgroundColor= [UIColor clearColor];
+//        text.font=[UIFont fontWithName:@"Arial" size:15];
+//        text.textColor=[UIColor whiteColor];
+//        text.textAlignment=UITextAlignmentCenter ;
+//        text.editable=NO;
+//        text.userInteractionEnabled=NO;
+//       [[[CCDirector sharedDirector] view] addSubview:text]; 
+        
+        
         
 //        CCMenuItemFont *label1=[CCMenuItemFont itemWithString:@"Instructions" ];
 //        CCMenuItemFont *label2=[CCMenuItemFont itemWithString:@"The object of this game is to create a 5 letter word in each of the 5 rows."];
@@ -101,8 +105,42 @@
 //                              (in the selected word) before 2 seconds to keep it. 
 //                              * In trophy/level selections (Bronze, Silver & Gold), a number of chosen letters will be locked in specific positions when the game starts. * To achieve STARS, complete game using the lowest number of letters.
 //                              HAVE FUN, GO PLAY !!!" fontName:@"Arial" fontSize:25];
+   
+//        
+//        NSString* content = @"Instructions\nThe object of this game is to create a 5 letter word in each of the 5 rows.\n* Select the next“available” letter generated in one of the 5 rows or in the spare letter row (bottom of screen).\n* Any spare letter can be used at any time. Select the “available” letter to position it in that same row.\n *Select any unlocked letter to move it into place.\n * If a 5 letter word is not possible, create/ eliminate 3 & 4 letter words to clear space.\n* When a 3 & 4 letter word is created,SWIPE across the word and if valid it will be eliminated.\n* To change your selection, select any letter(in the selected word) before 2 seconds to keep it.\n* When a valid 5 letter word is assembled then it will be LOCKED in.\n*All words must be readable (left to right only).\n * In trophy/level selections (Bronze, Silver & Gold), a number of chosen letters will be locked in specific positions when the game starts.\n* To achieve STARS, complete game using the lowest number of letters.\nHAVE FUN, GO PLAY !!!";
+       
+//        NSString* contentHTML = [NSString stringWithFormat:@"<html><head></head><body><b><font face='arial' size='2' color='black'>%@</font></b></body></html>", content];
+//        
+//        NSData* contentData = [NSData dataWithData: [contentHTML dataUsingEncoding: NSASCIIStringEncoding]];
+//        UIWebView * myUIWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, 400)];
+//        [myUIWebView loadData:contentData MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:[ NSURL URLWithString:@"" ]];
+////       
+//        
+//        [myUIWebView setBackgroundColor:[UIColor clearColor]];
+//        [myUIWebView setOpaque:NO];
+////        adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0,60, 320, 50)];
+//        [[[CCDirector sharedDirector] view] addSubview:myUIWebView]; 
+//
+//       
+////      
         
       
+        description=[[UITextView alloc] initWithFrame:CGRectMake(backButtonRect.size.height/2,backButtonRect.size.height*2,size.width-size.width/10,size.height-size.height/8)];
+        description.backgroundColor = [UIColor clearColor];
+        description.textColor=[UIColor whiteColor];
+        
+        description.text = [NSString stringWithString:@"Instructions\nThe object of this game is to create a 5 letter word in each of the 5 rows.\n* Select the next“available” letter generated in one of the 5 rows or in the spare letter row (bottom of screen).\n* Any spare letter can be used at any time. Select the “available” letter to position it in that same row.\n *Select any unlocked letter to move it into place.\n * If a 5 letter word is not possible, create/ eliminate 3 & 4 letter words to clear space.\n* When a 3 & 4 letter word is created,SWIPE across the word and if valid it will be eliminated.\n* To change your selection, select any letter(in the selected word) before 2 seconds to keep it.\n* When a valid 5 letter word is assembled then it will be LOCKED in.\n*All words must be readable (left to right only).\n * In trophy/level selections (Bronze, Silver & Gold), a number of chosen letters will be locked in specific positions when the game starts.\n* To achieve STARS, complete game using the lowest number of letters.\nHAVE FUN, GO PLAY !!!"];  
+        [description setEditable:NO]; 
+        description.font = [UIFont fontWithName:@"Marker Felt" size:15.0];
+//        description.font = [UIFont fontWithName:@"Arial" size:15.0];
+        description.showsHorizontalScrollIndicator = NO;
+        description.showsVerticalScrollIndicator=NO;
+        description.alwaysBounceVertical = YES;
+//        description.userInteractionEnabled=NO;
+         description.textAlignment=UITextAlignmentCenter ;
+        [[[CCDirector sharedDirector] view]addSubview:description]; 
+      
+        
      
 	}
 	return self;
@@ -122,7 +160,7 @@
     }
 }
 - (void)onExit {
-    text.hidden=YES;    
+    description.hidden=YES;    
     [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
     //    [[CDAudioManager sharedManager]stopBackgroundMusic];
     [super onExit];
