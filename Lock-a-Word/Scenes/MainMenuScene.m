@@ -16,6 +16,8 @@
 // Nedded to instert the TapforTap Ads
 #import "TapForTap.h"
 
+//Needed for Instruction Scene
+#import "InstructionsScene.h"
 
 @interface MainMenuScene()
 {
@@ -70,11 +72,7 @@
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [self animateMenuItems];
         [self performSelector:@selector(hideMenuItems) withObject:nil afterDelay:2.0f];
-        [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:2.0f];
-        
-         
-        
-        
+        [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:2.0f];   
        
         
         
@@ -153,7 +151,7 @@
     // Here I will add my begining of the intro animation "PLAY - INSTRUCTION - FULL"
     CCMenuItemImage* mainMenuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_play.png" selectedImage:@"main_btn_play.png" target:self selector:@selector(goToGameModeScene:)];
     CCMenuItemImage* mainMenuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_instr.png" selectedImage:@"main_btn_instr.png" target:self selector:@selector(goToInstructions)];
-    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_full.png" selectedImage:@"main_btn_full.png" target:self selector:@selector(goTofull)];
+    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_upgr.png" selectedImage:@"main_btn_upgr.png" target:self selector:@selector(goTofull)];
     
     
    
@@ -165,7 +163,7 @@
     
     [self addChild:mainMenu];
     
-    // Here is the animation part of the LOCK-A-WORD Menu
+    // Here is the animation part of the "PLAY - INSTRUCTION - FULL" Menu
     mainMenuItem1.scale=.75;        
     [mainMenuItem1 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
     mainMenuItem2.scale=.75;
@@ -184,6 +182,18 @@
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }
+
+#pragma mark Next Scene
+-(void) goToInstructions
+{  
+ [[CCDirector sharedDirector] pushScene:[InstructionsScene scene]];   
+ CCLOG(@"Instruction button has been pressed!!");   
+}
+
+
+
+
+
 
 #pragma mark GameKit delegate
 

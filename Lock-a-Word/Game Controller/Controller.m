@@ -351,7 +351,7 @@ static Controller *instanceOfController;
     return numOfBonusLetters < 5;
 }
 
-- (int)getPlasticModeStars {
+- (int)getModeStars:(GameMode)mode {
     Levels *plasticLevels = [LevelParser loadLevelsForChapter:1];
     Level *level1 = [plasticLevels.levels objectAtIndex:0];
     return level1.stars;

@@ -65,7 +65,7 @@
         gameModesSceneMenu.position=ccp(screenSize.width/2,screenSize.height/2 - (.380 *screenSize.height/2));   
         
         [self addChild:gameModesSceneMenu];
-        int numberOfStars = [controller getPlasticModeStars];
+        int numberOfStars = [controller getModeStars:PlasticLock];
         // Here we will add stars to Plastic level 
         
         if (numberOfStars == 0) {
