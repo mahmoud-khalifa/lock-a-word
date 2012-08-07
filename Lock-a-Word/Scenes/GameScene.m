@@ -29,6 +29,8 @@
     int countTimerMinutes;
     CCLabelBMFont *countTimerLabel;
     TapForTapAdView *adView;
+    CCSprite *boardTrophy;
+    NSString *boardTrophyName;
     
     
 }
@@ -158,18 +160,32 @@
     
     self.isTouchEnabled=YES;
     
-    wordsCollectedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    wordsCollectedLabel.position=ADJUST_XY(50, 410);
-    [self addChild:wordsCollectedLabel];
+//    wordsCollectedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
+//    wordsCollectedLabel.position=ADJUST_XY(50, 410);
+//    [self addChild:wordsCollectedLabel];
     
     
-    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    lettesLoadedLabel.position=ADJUST_XY(250, 410);
+    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score-2.fnt"];
+    lettesLoadedLabel.position=ADJUST_XY(142, 436);
     [self addChild:lettesLoadedLabel];
     
-    countTimerLabel=[CCLabelBMFont labelWithString:@"00:00" fntFile:@"score_bitmapfont.fnt"];
-    countTimerLabel.position=ADJUST_XY(150, 410);
-    [self addChild:countTimerLabel];
+//    countTimerLabel=[CCLabelBMFont labelWithString:@"00:00" fntFile:@"score_bitmapfont.fnt"];
+//    countTimerLabel.position=ADJUST_XY(150, 410);
+//    [self addChild:countTimerLabel];
+    
+    // This is for the Trophy image
+    boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",gameController.currentGameMode];
+    boardTrophy=[CCSprite spriteWithFile:boardTrophyName];
+    // This  
+    if (!IS_IPAD()) {
+        boardTrophy.position=ADJUST_XY(250, 436);
+    } else {
+        boardTrophy.position=ccp(.78*screenSize.width, .898*screenSize.height);
+    }
+    
+    
+    [self addChild:boardTrophy];
+    
     
     [self drawBoard];
     lettersLoaded++;

@@ -55,7 +55,7 @@
         
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-        CCSprite * backgroundImage = [CCSprite spriteWithFile:@"board_bg.png"];
+        CCSprite * backgroundImage = [CCSprite spriteWithFile:@"clean_bg.png"];
         backgroundImage.position =ccp(screenSize.width/2, screenSize.height/2);
         [self addChild:backgroundImage z:-4];      
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];

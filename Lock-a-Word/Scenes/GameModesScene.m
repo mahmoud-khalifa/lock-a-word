@@ -62,11 +62,15 @@
         CCMenuItemImage *menuItem2=[self showStars:BronzeLock];
         CCMenuItemImage *menuItem3=[self showStars:SilverLock];
         CCMenuItemImage *menuItem4=[self showStars:GoldLock];
+     
+        //Remove the scaling from the Ipad version
+        if (!IS_IPAD()) {
+            menuItem1.scale = 1.10;
+            menuItem2.scale = 1.10;
+            menuItem3.scale = 1.10;
+            menuItem4.scale = 1.10;
+        }
         
-        menuItem1.scale = 1.10;
-        menuItem2.scale = 1.10;
-        menuItem3.scale = 1.10;
-        menuItem4.scale = 1.10;
         
 //        CCMenuItemImage *menuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_plast.png" selectedImage:@"main_btn_plast.png" target:self selector:@selector(goToPlasticLock:)];
 //        CCMenuItemImage *menuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_bronz.png" selectedImage:@"main_btn_bronz.png" target:self selector:@selector(goToBronzeLock:)];
