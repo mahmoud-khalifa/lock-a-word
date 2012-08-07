@@ -70,9 +70,10 @@
         entrybackgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:entrybackgroundImage];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        [self animateMenuItems];
-        [self performSelector:@selector(hideMenuItems) withObject:nil afterDelay:2.0f];
-        [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:2.0f];   
+        [self animateMenuItems];        
+        [self performSelector:@selector(shrinkMenu) withObject:nil afterDelay:2.0];
+        [self performSelector:@selector(hideMenuItems) withObject:nil afterDelay:3.0f];
+        [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:3.0f];   
        
         
         
@@ -137,13 +138,26 @@
     
     // Here is the animation part of the LOCK-A-WORD Menu
     menuItemAnimate1.scale=.75;        
-    [menuItemAnimate1 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
+    [menuItemAnimate1 runAction:[CCScaleTo actionWithDuration:0.5 scale:1.0]];
     menuItemAnimate2.scale=.75;
-    [menuItemAnimate2 runAction:[CCScaleTo actionWithDuration:1.5 scale:1.0]];
+    [menuItemAnimate2 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
     menuItemAnimate3.scale=.75;
-    [menuItemAnimate3 runAction:[CCScaleTo actionWithDuration:2.0 scale:1.0]];  
+    [menuItemAnimate3 runAction:[CCScaleTo actionWithDuration:1.5 scale:1.0]];
+           
+   
     
 }
+
+-(void)shrinkMenu 
+{
+    [menuItemAnimate1 runAction:[CCScaleTo actionWithDuration:1.0 scale:.75]];
+    
+    [menuItemAnimate2 runAction:[CCScaleTo actionWithDuration:1.0 scale:.75]];
+    
+    [menuItemAnimate3 runAction:[CCScaleTo actionWithDuration:1.0 scale:.75]];
+}
+
+
 
 // This method will be used to show "PLAY-INSTRUCTION-FULL" menu items
 -(void)showMainMenu 
@@ -165,11 +179,11 @@
     
     // Here is the animation part of the "PLAY - INSTRUCTION - FULL" Menu
     mainMenuItem1.scale=.75;        
-    [mainMenuItem1 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
+    [mainMenuItem1 runAction:[CCScaleTo actionWithDuration:0.5 scale:1.0]];
     mainMenuItem2.scale=.75;
-    [mainMenuItem2 runAction:[CCScaleTo actionWithDuration:1.5 scale:1.0]];
+    [mainMenuItem2 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
     mainMenuItem3.scale=.75;
-    [mainMenuItem3 runAction:[CCScaleTo actionWithDuration:2.0 scale:1.0]];    
+    [mainMenuItem3 runAction:[CCScaleTo actionWithDuration:1.5 scale:1.0]];    
 }
 
 // on "dealloc" you need to release all your retained objects
