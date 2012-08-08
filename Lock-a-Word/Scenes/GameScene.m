@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "LevelSelectionScene.h"
+#import "GameModesScene.h"
 #import "Controller.h"
 #import "GameConfig.h"
 #import "SimpleAudioEngine.h"
@@ -196,7 +197,9 @@
     
     [self drawBoard];
 //    lettersLoaded++;
-    lettersCountedDown--;
+    if (lettersCountedDown > 0) {
+        lettersCountedDown--;
+    }
     
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
@@ -321,10 +324,6 @@
 
 - (void)addCurentLetterToExtraColumnWithBonus:(BOOL)bonus
 {
-    if (isGameCompleted) {
-        return;
-    }
-//    [self disableTouches];
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
     [actions addObject:@""];
     CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
@@ -339,14 +338,16 @@
         letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
         letterSprite.position=ccp(xPos,yPos);
-        letterSprite.color=ccGREEN;
+        if (!isGameCompleted) {
+            letterSprite.color=ccGREEN;
+        }
 //        letterSprite.scale = .75;
         [newLetters addObject:letterSprite];
         [self addChild:letterSprite z:100 tag:j+105];
         
         if (j>0) {
             yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
-            CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:ccp(xPos, yPos)];
+            CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
             [actions addObject:move];
         }
         
@@ -366,7 +367,7 @@
         letterSprite.position=ccp(xPos,yPos);
         
         yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
-        CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION position:ccp(xPos, yPos)];
+        CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
         [actions addObject:move];
     }
     
@@ -375,7 +376,7 @@
         for (int j=i; j<[newLetters count]; j++)  {
             letterSprite = [newLetters objectAtIndex:j];
             CCMoveTo* move = [[actions objectAtIndex:i] copy];
-            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:5*i*kANIMATION_DURATION];
+            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:2.5*i*kANIMATION_DURATION];
         }
     }
     
@@ -619,10 +620,11 @@
 
 - (void)gameCompleted {
     isGameCompleted=YES;
-    if(score>0){
-        [self showShareAlert];
-    }
-    [gameController setLevelStars:lettersCountedDown];
+    currentLetter = @"lock";
+    [self addCurentLetterToExtraColumnWithBonus:NO];
+    
+    [self performSelector:@selector(showShareAlert) withObject:nil afterDelay:12*kANIMATION_DURATION];
+    
     
     
 //    [self performSelector:@selector(disableTouches) withObject:nil afterDelay:0.05 ];
@@ -633,7 +635,10 @@
 #pragma mark - ShareAlert
 
 - (void)showShareAlert {
-    
+    int stars = [gameController setLevelStars:lettersCountedDown];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Passes" message:[NSString stringWithFormat:@"Congratulations, you have passed the game with %d stars",stars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
     
 }
 
@@ -697,7 +702,7 @@
 //        [[CCDirector sharedDirector] popScene];
         if (gameController.currentGameMode == PlasticLock) 
         {
-             [[CCDirector sharedDirector] popScene];
+             [[CCDirector sharedDirector] replaceScene:[GameModesScene scene]];
         } 
         else
         {

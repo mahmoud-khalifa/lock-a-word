@@ -8,6 +8,7 @@
 
 #import "LevelSelectionScene.h"
 #import "GameScene.h"
+#import "GameModesScene.h"
 
 #import "GameConfig.h"
 
@@ -193,8 +194,7 @@
 
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
-        [[CCDirector sharedDirector] popScene];
-//          [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
+        [[CCDirector sharedDirector] replaceScene:[GameModesScene scene]];
         
     }
 }

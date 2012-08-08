@@ -110,33 +110,26 @@ static Controller *instanceOfController;
     
     [self newGame];
 }
-- (int) setLevelStars : (int)lettersCountedDown 
+- (int)setLevelStars:(int)lettersCountedDown 
 {
+    int stars = 1;
+    if (lettersCountedDown >= 20){
+        stars=3;        
+    }
+    else if(lettersCountedDown >= 10) {
+        stars=2;
+    }
+    
     Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
     Level *gameLevel;
     for (gameLevel in levels.levels) {
-        if (gameLevel.number == currentLevel) 
-        {
-    
-                      if (lettersCountedDown >= 20)
-                      {
-                          gameLevel.stars=3;        
-                      }
-                      else if(lettersCountedDown >= 10) 
-                      {
-                          gameLevel.stars=2;
-                      }
-                      else 
-                      {
-                          gameLevel.stars=1;
-                      }
-    
+        if (gameLevel.number == currentLevel && gameLevel.stars < stars) {
+            gameLevel.stars = stars;
         } 
     }
-    
     [LevelParser saveData:levels forChapter:currentGameMode];
 
-        return gameLevel.stars;
+    return stars;
 }
 
 #pragma mark init/preparations 
@@ -390,9 +383,14 @@ static Controller *instanceOfController;
 }
 
 - (int)getModeStars:(GameMode)mode {
-    Levels *plasticLevels = [LevelParser loadLevelsForChapter:1];
-    Level *level1 = [plasticLevels.levels objectAtIndex:0];
-    return level1.stars;
+    Levels *levels = [LevelParser loadLevelsForChapter:mode];
+    int stars = 3;
+    for (Level *gameLevel in levels.levels) {
+        if (gameLevel.stars < stars) {
+            stars = gameLevel.stars;
+        }
+    }
+    return stars;
 }
 #pragma mark - Testing
 

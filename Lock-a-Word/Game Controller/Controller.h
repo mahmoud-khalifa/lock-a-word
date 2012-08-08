@@ -59,6 +59,6 @@ typedef enum
 - (BOOL)canAddBonusLetter;
 - (int)getModeStars:(GameMode)mode;
 - (void)printBoard;
-- (int) setLevelStars : (int)lettersCountedDown; 
+- (int)setLevelStars:(int)lettersCountedDown; 
 @end
 

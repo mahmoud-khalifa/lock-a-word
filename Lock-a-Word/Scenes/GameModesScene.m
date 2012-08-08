@@ -100,7 +100,7 @@
 - (void) goToPlasticLock : (id) sender {
     [controller selectChapter:PlasticLock];
     [controller selectLevel:1];
-    [[CCDirector sharedDirector] pushScene:[GameScene scene]];
+    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     CCLOG(@"Plastic Lock button has been pressed !!");
 }
 
