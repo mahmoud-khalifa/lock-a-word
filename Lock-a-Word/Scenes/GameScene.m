@@ -14,7 +14,7 @@
 #import "TapForTap.h"
 
 @interface GameScene() {
-    BOOL isGameOver;
+    BOOL isGameCompleted;
     int score;
     NSString *currentLetter;
     BOOL bonusLetterSelected;
@@ -56,7 +56,7 @@
 
 - (NSString*)getBonusString;
 
-- (void)gameOver;
+- (void)gameCompleted;
 - (void)showShareAlert;
 
 - (void)disableTouches;
@@ -146,7 +146,7 @@
 #pragma mark - initialization
 - (void)newGame {
     score=0;  
-    isGameOver=NO;
+    isGameCompleted=NO;
     wordsCollected = 0;
     lettersLoaded=0;
     countTimerSeconds=0;
@@ -165,7 +165,7 @@
 //    [self addChild:wordsCollectedLabel];
     
     
-    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score-2.fnt"];
+    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
     lettesLoadedLabel.position=ADJUST_XY(142, 436);
     [self addChild:lettesLoadedLabel];
     
@@ -226,7 +226,7 @@
         
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
         float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
-        letterSprite.color=ccYELLOW;
+        letterSprite.color=ccRED;
         letterSprite.position=ccp(xPos,yPos);
         [self addChild:letterSprite z:100 tag:(row*5+column)];
         [boardLetters addObject:letterSprite];
@@ -239,7 +239,10 @@
 
 - (void)insertNewLetter
 {
-    
+    if (lettersLoaded>18 && [gameController isGameCompleted]) {
+        [self gameCompleted];
+        return;
+    }
     currentLetter = [gameController getCurrentLetter];
     
     [newLetters removeAllObjects];
@@ -297,6 +300,9 @@
 
 - (void)addCurentLetterToExtraColumnWithBonus:(BOOL)bonus
 {
+    if (isGameCompleted) {
+        return;
+    }
 //    [self disableTouches];
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
     [actions addObject:@""];
@@ -312,6 +318,7 @@
         letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
         letterSprite.position=ccp(xPos,yPos);
+        letterSprite.color=ccGREEN;
 //        letterSprite.scale = .75;
         [newLetters addObject:letterSprite];
         [self addChild:letterSprite z:100 tag:j+105];
@@ -331,6 +338,7 @@
         letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
         letterSprite.position=ccp(xPos,yPos);
+        letterSprite.color=ccGREEN;
 //        letterSprite.scale = .75;
         [newLetters addObject:letterSprite];
         [self addChild:letterSprite z:100 tag:5+105];
@@ -408,7 +416,7 @@
     letterSprite.userData = currentLetter;
     float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
-    letterSprite.color=ccRED;
+    letterSprite.color=ccc3(128, 0, 128); 
     letterSprite.position=ccp(xPos,yPos);
     
     
@@ -584,10 +592,10 @@
 }
 
 
-#pragma mark - GameOver
+#pragma mark - Game Completed
 
-- (void)gameOver {
-    isGameOver=YES;
+- (void)gameCompleted {
+    isGameCompleted=YES;
     if(score>0){
         [self showShareAlert];
     }

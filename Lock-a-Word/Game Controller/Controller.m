@@ -228,7 +228,13 @@ static Controller *instanceOfController;
     }   
     return lockedLetters;
 }
-
+- (BOOL)isGameCompleted {
+    for (int i=0; i<25; i++) {
+        if(!lockedBoard[i])
+            return NO;
+    }
+    return YES;
+}
 - (void)resetBoard {
     
     board[0]=0;board[1]=0;board[2]=0;board[3]=0;board[4]=0;
@@ -252,6 +258,7 @@ static Controller *instanceOfController;
 
 #pragma mark - validation
 - (BOOL)isCorrectWord:(NSString*)word {
+    return YES;
     UITextChecker *checker = [[UITextChecker alloc] init];
     NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
     NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];

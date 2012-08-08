@@ -34,8 +34,8 @@ typedef enum
 
 - (void)newGame;
 - (NSArray*)getLockedLetters;
+- (BOOL)isGameCompleted;
 - (void)resetBoard;
-
 
 - (void)prepareCurrentLetter;
 - (void)prepareCurrentLetterWithRestrictions:(NSString*)restriction;
