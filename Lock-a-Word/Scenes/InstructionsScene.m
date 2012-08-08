@@ -52,7 +52,7 @@
         
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-        CCSprite * InstructionbackgroundImage = [CCSprite spriteWithFile:@"instructions_bg.png"];
+        CCSprite * InstructionbackgroundImage = [CCSprite spriteWithFile:@"clean_bg.png"];
         InstructionbackgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:InstructionbackgroundImage];
         
