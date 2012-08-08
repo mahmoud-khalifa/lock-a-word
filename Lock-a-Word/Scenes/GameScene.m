@@ -23,8 +23,10 @@
     ccColor3B boardLettersColor;
     int wordsCollected;
     CCLabelBMFont *wordsCollectedLabel;
-    int lettersLoaded;
-    CCLabelBMFont *lettesLoadedLabel;
+//    int lettersLoaded;
+    int lettersCountedDown;
+//    CCLabelBMFont *lettesLoadedLabel;
+    CCLabelBMFont *lettersCountedDownLabel;
     int countTimerSeconds;
     int countTimerMinutes;
     CCLabelBMFont *countTimerLabel;
@@ -148,7 +150,8 @@
     score=0;  
     isGameCompleted=NO;
     wordsCollected = 0;
-    lettersLoaded=0;
+//    lettersLoaded=0;
+    lettersCountedDown=70;
     countTimerSeconds=0;
     countTimerMinutes=0;
     
@@ -165,9 +168,13 @@
 //    [self addChild:wordsCollectedLabel];
     
     
-    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    lettesLoadedLabel.position=ADJUST_XY(142, 436);
-    [self addChild:lettesLoadedLabel];
+//    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
+//    lettesLoadedLabel.position=ADJUST_XY(142, 436);
+//    [self addChild:lettesLoadedLabel];
+    lettersCountedDownLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
+    lettersCountedDownLabel.position=ADJUST_XY(142, 436);
+    [self addChild:lettersCountedDownLabel];
+
     
 //    countTimerLabel=[CCLabelBMFont labelWithString:@"00:00" fntFile:@"score_bitmapfont.fnt"];
 //    countTimerLabel.position=ADJUST_XY(150, 410);
@@ -188,7 +195,9 @@
     
     
     [self drawBoard];
-    lettersLoaded++;
+//    lettersLoaded++;
+    lettersCountedDown--;
+    
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
     
@@ -240,7 +249,7 @@
 
 - (void)insertNewLetter
 {
-    if (lettersLoaded>18 && [gameController isGameCompleted]) {
+    if (lettersCountedDown < 52 && [gameController isGameCompleted]) {
         [self gameCompleted];
         return;
     }
@@ -248,7 +257,18 @@
     
     [newLetters removeAllObjects];
     
-    [lettesLoadedLabel setString:[NSString stringWithFormat:@"%d",lettersLoaded]];
+    [lettersCountedDownLabel setString:[NSString stringWithFormat:@"%d",lettersCountedDown]];
+    
+//    
+//    if (lettersLoaded>18 && [gameController isGameCompleted]) {
+//        [self gameCompleted];
+//        return;
+//    }
+//    currentLetter = [gameController getCurrentLetter];
+//    
+//    [newLetters removeAllObjects];
+//    
+//    [lettesLoadedLabel setString:[NSString stringWithFormat:@"%d",lettersLoaded]];
     // add the extra column letter
     [self addCurentLetterToExtraColumnWithBonus:YES];
 
@@ -394,7 +414,8 @@
     if (bonusLetterSelected) {
         bonusLetterSelected = NO;
     }else {
-        lettersLoaded++;
+//        lettersLoaded++;
+        lettersCountedDown--;
         [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     }
     
@@ -434,7 +455,8 @@
     CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
     [letterSprite runAction:move];
     
-    lettersLoaded++;
+//    lettersLoaded++;
+    lettersCountedDown--;
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
     
@@ -600,7 +622,10 @@
     if(score>0){
         [self showShareAlert];
     }
-    [self performSelector:@selector(disableTouches) withObject:nil afterDelay:0.05 ];
+    [gameController setLevelStars:lettersCountedDown];
+    
+    
+//    [self performSelector:@selector(disableTouches) withObject:nil afterDelay:0.05 ];
     [self unscheduleAllSelectors];
 }
 
@@ -669,7 +694,16 @@
     
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
-        [[CCDirector sharedDirector] popScene];
+//        [[CCDirector sharedDirector] popScene];
+        if (gameController.currentGameMode == PlasticLock) 
+        {
+             [[CCDirector sharedDirector] popScene];
+        } 
+        else
+        {
+            [[CCDirector sharedDirector] replaceScene:[LevelSelectionScene scene]];
+        }
+            
         return;
     }
     

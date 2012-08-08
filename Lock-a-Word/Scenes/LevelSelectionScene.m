@@ -194,6 +194,8 @@
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
         [[CCDirector sharedDirector] popScene];
+//          [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
+        
     }
 }
 
@@ -207,7 +209,7 @@
     [controller selectLevel:selectedLevel];
     
     // load the game scene
-    [[CCDirector sharedDirector] pushScene:[GameScene scene]];
+    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     
     
 }

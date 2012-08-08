@@ -18,6 +18,7 @@ static Controller *instanceOfController;
 
 @interface Controller()
 @property (nonatomic,strong) NSArray *secondLetters;
+
 @end
 
 @implementation Controller {
@@ -109,13 +110,43 @@ static Controller *instanceOfController;
     
     [self newGame];
 }
+- (int) setLevelStars : (int)lettersCountedDown 
+{
+    Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
+    Level *gameLevel;
+    for (gameLevel in levels.levels) {
+        if (gameLevel.number == currentLevel) 
+        {
+    
+                      if (lettersCountedDown >= 20)
+                      {
+                          gameLevel.stars=3;        
+                      }
+                      else if(lettersCountedDown >= 10) 
+                      {
+                          gameLevel.stars=2;
+                      }
+                      else 
+                      {
+                          gameLevel.stars=1;
+                      }
+    
+        } 
+    }
+    
+    [LevelParser saveData:levels forChapter:currentGameMode];
 
+        return gameLevel.stars;
+}
 
 #pragma mark init/preparations 
-- (void)newGame {
+-(void)newGame
+    {
     [self resetBoard];
     NSLog(@"NewGame");
-    switch (currentGameMode) {
+    
+        switch (currentGameMode) 
+        {
         case BronzeLock:
             NSLog(@"BronzeLock");
             board[0]=1;board[6]=1;board[12]=1;
@@ -143,7 +174,7 @@ static Controller *instanceOfController;
         default:
             NSLog(@"PlasticLock");
             break;
-    }
+        }
     
     lastLetter = @"";
     [self printBoard];
