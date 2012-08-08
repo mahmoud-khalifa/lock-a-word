@@ -176,7 +176,7 @@
     // This is for the Trophy image
     boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",gameController.currentGameMode];
     boardTrophy=[CCSprite spriteWithFile:boardTrophyName];
-    // This  
+    // This is for positioning the trophy in Ipad version and in Iphone  
     if (!IS_IPAD()) {
         boardTrophy.position=ADJUST_XY(250, 436);
     } else {
@@ -191,6 +191,7 @@
     lettersLoaded++;
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
+    
 }
 
 
