@@ -11,6 +11,9 @@
 #import "Controller.h"
 
 @interface LevelSelectionScene : CCLayer {
+    CCSprite *trophyImage;
+    CCSprite *boardTrophy;
+    NSString *boardTrophyName;
     
 }
 

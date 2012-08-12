@@ -35,7 +35,6 @@
     CCSprite *boardTrophy;
     NSString *boardTrophyName;
     
-    
 }
 
 @property (nonatomic, retain) NSMutableArray *newLetters;
@@ -143,16 +142,13 @@
 }
 
 
-
-
-
 #pragma mark - initialization
 - (void)newGame {
     score=0;  
     isGameCompleted=NO;
     wordsCollected = 0;
 //    lettersLoaded=0;
-    lettersCountedDown=70;
+    lettersCountedDown=60;
     countTimerSeconds=0;
     countTimerMinutes=0;
     
@@ -172,8 +168,17 @@
 //    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
 //    lettesLoadedLabel.position=ADJUST_XY(142, 436);
 //    [self addChild:lettesLoadedLabel];
-    lettersCountedDownLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-    lettersCountedDownLabel.position=ADJUST_XY(142, 436);
+    
+    //LETTERS LABEL
+    lettersCountedDownLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score.fnt"];
+#warning update position of IPAD
+    if(!IS_IPAD()){
+//        lettersCountedDownLabel.position = ADJUST_XY(142, 436);
+        lettersCountedDownLabel.position = ADJUST_XY(142, 434);
+    } else {
+//        lettersCountedDownLabel.position = ADJUST_XY(142, 436);
+        lettersCountedDownLabel.position = ADJUST_XY(172, 439);
+    }
     [self addChild:lettersCountedDownLabel];
 
     
@@ -186,9 +191,9 @@
     boardTrophy=[CCSprite spriteWithFile:boardTrophyName];
     // This is for positioning the trophy in Ipad version and in Iphone  
     if (!IS_IPAD()) {
-        boardTrophy.position=ADJUST_XY(250, 436);
+        boardTrophy.position = ADJUST_XY(250, 436);
     } else {
-        boardTrophy.position=ccp(.78*screenSize.width, .898*screenSize.height);
+        boardTrophy.position = ccp(.78*screenSize.width, .898*screenSize.height);
     }
     
     
@@ -252,7 +257,7 @@
 
 - (void)insertNewLetter
 {
-    if (lettersCountedDown < 52 && [gameController isGameCompleted]) {
+    if (lettersCountedDown < (60-18) && [gameController isGameCompleted]) {
         [self gameCompleted];
         return;
     }
@@ -439,8 +444,9 @@
     letterSprite.userData = currentLetter;
     float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
-    letterSprite.color=ccc3(128, 0, 128); 
-    letterSprite.position=ccp(xPos,yPos);
+//    letterSprite.color=ccc3(128, 0, 128); 
+    letterSprite.color = ccGREEN; 
+    letterSprite.position = ccp(xPos,yPos);
     
     
     
@@ -494,18 +500,27 @@
 - (void)checkLockedRow:(int)row
 {
     NSString *word = @"";
+    NSMutableArray *collWord = [[NSMutableArray alloc]init];
     for (int i=row*5; i< (row+1)*5; i++) {
         CCSprite* sprite = (CCSprite*)[self getChildByTag:i];
         if (sprite != nil) {
             word = [word stringByAppendingString:sprite.userData];
+            [collWord addObject:sprite];
         }
     }
     
     if ([word length] == 5 && [gameController isCorrectWord:word]) {
         [gameController lockRow:row];
+        [self performSelector:@selector(lockRow:) withObject:collWord afterDelay:2*kANIMATION_DURATION];
     } 
 }
 
+- (void)lockRow:(NSArray*)word {
+    for (CCSprite* collectedLetter in word) {
+        collectedLetter.color=ccRED;
+    }
+    
+}
 -(void)checkIsWordCorrect { 
     if ([collectedWord count]>2) {
         NSString *word = @"";
@@ -517,7 +532,8 @@
             NSLog(@"correct word");
             correctWordFound = YES;
             for (CCSprite* collectedLetter in collectedWord) {
-                collectedLetter.color=ccGREEN;
+//                collectedLetter.color=ccGREEN;
+                 collectedLetter.color=ccRED;
             }
             [self performSelector:@selector(removeCorrectWord) withObject:nil afterDelay:2];
             return;
@@ -635,6 +651,7 @@
 #pragma mark - ShareAlert
 
 - (void)showShareAlert {
+    //find old stars and show alert only if new stars more than old
     int stars = [gameController setLevelStars:lettersCountedDown];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Passes" message:[NSString stringWithFormat:@"Congratulations, you have passed the game with %d stars",stars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];

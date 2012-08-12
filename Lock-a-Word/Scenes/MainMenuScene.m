@@ -77,9 +77,6 @@
        
         
         
-        
-        
-        
         // Creating Menu Items
         // Normal images and selected are the same 
         
@@ -203,8 +200,6 @@
  [[CCDirector sharedDirector] pushScene:[InstructionsScene scene]];   
  CCLOG(@"Instruction button has been pressed!!");   
 }
-
-
 
 
 

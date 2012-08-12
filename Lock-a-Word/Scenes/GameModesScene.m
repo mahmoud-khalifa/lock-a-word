@@ -48,7 +48,6 @@
         // get shared controller
         controller = [Controller sharedController];
         
-        
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"main_bg.png"];
@@ -78,7 +77,6 @@
 //        CCMenuItemImage *menuItem4 =[CCMenuItemImage itemWithNormalImage:
 //            @"main_btn_gold.png" selectedImage:@"main_btn_gold.png" target:self selector:@selector(goToGoldLock:)];
      
-        
         
         
         // Adding items to the menu

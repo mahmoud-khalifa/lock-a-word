@@ -77,6 +77,24 @@
             }
         }
         
+        // This is for the Trophy image
+        trophyImage = [CCSprite spriteWithFile:@"board_trophy.png"];
+        
+        boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",controller.currentGameMode];
+        boardTrophy = [CCSprite spriteWithFile:boardTrophyName];
+        // This is for positioning the trophy in Ipad version and in Iphone  
+        if (!IS_IPAD()) {
+            trophyImage.position = ADJUST_XY(250, 436);
+//            boardTrophy.position = ADJUST_XY(250, 436);
+            boardTrophy.position = ADJUST_XY(250, 426);
+        } else {
+            trophyImage.position = ccp(.78*screenSize.width, .898*screenSize.height);
+//            boardTrophy.position = ccp(.78*screenSize.width, .898*screenSize.height);
+            boardTrophy.position = ccp(.78*screenSize.width, .876*screenSize.height);
+        }
+        
+        [self addChild:trophyImage];
+        [self addChild:boardTrophy];
         
         CCMenu *levelMenu = [CCMenu menuWithItems: nil]; 
         NSMutableArray *overlay = [NSMutableArray new];

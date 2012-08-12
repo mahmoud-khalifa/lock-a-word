@@ -83,6 +83,7 @@ static Controller *instanceOfController;
 
 #pragma mark - Leveling
 - (void)selectChapter:(int)chapter {
+    //Chapter = mode
     GameData *gameData = [GameDataParser loadData];
     [gameData setSelectedChapter:chapter];
     [GameDataParser saveData:gameData];
@@ -132,7 +133,9 @@ static Controller *instanceOfController;
     return stars;
 }
 
+
 #pragma mark init/preparations 
+
 -(void)newGame
     {
     [self resetBoard];
@@ -178,7 +181,7 @@ static Controller *instanceOfController;
     if (currentGameMode == PlasticLock) {
         lockedLetters = nil;
     } else if (currentGameMode == BronzeLock) {
-        lockedLetters = [[NSMutableArray alloc] initWithCapacity:3];
+        lockedLetters = [[NSMutableArray alloc] initWithCapacity:3]; //only three locked letters
         
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
         [lockedLetters addObject:dic];
@@ -192,7 +195,9 @@ static Controller *instanceOfController;
         [lockedLetters addObject:dic];
         
     } else if (currentGameMode == SilverLock) {
+        //At index 0, 5, 10 are the same. At index 1, 6, 11 are not
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
+        
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
         [lockedLetters addObject:dic];
         
@@ -206,6 +211,7 @@ static Controller *instanceOfController;
         
         int secondLetterscount = [secondLetters count];
         NSString *secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
+        
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"1", @"index", nil];
         [lockedLetters addObject:dic];
         
@@ -220,8 +226,8 @@ static Controller *instanceOfController;
         [lockedLetters addObject:dic];
         
         
-        
     } else if (currentGameMode == GoldLock) {
+        //At index 0, 5, 10 are the same. At index 4, 9, 14 are not
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
         
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
@@ -252,6 +258,8 @@ static Controller *instanceOfController;
     }   
     return lockedLetters;
 }
+
+
 - (BOOL)isGameCompleted {
     for (int i=0; i<25; i++) {
         if(!lockedBoard[i])
@@ -259,30 +267,37 @@ static Controller *instanceOfController;
     }
     return YES;
 }
+
+
 - (void)resetBoard {
     
+    //initialize with free labels
     board[0]=0;board[1]=0;board[2]=0;board[3]=0;board[4]=0;
     board[5]=0;board[6]=0;board[7]=0;board[8]=0;board[9]=0;
     board[10]=0;board[11]=0;board[12]=0;board[13]=0;board[14]=0;
     board[15]=0;board[16]=0;board[17]=0;board[18]=0;board[19]=0;
     board[20]=0;board[21]=0;board[22]=0;board[23]=0;board[24]=0;
 
+    //initialize with unlocked labels
     lockedBoard[0]=0;lockedBoard[1]=0;lockedBoard[2]=0;lockedBoard[3]=0;lockedBoard[4]=0;
     lockedBoard[5]=0;lockedBoard[6]=0;lockedBoard[7]=0;lockedBoard[8]=0;lockedBoard[9]=0;
     lockedBoard[10]=0;lockedBoard[11]=0;lockedBoard[12]=0;lockedBoard[13]=0;lockedBoard[14]=0;
     lockedBoard[15]=0;lockedBoard[16]=0;lockedBoard[17]=0;lockedBoard[18]=0;lockedBoard[19]=0;
     lockedBoard[20]=0;lockedBoard[21]=0;lockedBoard[22]=0;lockedBoard[23]=0;lockedBoard[24]=0;
 
-    
+    //initialize with free labels
     bonusRow[0]=0;bonusRow[1]=0;bonusRow[2]=0;bonusRow[3]=0;bonusRow[4]=0;
     numOfBonusLetters = 0;
     
+    //No letters generated yet
     numOfGeneratedLetters = 0;
 }
 
 #pragma mark - validation
 - (BOOL)isCorrectWord:(NSString*)word {
+    #warning remove next line
     return YES;
+    
     UITextChecker *checker = [[UITextChecker alloc] init];
     NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
     NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
@@ -301,6 +316,7 @@ static Controller *instanceOfController;
 # pragma mark - letters generations
 
 - (void)prepareCurrentLetter {
+    //get next letter to display
     currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
 }
 
@@ -323,6 +339,7 @@ static Controller *instanceOfController;
 - (void)lockRow:(int)row {
     for (int i=0; i<5; i++) {
         lockedBoard[row*5+i] = 1;
+        
     }
 }
 
@@ -335,6 +352,7 @@ static Controller *instanceOfController;
     for (i=0; i<lenght; i++) {
         board[index+i] = 0;
     }
+    //move the remaining letters of the word to the left
     while ((index+i)%5 != 0) {
         if (lockedBoard[index+i]) {
             break;
@@ -383,6 +401,7 @@ static Controller *instanceOfController;
 }
 
 - (int)getModeStars:(GameMode)mode {
+    //Chapter = mode
     Levels *levels = [LevelParser loadLevelsForChapter:mode];
     int stars = 3;
     for (Level *gameLevel in levels.levels) {
