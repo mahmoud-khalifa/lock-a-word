@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UITextChecker.h>
 
-
-#define KStreamLength 100
-
 typedef enum
 {
     PlasticLock = 1,
@@ -43,7 +40,6 @@ typedef enum
 
 
 - (BOOL)isCorrectWord:(NSString*)word;
-- (BOOL)isNewLetterAvailable;
 
 
 - (BOOL)isLockedPosition:(int)index;
@@ -59,6 +55,6 @@ typedef enum
 - (BOOL)canAddBonusLetter;
 - (int)getModeStars:(GameMode)mode;
 - (void)printBoard;
-- (int)setLevelStars:(int)lettersCountedDown; 
+- (int)updateLevelStars:(int)lettersCountedDown; 
 @end
 
