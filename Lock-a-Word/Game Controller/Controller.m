@@ -139,7 +139,7 @@ static Controller *instanceOfController;
     
     [self newGame];
 }
-- (int)setLevelStars:(int)lettersCountedDown 
+- (int)updateLevelStars:(int)lettersCountedDown 
 {
     int stars = 1;
     if (lettersCountedDown >= 20){
@@ -154,11 +154,11 @@ static Controller *instanceOfController;
     for (gameLevel in levels.levels) {
         if (gameLevel.number == currentLevel && gameLevel.stars < stars) {
             gameLevel.stars = stars;
+            [LevelParser saveData:levels forChapter:currentGameMode];
+            return stars;
         } 
     }
-    [LevelParser saveData:levels forChapter:currentGameMode];
-
-    return stars;
+    return 0;
 }
 
 
@@ -334,10 +334,6 @@ static Controller *instanceOfController;
     NSRange misspelledRange = [checker rangeOfMisspelledWordInString:word range:searchRange startingAt:0 wrap:NO language: currentLanguage];
     return misspelledRange.location == NSNotFound;
 
-}
-
-- (BOOL)isNewLetterAvailable {
-    return numOfGeneratedLetters < KStreamLength ;
 }
 
 

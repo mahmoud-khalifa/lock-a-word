@@ -73,7 +73,7 @@
         [self animateMenuItems];        
         [self performSelector:@selector(shrinkMenu) withObject:nil afterDelay:2.0];
         [self performSelector:@selector(hideMenuItems) withObject:nil afterDelay:3.0f];
-        [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:3.0f];   
+        [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:5.0f];   
        
         
         

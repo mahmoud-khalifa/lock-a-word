@@ -14,6 +14,8 @@
 #import "SimpleAudioEngine.h"
 #import "TapForTap.h"
 
+#define KStartingLetterCountedDown 60 
+
 @interface GameScene() {
     BOOL isGameCompleted;
     int score;
@@ -24,9 +26,7 @@
     ccColor3B boardLettersColor;
     int wordsCollected;
     CCLabelBMFont *wordsCollectedLabel;
-//    int lettersLoaded;
     int lettersCountedDown;
-//    CCLabelBMFont *lettesLoadedLabel;
     CCLabelBMFont *lettersCountedDownLabel;
     int countTimerSeconds;
     int countTimerMinutes;
@@ -123,19 +123,10 @@
             adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0,60, 320, 50)];
             [[[CCDirector sharedDirector] view] addSubview:adView];       
             // You don't have to do this if you set the default app ID in your app delegate
-            adView.appId = @"c91a3680-b956-012f-f6ff-4040d804a637";
+            adView.appId = KTapForTapID;
             
             [adView loadAds];
         }
-       
-//        // trial ads
-//        t = [[UITextView alloc] initWithFrame: CGRectMake(0,300, 320,50)];
-//        t.backgroundColor = [UIColor blackColor];
-//        t.textColor = [UIColor whiteColor];
-//        t.text = @"Hello UIKit!";
-//        t.editable = NO;
-//        
-//        [[[CCDirector sharedDirector] view] addSubview:t];
         
 	}
 	return self;
@@ -148,7 +139,7 @@
     isGameCompleted=NO;
     wordsCollected = 0;
 //    lettersLoaded=0;
-    lettersCountedDown=60;
+    lettersCountedDown=KStartingLetterCountedDown;
     countTimerSeconds=0;
     countTimerMinutes=0;
     
@@ -160,30 +151,15 @@
     
     self.isTouchEnabled=YES;
     
-//    wordsCollectedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-//    wordsCollectedLabel.position=ADJUST_XY(50, 410);
-//    [self addChild:wordsCollectedLabel];
-    
-    
-//    lettesLoadedLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score_bitmapfont.fnt"];
-//    lettesLoadedLabel.position=ADJUST_XY(142, 436);
-//    [self addChild:lettesLoadedLabel];
-    
     //LETTERS LABEL
     lettersCountedDownLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score.fnt"];
     if(!IS_IPAD()){
-//        lettersCountedDownLabel.position = ADJUST_XY(142, 436);
         lettersCountedDownLabel.position = ADJUST_XY(142, 434);
     } else {
-//        lettersCountedDownLabel.position = ADJUST_XY(142, 436);
         lettersCountedDownLabel.position = ADJUST_XY(172, 439);
     }
     [self addChild:lettersCountedDownLabel];
 
-    
-//    countTimerLabel=[CCLabelBMFont labelWithString:@"00:00" fntFile:@"score_bitmapfont.fnt"];
-//    countTimerLabel.position=ADJUST_XY(150, 410);
-//    [self addChild:countTimerLabel];
     
     // This is for the Trophy image
     boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",gameController.currentGameMode];
@@ -258,7 +234,7 @@
 
 - (void)insertNewLetter
 {
-    if (lettersCountedDown < (60-18) && [gameController isGameCompleted]) {
+    if (lettersCountedDown < (KStartingLetterCountedDown -18) && [gameController isGameCompleted]) {
         [self gameCompleted];
         return;
     }
@@ -268,16 +244,6 @@
     
     [lettersCountedDownLabel setString:[NSString stringWithFormat:@"%d",lettersCountedDown]];
     
-//    
-//    if (lettersLoaded>18 && [gameController isGameCompleted]) {
-//        [self gameCompleted];
-//        return;
-//    }
-//    currentLetter = [gameController getCurrentLetter];
-//    
-//    [newLetters removeAllObjects];
-//    
-//    [lettesLoadedLabel setString:[NSString stringWithFormat:@"%d",lettersLoaded]];
     // add the extra column letter
     [self addCurentLetterToExtraColumnWithBonus:YES];
 
@@ -654,10 +620,12 @@
 
 - (void)showShareAlert {
     //find old stars and show alert only if new stars more than old
-    int stars = [gameController setLevelStars:lettersCountedDown];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Passes" message:[NSString stringWithFormat:@"Congratulations, you have passed the game with %d stars",stars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    int stars = [gameController updateLevelStars:lettersCountedDown];
+    if (stars!= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",stars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
     
 }
 

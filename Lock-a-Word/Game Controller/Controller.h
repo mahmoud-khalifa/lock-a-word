@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UITextChecker.h>
-
 #import "GameKitHelper.h"
-
-#define KStreamLength 100
 
 typedef enum
 {
@@ -52,7 +49,6 @@ typedef enum
 
 
 - (BOOL)isCorrectWord:(NSString*)word;
-- (BOOL)isNewLetterAvailable;
 
 
 - (BOOL)isLockedPosition:(int)index;
@@ -68,7 +64,7 @@ typedef enum
 - (BOOL)canAddBonusLetter;
 - (int)getModeStars:(GameMode)mode;
 - (void)printBoard;
-- (int)setLevelStars:(int)lettersCountedDown; 
+- (int)updateLevelStars:(int)lettersCountedDown; 
 
 //Flurry methods
 - (void)logGameStart;
