@@ -15,6 +15,8 @@
 #import "GameConfig.h"
 #import "StatisticsCollector.h"
 
+#import "Appirater.h"
+
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
@@ -118,6 +120,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     //Flurry Analytics:
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     [StatisticsCollector startSession:kFLURRY_APP_KEY];
+    
+    //App Rater:
+	[Appirater appLaunched:YES];
 
 	return YES;
 }
@@ -156,7 +161,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
 	if( [navController_ visibleViewController] == director_ )
+    {
+        //App Rater:
+        [Appirater appEnteredForeground:YES];
+        
 		[director_ startAnimation];
+    }
 }
 
 // application will be killed

@@ -42,6 +42,9 @@
 @property (nonatomic, retain) NSMutableArray *boardLetters;
 @property (nonatomic, retain) NSMutableArray *collectedWord;
 
+@property (nonatomic, retain) NSMutableArray *greenBorder;
+@property (nonatomic, retain) NSMutableArray *redBorder;
+
 - (void)newGame;
 - (void)drawBoard;
 
@@ -80,6 +83,9 @@
 @synthesize bonusLetters;
 @synthesize boardLetters;
 @synthesize collectedWord;
+
+@synthesize greenBorder;
+@synthesize redBorder;
 
 
 + (id)scene {
@@ -147,7 +153,10 @@
     self.newLetters = [[NSMutableArray alloc] init];
     self.bonusLetters = [[NSMutableArray alloc] init];
     self.boardLetters =  [[NSMutableArray alloc] init];
-    self.collectedWord=[[NSMutableArray alloc]init];
+    self.collectedWord = [[NSMutableArray alloc] init];
+    
+    self.greenBorder = [[NSMutableArray alloc] init];
+    self.redBorder = [[NSMutableArray alloc] init];
     
     self.isTouchEnabled=YES;
     
@@ -221,12 +230,13 @@
         
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
         float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
+        
         letterSprite.color=ccRED;
         letterSprite.position=ccp(xPos,yPos);
+        
         [self addChild:letterSprite z:100 tag:(row*5+column)];
         [boardLetters addObject:letterSprite];
-        
-        
+                
     }
 }
 
@@ -263,7 +273,6 @@
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
         float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
         letterSprite.position=ccp(xPos,yPos);
-        
         
         
         [self addChild:letterSprite z:100 tag:i+200];
@@ -384,6 +393,22 @@
     CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
     [letterSprite runAction:move];
     
+    //borders
+    CCSprite* greenBorderSprite = [CCSprite spriteWithFile:@"GreenBorder.png"];
+    greenBorderSprite.position = ccp(xPos, yPos);
+    greenBorderSprite.visible = NO;
+    greenBorderSprite.contentSize = letterSprite.contentSize;
+    [self addChild:greenBorderSprite z:200 tag:(row*5 + column + 100)];
+    [greenBorder addObject:greenBorderSprite];
+    
+    
+    CCSprite* redBorderSprite = [CCSprite spriteWithFile:@"RedBorder.png"];
+    redBorderSprite.position = ccp(xPos, yPos);
+    redBorderSprite.visible = NO;
+    redBorderSprite.contentSize = letterSprite.contentSize;
+    [self addChild:redBorderSprite z:200 tag:(row*5 + column + 300)];
+    [redBorder addObject:redBorderSprite];
+    //End borders
     
     if (bonusLetterSelected) {
         bonusLetterSelected = NO;
@@ -502,13 +527,21 @@
             for (CCSprite* collectedLetter in collectedWord) {
 //                collectedLetter.color=ccGREEN;
                  collectedLetter.color=ccRED;
+                
+                CCSprite* redSprite = (CCSprite*)[self getChildByTag:collectedLetter.tag + 300];
+                redSprite.visible = NO;
             }
             [self performSelector:@selector(removeCorrectWord) withObject:nil afterDelay:2];
             return;
         }
     }
     for (CCSprite* collectedLetter in collectedWord) {
-        collectedLetter.color=boardLettersColor;
+        
+        CCSprite* redSprite = (CCSprite*)[self getChildByTag:collectedLetter.tag + 300];
+        redSprite.visible = NO;
+        
+        collectedLetter.color = boardLettersColor; //yellow
+        
     }
     [collectedWord removeAllObjects];
 }
@@ -572,7 +605,7 @@
         
         correctWordFound = NO;
         for (CCSprite* collectedLetter in collectedWord) {
-            collectedLetter.color=boardLettersColor;
+            collectedLetter.color=boardLettersColor; //yellow
         }
         [collectedWord removeAllObjects];
     }
@@ -655,13 +688,21 @@
         }
         if (CGRectContainsPoint(letterArea, location)) {
             int count = [collectedWord count];
-            if (count<1) {
-                letterSprite.color=ccRED;
+            if (count<1) { //select letter
+//                letterSprite.color=ccRED;
+                
+                CCSprite* redSprite = (CCSprite*)[self getChildByTag:letterSprite.tag + 300];
+                redSprite.visible = YES;
+                
                 [collectedWord addObject:letterSprite];
             } else {
                 if ([collectedWord containsObject:letterSprite]) {
                     if (count>1 && [collectedWord objectAtIndex:[collectedWord count]-2]==letterSprite) {
-                        ((CCSprite*)[collectedWord lastObject]).color=boardLettersColor;
+                        
+                        CCSprite* redSprite = (CCSprite*)[self getChildByTag:((CCSprite*)[collectedWord lastObject]).tag + 300];
+                        redSprite.visible = NO;
+                                                
+                        ((CCSprite*)[collectedWord lastObject]).color=boardLettersColor; //yellow
                         [collectedWord removeLastObject];
                     }
                 }else {
@@ -670,7 +711,11 @@
                     int row1 = index1/5;
                     int row2 = index2/5;
                     if (index2-index1 == 1 && row1==row2) {
-                        letterSprite.color=ccRED;
+//                        letterSprite.color=ccRED;
+                        
+                        CCSprite* redSprite = (CCSprite*)[self getChildByTag:letterSprite.tag + 300];
+                        redSprite.visible = YES;
+                        
                         [collectedWord addObject:letterSprite];
                     }
                     
@@ -701,7 +746,7 @@
         return;
     }
     
-    if (correctWordFound) {
+    if (correctWordFound) { //without selection ??
         @synchronized (collectedWord) {
             CCLOG(@"ccTouchEnded->synchronized");
             CGPoint location = [touch locationInView:[touch view]]; 
@@ -718,7 +763,7 @@
         selectingWord = NO;
         [self checkIsWordCorrect];
         
-    } else {
+    } else { //letter pressed
         
         CGRect letterArea;
         

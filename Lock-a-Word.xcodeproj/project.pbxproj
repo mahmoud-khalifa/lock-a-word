@@ -191,6 +191,15 @@
 		314CC2C515B41E8B00E65F85 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C415B41E8B00E65F85 /* Accounts.framework */; };
 		314CC2C715B41E9A00E65F85 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */; };
 		31CEA2BD15AB3C3F00A6512D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */; };
+		3436F28715DB97D6000B7D52 /* GreenBorder-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F28515DB97D6000B7D52 /* GreenBorder-ipad.png */; };
+		3436F28815DB97D6000B7D52 /* RedBorder-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F28615DB97D6000B7D52 /* RedBorder-ipad.png */; };
+		3436F28C15DB983E000B7D52 /* GreenBorder-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F28A15DB983E000B7D52 /* GreenBorder-ipadhd.png */; };
+		3436F28D15DB983E000B7D52 /* RedBorder-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F28B15DB983E000B7D52 /* RedBorder-ipadhd.png */; };
+		3436F29015DB984E000B7D52 /* GreenBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F28E15DB984E000B7D52 /* GreenBorder.png */; };
+		3436F29115DB984E000B7D52 /* RedBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F28F15DB984E000B7D52 /* RedBorder.png */; };
+		3436F29415DB9859000B7D52 /* GreenBorder-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F29215DB9859000B7D52 /* GreenBorder-hd.png */; };
+		3436F29515DB9859000B7D52 /* RedBorder-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3436F29315DB9859000B7D52 /* RedBorder-hd.png */; };
+		3436F29915DBB954000B7D52 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 3436F29815DBB954000B7D52 /* Appirater.m */; };
 		34778D4515DA5FCC00856034 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34778D4415DA5FCC00856034 /* libFlurryAnalytics.a */; };
 		34778D4915DA634300856034 /* StatisticsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 34778D4815DA634300856034 /* StatisticsCollector.m */; };
 		34778D5115DA860100856034 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 34778D5015DA860100856034 /* GameKitHelper.m */; };
@@ -654,6 +663,16 @@
 		314CC2C415B41E8B00E65F85 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		3436F28515DB97D6000B7D52 /* GreenBorder-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GreenBorder-ipad.png"; sourceTree = "<group>"; };
+		3436F28615DB97D6000B7D52 /* RedBorder-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedBorder-ipad.png"; sourceTree = "<group>"; };
+		3436F28A15DB983E000B7D52 /* GreenBorder-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GreenBorder-ipadhd.png"; sourceTree = "<group>"; };
+		3436F28B15DB983E000B7D52 /* RedBorder-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedBorder-ipadhd.png"; sourceTree = "<group>"; };
+		3436F28E15DB984E000B7D52 /* GreenBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenBorder.png; sourceTree = "<group>"; };
+		3436F28F15DB984E000B7D52 /* RedBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedBorder.png; sourceTree = "<group>"; };
+		3436F29215DB9859000B7D52 /* GreenBorder-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GreenBorder-hd.png"; sourceTree = "<group>"; };
+		3436F29315DB9859000B7D52 /* RedBorder-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedBorder-hd.png"; sourceTree = "<group>"; };
+		3436F29715DBB954000B7D52 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		3436F29815DBB954000B7D52 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		34778D4315DA5FCC00856034 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		34778D4415DA5FCC00856034 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		34778D4715DA634300856034 /* StatisticsCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsCollector.h; sourceTree = "<group>"; };
@@ -1376,6 +1395,15 @@
 			path = "Lock-a-Word/Resources/Iphone/Tiles";
 			sourceTree = SOURCE_ROOT;
 		};
+		3436F29615DBB954000B7D52 /* AppRater */ = {
+			isa = PBXGroup;
+			children = (
+				3436F29715DBB954000B7D52 /* Appirater.h */,
+				3436F29815DBB954000B7D52 /* Appirater.m */,
+			);
+			path = AppRater;
+			sourceTree = "<group>";
+		};
 		34778D4215DA5FCC00856034 /* FlurryAnalytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1444,6 +1472,8 @@
 		34DB2F5B15A8BB9400998A76 /* Ipad */ = {
 			isa = PBXGroup;
 			children = (
+				3436F28515DB97D6000B7D52 /* GreenBorder-ipad.png */,
+				3436F28615DB97D6000B7D52 /* RedBorder-ipad.png */,
 				3479707215D7F29F00D49618 /* board_trophy-ipad.png */,
 				1EF811E015D315DC00CA61CA /* instructions_bg-ipad.png */,
 				BB0C472715D00F44006AD9F5 /* board_trophy_1-ipad.png */,
@@ -1482,6 +1512,8 @@
 		34DB2F6015A8BB9400998A76 /* Ipad-hd */ = {
 			isa = PBXGroup;
 			children = (
+				3436F28A15DB983E000B7D52 /* GreenBorder-ipadhd.png */,
+				3436F28B15DB983E000B7D52 /* RedBorder-ipadhd.png */,
 				3479707015D7F28600D49618 /* board_trophy-ipadhd.png */,
 				1EF811E215D315E900CA61CA /* instructions_bg-ipadhd.png */,
 				BB0C471F15D00F03006AD9F5 /* board_trophy_1-ipadhd.png */,
@@ -1520,6 +1552,8 @@
 		34DB2F6515A8BB9400998A76 /* Iphone */ = {
 			isa = PBXGroup;
 			children = (
+				3436F28E15DB984E000B7D52 /* GreenBorder.png */,
+				3436F28F15DB984E000B7D52 /* RedBorder.png */,
 				3479706B15D7F26400D49618 /* board_trophy.png */,
 				1EF811DB15D315BE00CA61CA /* instructions_bg.png */,
 				BB0C470E15CFF95E006AD9F5 /* board_trophy_1.png */,
@@ -1559,6 +1593,8 @@
 		34DB2F6A15A8BB9400998A76 /* Iphone-hd */ = {
 			isa = PBXGroup;
 			children = (
+				3436F29215DB9859000B7D52 /* GreenBorder-hd.png */,
+				3436F29315DB9859000B7D52 /* RedBorder-hd.png */,
 				3479706E15D7F27600D49618 /* board_trophy-hd.png */,
 				1EF811DE15D315CB00CA61CA /* instructions_bg-hd.png */,
 				BB0C471715D00EA5006AD9F5 /* board_trophy_1-hd.png */,
@@ -1661,6 +1697,7 @@
 		BB2CBF9F15A63EAB001CC30F /* Lock-A-Word */ = {
 			isa = PBXGroup;
 			children = (
+				3436F29615DBB954000B7D52 /* AppRater */,
 				34778D5215DA8C2C00856034 /* Custom AlertView */,
 				34778D4E15DA860100856034 /* Game Center */,
 				BB9BFAA915C1955E003ABDD2 /* TapForTap */,
@@ -2431,6 +2468,14 @@
 				34778D6615DA8C2C00856034 /* alert-red-button@2x.png in Resources */,
 				34778D6715DA8C2C00856034 /* alert-window.png in Resources */,
 				34778D6815DA8C2C00856034 /* alert-window@2x.png in Resources */,
+				3436F28715DB97D6000B7D52 /* GreenBorder-ipad.png in Resources */,
+				3436F28815DB97D6000B7D52 /* RedBorder-ipad.png in Resources */,
+				3436F28C15DB983E000B7D52 /* GreenBorder-ipadhd.png in Resources */,
+				3436F28D15DB983E000B7D52 /* RedBorder-ipadhd.png in Resources */,
+				3436F29015DB984E000B7D52 /* GreenBorder.png in Resources */,
+				3436F29115DB984E000B7D52 /* RedBorder.png in Resources */,
+				3436F29415DB9859000B7D52 /* GreenBorder-hd.png in Resources */,
+				3436F29515DB9859000B7D52 /* RedBorder-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2561,6 +2606,7 @@
 				34778D5115DA860100856034 /* GameKitHelper.m in Sources */,
 				34778D6915DA8C2C00856034 /* BlockAlertView.m in Sources */,
 				34778D6A15DA8C2C00856034 /* BlockBackground.m in Sources */,
+				3436F29915DBB954000B7D52 /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

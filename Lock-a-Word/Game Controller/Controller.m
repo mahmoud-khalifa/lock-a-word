@@ -323,9 +323,6 @@ static Controller *instanceOfController;
 
 #pragma mark - validation
 - (BOOL)isCorrectWord:(NSString*)word {
-    #warning remove next line
-    return YES;
-    
     UITextChecker *checker = [[UITextChecker alloc] init];
     NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
     NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
@@ -452,24 +449,26 @@ static Controller *instanceOfController;
 - (void)logGameStart
 {
     gameStarted = YES;
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     switch (currentGameMode) {
         case PlasticLock:
-            [StatisticsCollector logEvent:@"Single-player_PlasticLock_Level # 1" timed:YES];
+            [params setObject:@"GameMode" forKey:@"PlasticLock"];
             break;
         case BronzeLock:
-            [StatisticsCollector logEvent:[NSString stringWithFormat:@"Single-player_BronzeLock_Level # %d", currentLevel] timed:YES];
+            [params setObject:@"GameMode" forKey:@"BronzeLock"];
             break;
         case SilverLock:
-            [StatisticsCollector logEvent:[NSString stringWithFormat:@"Single-player_SilverLock_Level # %d", currentLevel] timed:YES];
+            [params setObject:@"GameMode" forKey:@"SilverLock"];
             break;
         case GoldLock:
-            [StatisticsCollector logEvent:[NSString stringWithFormat:@"Single-player_GoldLock_Level # %d", currentLevel] timed:YES];
+            [params setObject:@"GameMode" forKey:@"GoldLock"];
             break;
                 
         default:
             break;
     }
     
+    [StatisticsCollector logEvent:@"GamePlayed" withParameters:params timed:YES];
 }
 
 - (void)logGameEnd
@@ -478,52 +477,53 @@ static Controller *instanceOfController;
         return;
     }
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:@"Exit" forKey:@"Result"];
     
     switch (currentGameMode) {
         case PlasticLock:
-            [StatisticsCollector endTimedEvent:@"Single-player_PlasticLock_Level # 1" withParameters:params];
+            [params setObject:@"GameMode" forKey:@"PlasticLock"];
             break;
         case BronzeLock:
-            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_BronzeLock_Level # %d", currentLevel] withParameters:params];
+            [params setObject:@"GameMode" forKey:@"BronzeLock"];
             break;
         case SilverLock:
-            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_SilverLock_Level # %d", currentLevel] withParameters:params];
+            [params setObject:@"GameMode" forKey:@"SilverLock"];
             break;
         case GoldLock:
-            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_GoldLock_Level # %d", currentLevel] withParameters:params];
+            [params setObject:@"GameMode" forKey:@"GoldLock"];
             break;
-                
+            
         default:
             break;
     }
-    
+    [StatisticsCollector endTimedEvent:@"GamePlayed" withParameters:params];
+    [StatisticsCollector logEvent:@"ExitGame" withParameters:params];
 }
 
 - (void)logGameCompleted
 {
     gameStarted = NO;
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:@"Completed" forKey:@"Result"];
     
     switch (currentGameMode) {
         case PlasticLock:
-            [StatisticsCollector endTimedEvent:@"Single-player_PlasticLock_Level # 1" withParameters:params];
+            [params setObject:@"GameMode" forKey:@"PlasticLock"];
             break;
         case BronzeLock:
-            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_BronzeLock_Level # %d", currentLevel] withParameters:params];
+            [params setObject:@"GameMode" forKey:@"BronzeLock"];
             break;
         case SilverLock:
-            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_SilverLock_Level # %d", currentLevel] withParameters:params];
+            [params setObject:@"GameMode" forKey:@"SilverLock"];
             break;
         case GoldLock:
-            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_GoldLock_Level # %d", currentLevel] withParameters:params];
+            [params setObject:@"GameMode" forKey:@"GoldLock"];
             break;
-                
+            
         default:
             break;
     }
-    
+    [StatisticsCollector endTimedEvent:@"GamePlayed" withParameters:params];
+    [StatisticsCollector logEvent:@"CompleteLevel" withParameters:params];    
 }
 
 @end

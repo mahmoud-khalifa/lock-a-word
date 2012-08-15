@@ -59,6 +59,8 @@ __x__)
 
 #define ADJUST_DOUBLE(__x__) (IS_IPAD() == YES ? ( __x__ * 2 )  : __x__)
 
-#define KTapForTapID @"c91a3680-b956-012f-f6ff-4040d804a637"
+//#define KTapForTapID @"c91a3680-b956-012f-f6ff-4040d804a637"
+
+#define KTapForTapID @"e9ffe670-c8e0-012f-fb9d-4040d804a637"
 
 #endif
