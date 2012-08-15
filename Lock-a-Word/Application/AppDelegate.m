@@ -12,14 +12,33 @@
 #import "MainMenuScene.h"
 #import "TapForTap.h"
 
+#import "GameConfig.h"
+#import "StatisticsCollector.h"
+
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
+
+void uncaughtExceptionHandler(NSException *exception) {
+    
+    NSArray *backtrace = [exception callStackSymbols];
+    NSString *platform = [[UIDevice currentDevice] model];
+    NSString *version = [[UIDevice currentDevice] systemVersion];
+    NSString *message = [NSString stringWithFormat:@"Device: %@. OS: %@. Backtrace:\n%@",
+                         platform,
+                         version,
+                         backtrace];
+    [StatisticsCollector trackApplicationError:@"Uncaught" andMessage:message andException:exception];
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	
     // this is method for TapforTap
+//    [TapForTap setDefaultAppId: @"c91a3680-b956-012f-f6ff-4040d804a637"];
+    
+    //update id
     [TapForTap setDefaultAppId: @"c91a3680-b956-012f-f6ff-4040d804a637"];
     [TapForTap checkIn];
     
@@ -70,6 +89,10 @@
 
 	// make main window visible
 	[window_ makeKeyAndVisible];
+    
+    
+    gameController=[Controller sharedController];
+    [gameController authenticateLocalPlayer];
 
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -92,7 +115,9 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [MainMenuScene scene]]; 
     
-      
+    //Flurry Analytics:
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    [StatisticsCollector startSession:kFLURRY_APP_KEY];
 
 	return YES;
 }
@@ -116,7 +141,10 @@
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
 	if( [navController_ visibleViewController] == director_ )
+    {
+        [gameController authenticateLocalPlayer];
 		[director_ resume];
+    }
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application

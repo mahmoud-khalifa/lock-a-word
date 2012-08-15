@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UITextChecker.h>
 
+#import "GameKitHelper.h"
 
 #define KStreamLength 100
 
@@ -23,11 +24,19 @@ typedef enum
 
 
 
-@interface Controller : NSObject
+@interface Controller : NSObject<GameKitHelperProtocol>
 
 @property (readonly) GameMode currentGameMode;
+@property (readonly) int currentLevel;
+
+@property (atomic) BOOL gameStarted;
+
+@property(nonatomic, assign)GameKitHelper* gkHelper;
+
 + (Controller*) sharedController; //singleton pattern
 
+- (void)authenticateLocalPlayer;
+- (BOOL)connectedToWeb;
 - (void)selectChapter:(int)chapter;
 - (void)selectLevel:(int)level;
 
@@ -60,5 +69,10 @@ typedef enum
 - (int)getModeStars:(GameMode)mode;
 - (void)printBoard;
 - (int)setLevelStars:(int)lettersCountedDown; 
+
+//Flurry methods
+- (void)logGameStart;
+- (void)logGameEnd;
+- (void)logGameCompleted;
 @end
 

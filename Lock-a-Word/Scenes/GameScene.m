@@ -34,7 +34,7 @@
     TapForTapAdView *adView;
     CCSprite *boardTrophy;
     NSString *boardTrophyName;
-    
+        
 }
 
 @property (nonatomic, retain) NSMutableArray *newLetters;
@@ -171,7 +171,6 @@
     
     //LETTERS LABEL
     lettersCountedDownLabel=[CCLabelBMFont labelWithString:@"0" fntFile:@"score.fnt"];
-#warning update position of IPAD
     if(!IS_IPAD()){
 //        lettersCountedDownLabel.position = ADJUST_XY(142, 436);
         lettersCountedDownLabel.position = ADJUST_XY(142, 434);
@@ -205,6 +204,8 @@
     if (lettersCountedDown > 0) {
         lettersCountedDown--;
     }
+    
+    [gameController logGameStart];
     
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
@@ -291,7 +292,8 @@
         
         CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
-        letterSprite.color=ccRED;
+//        letterSprite.color=ccRED;
+        letterSprite.color=ccGREEN;
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
         float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
         letterSprite.position=ccp(xPos,yPos);
@@ -641,10 +643,10 @@
     
     [self performSelector:@selector(showShareAlert) withObject:nil afterDelay:12*kANIMATION_DURATION];
     
-    
-    
 //    [self performSelector:@selector(disableTouches) withObject:nil afterDelay:0.05 ];
     [self unscheduleAllSelectors];
+    
+    [gameController logGameCompleted];
 }
 
 
@@ -726,6 +728,8 @@
             [[CCDirector sharedDirector] replaceScene:[LevelSelectionScene scene]];
         }
             
+        [gameController logGameEnd];
+        
         return;
     }
     

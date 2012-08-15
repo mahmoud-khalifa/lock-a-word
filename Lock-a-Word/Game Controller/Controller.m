@@ -14,6 +14,10 @@
 #import "LevelParser.h"
 //#import "cocos2d.h"
 
+#import "StatisticsCollector.h"
+
+#import <SystemConfiguration/SystemConfiguration.h>
+
 static Controller *instanceOfController;
 
 @interface Controller()
@@ -25,7 +29,7 @@ static Controller *instanceOfController;
     NSArray *allLetters;
     int currentIndex;
     int numberOfBonus;
-    int currentLevel;
+//    int currentLevel;
     NSString *lockedLetter;
     NSArray *secondLetters;
     
@@ -37,10 +41,15 @@ static Controller *instanceOfController;
     NSString *currentLetter;
     NSString *lastLetter;
     
+    GameKitHelper* gkHelper;
+    
 }
 
 @synthesize secondLetters;
 @synthesize currentGameMode;
+@synthesize currentLevel;
+@synthesize gameStarted;
+@synthesize gkHelper;
 
 -(void)dealloc {
     [allLetters release];
@@ -61,7 +70,6 @@ static Controller *instanceOfController;
 	@synchronized(self) {
 		NSAssert(instanceOfController == nil, @"Attempted to allocate a second instance of the singleton: Game Controller");
 		instanceOfController = [[super alloc] retain];
-        
 		return instanceOfController;
 	}
 	// to avoid compiler warning
@@ -79,7 +87,27 @@ static Controller *instanceOfController;
 	return nil;
 }
 
+#pragma mark GameCenter Methods
+-(void)authenticateLocalPlayer{
+    gkHelper = [GameKitHelper sharedGameKitHelper];
+    if ([self connectedToWeb]) {
+        if ([GKLocalPlayer localPlayer].authenticated==NO) {
+            [gkHelper authenticateLocalPlayer];
+        }
+    }
+    
+}
 
+-(BOOL)connectedToWeb {
+	BOOL connected;
+	const char *host = "www.google.com";
+	SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, host);
+	SCNetworkReachabilityFlags flags;
+	connected = SCNetworkReachabilityGetFlags(reachability, &flags);
+	BOOL isConnected = connected && (flags & kSCNetworkFlagsReachable) && !(flags & kSCNetworkFlagsConnectionRequired);
+	CFRelease(reachability);
+	return isConnected;
+}
 
 #pragma mark - Leveling
 - (void)selectChapter:(int)chapter {
@@ -424,5 +452,82 @@ static Controller *instanceOfController;
     }
 }
 
+#pragma Log Flurry Events
+- (void)logGameStart
+{
+    gameStarted = YES;
+    switch (currentGameMode) {
+        case PlasticLock:
+            [StatisticsCollector logEvent:@"Single-player_PlasticLock_Level # 1" timed:YES];
+            break;
+        case BronzeLock:
+            [StatisticsCollector logEvent:[NSString stringWithFormat:@"Single-player_BronzeLock_Level # %d", currentLevel] timed:YES];
+            break;
+        case SilverLock:
+            [StatisticsCollector logEvent:[NSString stringWithFormat:@"Single-player_SilverLock_Level # %d", currentLevel] timed:YES];
+            break;
+        case GoldLock:
+            [StatisticsCollector logEvent:[NSString stringWithFormat:@"Single-player_GoldLock_Level # %d", currentLevel] timed:YES];
+            break;
+                
+        default:
+            break;
+    }
+    
+}
+
+- (void)logGameEnd
+{
+    if (!gameStarted) {
+        return;
+    }
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@"Exit" forKey:@"Result"];
+    
+    switch (currentGameMode) {
+        case PlasticLock:
+            [StatisticsCollector endTimedEvent:@"Single-player_PlasticLock_Level # 1" withParameters:params];
+            break;
+        case BronzeLock:
+            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_BronzeLock_Level # %d", currentLevel] withParameters:params];
+            break;
+        case SilverLock:
+            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_SilverLock_Level # %d", currentLevel] withParameters:params];
+            break;
+        case GoldLock:
+            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_GoldLock_Level # %d", currentLevel] withParameters:params];
+            break;
+                
+        default:
+            break;
+    }
+    
+}
+
+- (void)logGameCompleted
+{
+    gameStarted = NO;
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:@"Completed" forKey:@"Result"];
+    
+    switch (currentGameMode) {
+        case PlasticLock:
+            [StatisticsCollector endTimedEvent:@"Single-player_PlasticLock_Level # 1" withParameters:params];
+            break;
+        case BronzeLock:
+            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_BronzeLock_Level # %d", currentLevel] withParameters:params];
+            break;
+        case SilverLock:
+            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_SilverLock_Level # %d", currentLevel] withParameters:params];
+            break;
+        case GoldLock:
+            [StatisticsCollector endTimedEvent:[NSString stringWithFormat:@"Single-player_GoldLock_Level # %d", currentLevel] withParameters:params];
+            break;
+                
+        default:
+            break;
+    }
+    
+}
 
 @end

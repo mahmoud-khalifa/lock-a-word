@@ -23,6 +23,8 @@
 #define kBOARD_LETTERS_Y_OFFSET IS_IPAD() == YES ? 225 : 152
 #define kLETTERS_SPACING 1
 
+#define kFLURRY_APP_KEY @"SSGG3CDF8MX9BVQ33HYC"
+
 /*  NORMAL DETAILS */
 #define kScreenHeight       480
 #define kScreenWidth        320
