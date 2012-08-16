@@ -19,6 +19,9 @@
 //Needed for Instruction Scene
 #import "InstructionsScene.h"
 
+//Needed for Sound effects
+#import "SimpleAudioEngine.h"
+
 @interface MainMenuScene()
 {
     CCMenuItemImage *menuItemAnimate1; 
@@ -133,6 +136,8 @@
     
     [self addChild:introMenu];
     
+    [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
+    
     // Here is the animation part of the LOCK-A-WORD Menu
     menuItemAnimate1.scale=.75;        
     [menuItemAnimate1 runAction:[CCScaleTo actionWithDuration:0.5 scale:1.0]];
@@ -141,8 +146,6 @@
     menuItemAnimate3.scale=.75;
     [menuItemAnimate3 runAction:[CCScaleTo actionWithDuration:1.5 scale:1.0]];
            
-   
-    
 }
 
 -(void)shrinkMenu 

@@ -244,10 +244,13 @@
 
 - (void)insertNewLetter
 {
-    if (lettersCountedDown < (KStartingLetterCountedDown -18) && [gameController isGameCompleted]) {
+    if (lettersCountedDown < (KStartingLetterCountedDown - 18) && [gameController isGameCompleted]) {
         [self gameCompleted];
         return;
     }
+    
+    [self newLetterSounds];
+    
     currentLetter = [gameController getCurrentLetter];
     
     [newLetters removeAllObjects];
@@ -259,6 +262,31 @@
 
 }
 
+-(void) newLetterSounds
+{
+    if ( lettersCountedDown <= (KStartingLetterCountedDown - 25) ) {
+        if (lettersCountedDown % 5 == 0) {
+            int r = arc4random() % 3; //0, 1, 2
+            NSLog(@"\n\n random = %d", r);
+            switch (r) {
+                case 0:
+                    [[SimpleAudioEngine sharedEngine]playEffect:@"Mhmm.mp3"];
+                    break;
+                    
+                case 1:
+                    [[SimpleAudioEngine sharedEngine]playEffect:@"Ohhh_2.mp3"];
+                    break;
+                    
+                case 2:
+                    [[SimpleAudioEngine sharedEngine]playEffect:@"Whoa_1.mp3"];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+}
 
 - (void)useBonusLetter:(int)row
 {
@@ -512,8 +540,9 @@
     for (CCSprite* collectedLetter in word) {
         collectedLetter.color=ccRED;
     }
-    
+    [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
 }
+
 -(void)checkIsWordCorrect { 
     if ([collectedWord count]>2) {
         NSString *word = @"";
@@ -654,7 +683,12 @@
 - (void)showShareAlert {
     //find old stars and show alert only if new stars more than old
     int stars = [gameController updateLevelStars:lettersCountedDown];
+    
     if (stars!= 0) {
+        
+        [[SimpleAudioEngine sharedEngine]playEffect:@"Whoa_2.mp3"];
+        [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",stars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [alert release];
@@ -771,6 +805,7 @@
         for (CCSprite* letterSprite in newLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
             if (CGRectContainsPoint(letterArea, location)) {
+                [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
                 [self performSelector:@selector(extraColumnLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-105] afterDelay:.01 ];
                 return;
             }
@@ -780,6 +815,7 @@
         for (CCSprite* letterSprite in bonusLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
             if (CGRectContainsPoint(letterArea, location)) {
+                [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
                 [self performSelector:@selector(bounsLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-200] afterDelay:.01 ];
                 return;
             }
@@ -794,6 +830,7 @@
                 int index = 5*row + colunm;
                 if (colunm != 0) {
                     if (!([gameController isLockedPosition:index] || [gameController isLockedPosition:index-1])) {
+                        [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
                         [self shiftSprite:letterSprite];
                     } 
                 }

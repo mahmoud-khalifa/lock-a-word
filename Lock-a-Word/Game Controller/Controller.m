@@ -15,6 +15,7 @@
 //#import "cocos2d.h"
 
 #import "StatisticsCollector.h"
+#import "SimpleAudioEngine.h"
 
 #import <SystemConfiguration/SystemConfiguration.h>
 
@@ -202,6 +203,7 @@ static Controller *instanceOfController;
     
     lastLetter = @"";
     [self printBoard];
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Fanfare.mp3"];
 }
 
 - (NSArray*)getLockedLetters {
