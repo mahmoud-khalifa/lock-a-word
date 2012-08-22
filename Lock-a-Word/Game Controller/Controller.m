@@ -140,7 +140,8 @@ static Controller *instanceOfController;
     
     [self newGame];
 }
-- (int)updateLevelStars:(int)lettersCountedDown 
+
+- (int)calculateLevelStars:(int)lettersCountedDown 
 {
     int stars = 1;
     if (lettersCountedDown >= 20){
@@ -149,17 +150,32 @@ static Controller *instanceOfController;
     else if(lettersCountedDown >= 10) {
         stars=2;
     }
-    
+    return stars;
+
+}
+
+- (int)getcurrentLevelStars 
+{
+    Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
+    Level *gameLevel;
+    for (gameLevel in levels.levels) {
+        if (gameLevel.number == currentLevel) {
+            return gameLevel.stars;
+        } 
+    }
+    return 0;
+}
+
+- (void)updateLevelStars:(int)stars 
+{
     Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
     Level *gameLevel;
     for (gameLevel in levels.levels) {
         if (gameLevel.number == currentLevel && gameLevel.stars < stars) {
             gameLevel.stars = stars;
             [LevelParser saveData:levels forChapter:currentGameMode];
-            return stars;
         } 
     }
-    return 0;
 }
 
 
@@ -203,7 +219,7 @@ static Controller *instanceOfController;
     
     lastLetter = @"";
     [self printBoard];
-    [[SimpleAudioEngine sharedEngine]playEffect:@"Fanfare.mp3"];
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
 }
 
 - (NSArray*)getLockedLetters {
@@ -325,6 +341,7 @@ static Controller *instanceOfController;
 
 #pragma mark - validation
 - (BOOL)isCorrectWord:(NSString*)word {
+//    return YES;
     UITextChecker *checker = [[UITextChecker alloc] init];
     NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
     NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];

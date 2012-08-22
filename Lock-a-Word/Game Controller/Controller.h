@@ -64,7 +64,11 @@ typedef enum
 - (BOOL)canAddBonusLetter;
 - (int)getModeStars:(GameMode)mode;
 - (void)printBoard;
-- (int)updateLevelStars:(int)lettersCountedDown; 
+
+
+- (int)calculateLevelStars:(int)lettersCountedDown;
+- (int)getcurrentLevelStars;
+- (void)updateLevelStars:(int)stars;
 
 //Flurry methods
 - (void)logGameStart;

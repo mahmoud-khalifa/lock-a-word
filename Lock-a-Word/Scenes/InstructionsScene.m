@@ -7,6 +7,7 @@
 //
 
 #import "InstructionsScene.h"
+#import "SimpleAudioEngine.h"
 
 
 //This is to define our BackButtonRect
@@ -69,6 +70,7 @@
     
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
+         [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
         [[CCDirector sharedDirector] popScene];
     }
 }

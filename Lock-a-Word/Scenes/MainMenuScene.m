@@ -73,6 +73,10 @@
         entrybackgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:entrybackgroundImage];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        
+        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
+        [self performSelector:@selector(playApplause) withObject:nil afterDelay:1.3];
+        
         [self animateMenuItems];        
         [self performSelector:@selector(shrinkMenu) withObject:nil afterDelay:2.0];
         [self performSelector:@selector(hideMenuItems) withObject:nil afterDelay:3.0f];
@@ -108,6 +112,8 @@
 // This method will push our Game Mode Scene
 - (void)goToGameModeScene:(id) sender 
 {
+     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
     [[CCDirector sharedDirector] pushScene:[GameModesScene scene]];
 }
 
@@ -136,8 +142,6 @@
     
     [self addChild:introMenu];
     
-    [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
-    
     // Here is the animation part of the LOCK-A-WORD Menu
     menuItemAnimate1.scale=.75;        
     [menuItemAnimate1 runAction:[CCScaleTo actionWithDuration:0.5 scale:1.0]];
@@ -146,6 +150,11 @@
     menuItemAnimate3.scale=.75;
     [menuItemAnimate3 runAction:[CCScaleTo actionWithDuration:1.5 scale:1.0]];
            
+}
+
+-(void)playApplause
+{
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
 }
 
 -(void)shrinkMenu 
@@ -168,7 +177,6 @@
     CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_upgr.png" selectedImage:@"main_btn_upgr.png" target:self selector:@selector(goTofull)];
     
     
-   
     // Adding "PLAY - INSTRUCTION - FULL" items to the menu
     CCMenu *mainMenu = [CCMenu menuWithItems:mainMenuItem1,mainMenuItem2,mainMenuItem3, nil];
     // gameMenu.anchorPoint=CGPointZero;
@@ -200,8 +208,10 @@
 #pragma mark Next Scene
 -(void) goToInstructions
 {  
- [[CCDirector sharedDirector] pushScene:[InstructionsScene scene]];   
- CCLOG(@"Instruction button has been pressed!!");   
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
+    [[CCDirector sharedDirector] pushScene:[InstructionsScene scene]];   
+    CCLOG(@"Instruction button has been pressed!!");   
 }
 
 

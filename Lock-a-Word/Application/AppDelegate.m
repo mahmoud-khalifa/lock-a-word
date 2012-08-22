@@ -45,8 +45,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     [TapForTap checkIn];
     
     // Create the main window
-	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
+	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
 	CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
@@ -96,6 +96,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     gameController=[Controller sharedController];
     [gameController authenticateLocalPlayer];
 
+//    UIViewController* cont = (UIViewController*) [UIApplication sharedApplication].keyWindow.rootViewController;
+//    cont.managedObjectContext = self.managedObjectContext;
+    
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.

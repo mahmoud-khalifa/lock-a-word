@@ -12,6 +12,7 @@
 #import "Controller.h"
 #import "GameConfig.h"
 #import "TapForTap.h"
+#import "SimpleAudioEngine.h"
 
 @interface GameModesScene()
 {
@@ -96,6 +97,13 @@
 // the Go to free plastic lock levels [free]
 
 - (void) goToPlasticLock : (id) sender {
+    
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
+    [self performSelector:@selector(plasticLock) withObject:nil afterDelay:0.6];
+}
+
+- (void) plasticLock {
     [controller selectChapter:PlasticLock];
     [controller selectLevel:1];
     [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
@@ -105,6 +113,13 @@
 // the Go to Bronze lock levels [free]
 
 - (void) goToBronzeLock: (id) sender {
+    
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
+    [self performSelector:@selector(bronzeLock) withObject:nil afterDelay:0.6];
+}
+
+- (void) bronzeLock {
     [controller selectChapter:BronzeLock];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     CCLOG(@"Bronze Lock button has been pressed !!");
@@ -113,6 +128,13 @@
 // the Go to Silver lock levels [free]
 
 - (void) goToSilverLock: (id) sender {
+    
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
+    [self performSelector:@selector(silverLock) withObject:nil afterDelay:0.6];
+}
+
+- (void) silverLock{
     [controller selectChapter:SilverLock];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     CCLOG(@"Silver Lock button has been pressed !!");
@@ -120,6 +142,13 @@
 // the Go to Gold lock levels [free]
 
 - (void) goToGoldLock: (id) sender {
+    
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
+    [self performSelector:@selector(goldLock) withObject:nil afterDelay:0.6];
+}
+
+- (void) goldLock{
     [controller selectChapter:GoldLock];
     [[CCDirector sharedDirector] pushScene:[LevelSelectionScene scene]];
     CCLOG(@"Gold Lock button has been pressed !!");
@@ -129,9 +158,9 @@
 {   
     
     int numberOfStars = [controller getModeStars:gameMode];    
-               CCMenuItemImage *stars;
-               CCMenuItemImage *gameModeItemImage; 
-               CCMenuItemImage *finalItemImage; 
+    CCMenuItemImage *stars;
+    CCMenuItemImage *gameModeItemImage; 
+    CCMenuItemImage *finalItemImage; 
     // This will get the stars images
                 switch (numberOfStars) {
                     case 0:
@@ -171,7 +200,6 @@
     [finalItemImage addChild:stars];    
     return finalItemImage;
        
-         
 }                                  
 
 @end

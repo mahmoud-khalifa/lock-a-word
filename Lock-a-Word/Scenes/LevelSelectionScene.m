@@ -9,6 +9,7 @@
 #import "LevelSelectionScene.h"
 #import "GameScene.h"
 #import "GameModesScene.h"
+#import "SimpleAudioEngine.h"
 
 #import "GameConfig.h"
 
@@ -212,13 +213,22 @@
 
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
-        [[CCDirector sharedDirector] replaceScene:[GameModesScene scene]];
+        [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
         
+        [[CCDirector sharedDirector] replaceScene:[GameModesScene scene]];
     }
 }
 
 
 - (void) onPlay: (CCMenuItemImage*) sender {
+    
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+    
+    [self performSelector:@selector(onPlay2:) withObject:sender afterDelay:0.6];
+    
+}
+
+- (void) onPlay2: (CCMenuItemImage*) sender {
     
     // the selected level is determined by the tag in the menu item 
     int selectedLevel = sender.tag;
@@ -228,7 +238,6 @@
     
     // load the game scene
     [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
-    
     
 }
 
