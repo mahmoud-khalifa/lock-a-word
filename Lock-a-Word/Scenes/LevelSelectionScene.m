@@ -230,14 +230,28 @@
 
 - (void) onPlay2: (CCMenuItemImage*) sender {
     
-    // the selected level is determined by the tag in the menu item 
-    int selectedLevel = sender.tag;
+//    // the selected level is determined by the tag in the menu item 
+//    int selectedLevel = sender.tag;
+//    
+//    // store the selected level in GameData
+//    [controller selectLevel:selectedLevel];
+//    
+//    // load the game scene
+//    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     
-    // store the selected level in GameData
-    [controller selectLevel:selectedLevel];
-    
-    // load the game scene
-    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
+    if ([[Controller sharedController] isGameModesUnlocked]) {
+        int selectedLevel = sender.tag;
+        [controller selectLevel:selectedLevel];
+        [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
+    }else {
+        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
+        [alertView addButtonWithTitle:@"Upgrade" block:^{
+            [[Controller sharedController] unlockAllGameModes];
+        }];
+        [alertView addButtonWithTitle:@"No" block:nil];
+        
+        [alertView show];
+    }
     
 }
 

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UITextChecker.h>
 #import "GameKitHelper.h"
+#import "BlockAlertView.h"
 
 typedef enum
 {
@@ -19,9 +20,9 @@ typedef enum
 }GameMode;
 
 
-
-
-@interface Controller : NSObject<GameKitHelperProtocol>
+@interface Controller : NSObject<GameKitHelperProtocol>{
+    BlockAlertView *loadingView;
+}
 
 @property (readonly) GameMode currentGameMode;
 @property (readonly) int currentLevel;
@@ -74,5 +75,14 @@ typedef enum
 - (void)logGameStart;
 - (void)logGameEnd;
 - (void)logGameCompleted;
+
+//In-App purchase methods
+-(void)unlockAllGameModes;
+-(void)buyFeature:(NSString*)featureId;
+
+-(bool)isGameModesUnlocked;
+-(bool)isFeaturePurchased:(NSString*)featureId; -(BOOL)connectedToWeb;
+
+
 @end
 

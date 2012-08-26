@@ -17,6 +17,8 @@
 #import "StatisticsCollector.h"
 #import "SimpleAudioEngine.h"
 
+#import "MKStoreManager.h"
+
 #import <SystemConfiguration/SystemConfiguration.h>
 
 static Controller *instanceOfController;
@@ -543,6 +545,85 @@ static Controller *instanceOfController;
     }
     [StatisticsCollector endTimedEvent:@"GamePlayed" withParameters:params];
     [StatisticsCollector logEvent:@"CompleteLevel" withParameters:params];    
+}
+
+#pragma in-App Purchase
+
+-(void)unlockAllGameModes
+{
+    [self buyFeature:kUNLOCK_ALL_MODES_ID];
+}
+
+-(void)buyFeature:(NSString*)featureId{
+    
+    if ([self connectedToWeb]) {
+        [[MKStoreManager sharedManager] buyFeature:featureId 
+                                        onComplete:^(NSString* purchasedFeature)
+         {
+             CCLOG(@"Purchased: %@", purchasedFeature);
+             
+             [loadingView dismissWithClickedButtonIndex:-1 animated:NO];
+             
+             //         UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"Success" message: @"Transaction was completed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+             //         [alert show];
+             //         [alert release];
+             
+             
+             BlockAlertView* alert=[BlockAlertView alertWithTitle:@"Success" message:@"Transaction was completed" andLoadingviewEnabled:NO];
+             [alert setCancelButtonWithTitle:@"OK" block:nil];
+             
+             [alert show];
+             
+//             [delegatoe onPurchaseFeatureCompleted:featureId];
+             
+             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:featureId];
+         }
+                                       onCancelled:^
+         {
+             CCLOG(@"User Cancelled Transaction");
+             
+             
+             [loadingView dismissWithClickedButtonIndex:-1 animated:NO];
+             
+             //         UIAlertView* alert=[[UIAlertView alloc]initWithTitle:@"Operation Cancelled" message:@"Transaction was cancelled" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil];
+             //         [alert show];
+             //         [alert release];
+             
+             BlockAlertView* alert=[BlockAlertView alertWithTitle:@"Operation Cancelled" message:@"" andLoadingviewEnabled:NO];
+             [alert setCancelButtonWithTitle:@"Close" block:nil];
+             
+             [alert show];
+             
+         }];
+           
+        loadingView=[BlockAlertView alertWithTitle:nil message:@"Please wait..." andLoadingviewEnabled:YES];
+        [loadingView show];
+        
+    }else {
+        BlockAlertView* alert=[BlockAlertView alertWithTitle:@"No Internet Connection" message:@"Please Connect to the Internet then try again" andLoadingviewEnabled:NO];
+        [alert setCancelButtonWithTitle:@"OK" block:nil];
+        
+        [alert show];
+        
+    }
+    
+}
+
+-(bool)isGameModesUnlocked
+{
+    return [self isFeaturePurchased:kUNLOCK_ALL_MODES_ID];
+}
+
+-(bool)isFeaturePurchased:(NSString*)featureId{
+    
+    if ([self connectedToWeb]) {
+        bool isFeaturePurchasedBefore=[MKStoreManager  isFeaturePurchased:featureId];
+        [[NSUserDefaults standardUserDefaults] setBool:isFeaturePurchasedBefore forKey:featureId];
+        return [MKStoreManager  isFeaturePurchased:featureId];
+    }else {
+        return  [[NSUserDefaults standardUserDefaults]boolForKey:featureId];
+    }
+
 }
 
 @end

@@ -229,6 +229,16 @@
 		347D27E715DCE3AC005DA374 /* Ohhh_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 347D27DF15DCE3AC005DA374 /* Ohhh_2.mp3 */; };
 		347D27E815DCE3AC005DA374 /* Whoa_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 347D27E015DCE3AC005DA374 /* Whoa_1.mp3 */; };
 		347D27E915DCE3AC005DA374 /* Whoa_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 347D27E115DCE3AC005DA374 /* Whoa_2.mp3 */; };
+		348B0E8615EA61FD00DB065D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348B0E8515EA61FD00DB065D /* Security.framework */; };
+		348B0E8915EA620700DB065D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348B0E8815EA620700DB065D /* StoreKit.framework */; };
+		348B0E9C15EA628100DB065D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E8D15EA628100DB065D /* JSONKit.m */; };
+		348B0E9D15EA628100DB065D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E8F15EA628100DB065D /* NSData+Base64.m */; };
+		348B0E9E15EA628100DB065D /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9115EA628100DB065D /* SFHFKeychainUtils.m */; };
+		348B0E9F15EA628100DB065D /* MKSKProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9315EA628100DB065D /* MKSKProduct.m */; };
+		348B0EA015EA628100DB065D /* MKSKSubscriptionProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9515EA628100DB065D /* MKSKSubscriptionProduct.m */; };
+		348B0EA115EA628100DB065D /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 348B0E9715EA628100DB065D /* MKStoreKitConfigs.plist */; };
+		348B0EA215EA628100DB065D /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9915EA628100DB065D /* MKStoreManager.m */; };
+		348B0EA315EA628100DB065D /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9B15EA628100DB065D /* MKStoreObserver.m */; };
 		34CEDF6C15E4CA7700E77A0D /* instructions_bg-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF6B15E4CA7700E77A0D /* instructions_bg-ipad.png */; };
 		34CEDF6E15E4CA8E00E77A0D /* instructions_bg-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF6D15E4CA8E00E77A0D /* instructions_bg-ipadhd.png */; };
 		34CEDF7015E4CAA300E77A0D /* instructions_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF6F15E4CAA300E77A0D /* instructions_bg.png */; };
@@ -721,6 +731,24 @@
 		347D27DF15DCE3AC005DA374 /* Ohhh_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ohhh_2.mp3; sourceTree = "<group>"; };
 		347D27E015DCE3AC005DA374 /* Whoa_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoa_1.mp3; sourceTree = "<group>"; };
 		347D27E115DCE3AC005DA374 /* Whoa_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoa_2.mp3; sourceTree = "<group>"; };
+		348B0E8515EA61FD00DB065D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		348B0E8815EA620700DB065D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		348B0E8C15EA628100DB065D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		348B0E8D15EA628100DB065D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		348B0E8E15EA628100DB065D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		348B0E8F15EA628100DB065D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		348B0E9015EA628100DB065D /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		348B0E9115EA628100DB065D /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		348B0E9215EA628100DB065D /* MKSKProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKProduct.h; sourceTree = "<group>"; };
+		348B0E9315EA628100DB065D /* MKSKProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKProduct.m; sourceTree = "<group>"; };
+		348B0E9415EA628100DB065D /* MKSKSubscriptionProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSKSubscriptionProduct.h; sourceTree = "<group>"; };
+		348B0E9515EA628100DB065D /* MKSKSubscriptionProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSKSubscriptionProduct.m; sourceTree = "<group>"; };
+		348B0E9615EA628100DB065D /* MKStoreKitConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreKitConfigs.h; sourceTree = "<group>"; };
+		348B0E9715EA628100DB065D /* MKStoreKitConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MKStoreKitConfigs.plist; sourceTree = "<group>"; };
+		348B0E9815EA628100DB065D /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreManager.h; sourceTree = "<group>"; };
+		348B0E9915EA628100DB065D /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreManager.m; sourceTree = "<group>"; };
+		348B0E9A15EA628100DB065D /* MKStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreObserver.h; sourceTree = "<group>"; };
+		348B0E9B15EA628100DB065D /* MKStoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreObserver.m; sourceTree = "<group>"; };
 		34CEDF6B15E4CA7700E77A0D /* instructions_bg-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions_bg-ipad.png"; sourceTree = "<group>"; };
 		34CEDF6D15E4CA8E00E77A0D /* instructions_bg-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions_bg-ipadhd.png"; sourceTree = "<group>"; };
 		34CEDF6F15E4CAA300E77A0D /* instructions_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instructions_bg.png; sourceTree = "<group>"; };
@@ -1122,6 +1150,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348B0E8915EA620700DB065D /* StoreKit.framework in Frameworks */,
+				348B0E8615EA61FD00DB065D /* Security.framework in Frameworks */,
 				314CC2C715B41E9A00E65F85 /* SystemConfiguration.framework in Frameworks */,
 				314CC2C515B41E8B00E65F85 /* Accounts.framework in Frameworks */,
 				314CC2C215B41E8300E65F85 /* Twitter.framework in Frameworks */,
@@ -1514,6 +1544,37 @@
 			path = sounds;
 			sourceTree = "<group>";
 		};
+		348B0E8A15EA628100DB065D /* MKStoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				348B0E8B15EA628100DB065D /* Externals */,
+				348B0E9215EA628100DB065D /* MKSKProduct.h */,
+				348B0E9315EA628100DB065D /* MKSKProduct.m */,
+				348B0E9415EA628100DB065D /* MKSKSubscriptionProduct.h */,
+				348B0E9515EA628100DB065D /* MKSKSubscriptionProduct.m */,
+				348B0E9615EA628100DB065D /* MKStoreKitConfigs.h */,
+				348B0E9715EA628100DB065D /* MKStoreKitConfigs.plist */,
+				348B0E9815EA628100DB065D /* MKStoreManager.h */,
+				348B0E9915EA628100DB065D /* MKStoreManager.m */,
+				348B0E9A15EA628100DB065D /* MKStoreObserver.h */,
+				348B0E9B15EA628100DB065D /* MKStoreObserver.m */,
+			);
+			path = MKStoreKit;
+			sourceTree = "<group>";
+		};
+		348B0E8B15EA628100DB065D /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				348B0E8C15EA628100DB065D /* JSONKit.h */,
+				348B0E8D15EA628100DB065D /* JSONKit.m */,
+				348B0E8E15EA628100DB065D /* NSData+Base64.h */,
+				348B0E8F15EA628100DB065D /* NSData+Base64.m */,
+				348B0E9015EA628100DB065D /* SFHFKeychainUtils.h */,
+				348B0E9115EA628100DB065D /* SFHFKeychainUtils.m */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
 		34CEDF7315E51F0F00E77A0D /* Toast */ = {
 			isa = PBXGroup;
 			children = (
@@ -1745,6 +1806,8 @@
 			isa = PBXGroup;
 			children = (
 				31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */,
+				348B0E8515EA61FD00DB065D /* Security.framework */,
+				348B0E8815EA620700DB065D /* StoreKit.framework */,
 				314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */,
 				314CC2C415B41E8B00E65F85 /* Accounts.framework */,
 				314CC2C115B41E8300E65F85 /* Twitter.framework */,
@@ -1764,6 +1827,7 @@
 		BB2CBF9F15A63EAB001CC30F /* Lock-A-Word */ = {
 			isa = PBXGroup;
 			children = (
+				348B0E8A15EA628100DB065D /* MKStoreKit */,
 				34778D4E15DA860100856034 /* Game Center */,
 				BB9BFAA915C1955E003ABDD2 /* TapForTap */,
 				3106A67515B6D551000EA482 /* Leveling */,
@@ -2557,6 +2621,7 @@
 				34CEDF7915E51F0F00E77A0D /* .gitignore in Resources */,
 				34CEDF7B15E51F0F00E77A0D /* LICENSE.txt in Resources */,
 				34CEDF7C15E51F0F00E77A0D /* README.mdown in Resources */,
+				348B0EA115EA628100DB065D /* MKStoreKitConfigs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2690,6 +2755,13 @@
 				1EC4471C15DD8D6700C50ADE /* StatisticsCollector.m in Sources */,
 				34CEDF7A15E51F0F00E77A0D /* ALToastView.m in Sources */,
 				34CEDF8015E5351E00E77A0D /* EZToastView.m in Sources */,
+				348B0E9C15EA628100DB065D /* JSONKit.m in Sources */,
+				348B0E9D15EA628100DB065D /* NSData+Base64.m in Sources */,
+				348B0E9E15EA628100DB065D /* SFHFKeychainUtils.m in Sources */,
+				348B0E9F15EA628100DB065D /* MKSKProduct.m in Sources */,
+				348B0EA015EA628100DB065D /* MKSKSubscriptionProduct.m in Sources */,
+				348B0EA215EA628100DB065D /* MKStoreManager.m in Sources */,
+				348B0EA315EA628100DB065D /* MKStoreObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
