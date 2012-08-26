@@ -290,7 +290,7 @@ static UIFont *buttonFont = nil;
                      animations:^{
                          [BlockBackground sharedInstance].alpha = 1.0f;
                      } 
-                     completion:nil];
+//                     completion:nil];
     
 //    // Show the BlockAlertView with animation
 //    [UIView animateWithDuration:0.4
@@ -300,16 +300,16 @@ static UIFont *buttonFont = nil;
 //                         [BlockBackground sharedInstance].alpha = 1.0f;
 //                         _view.center = center;
 //                     } 
-//                     completion:^(BOOL finished) {
-//                         [UIView animateWithDuration:0.1
-//                                               delay:0.0
-//                                             options:0
-//                                          animations:^{
-//                                              center.y -= kAlertViewBounce;
-//                                              _view.center = center;
-//                                          } 
-//                                          completion:nil];
-//                     }];
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.1
+                                               delay:0.0
+                                             options:0
+                                          animations:^{
+                                              center.y -= kAlertViewBounce;
+                                              _view.center = center;
+                                          } 
+                                          completion:nil];
+                     }];
     
     [self retain];
 }
@@ -354,21 +354,21 @@ static UIFont *buttonFont = nil;
     }
     else
     {
-        [UIView animateWithDuration:0.4
-                              delay:0.0
-                            options:UIViewAnimationCurveEaseOut
-                         animations:^{
-                             [BlockBackground sharedInstance].alpha = 0.0f;
-                         } 
-                         completion:^(BOOL finished){
-                             [[BlockBackground sharedInstance] removeView:_view];
-                             [_view release]; _view = nil;
-                             [self autorelease];
-                         }];
+//        [UIView animateWithDuration:0.4
+//                              delay:0.0
+//                            options:UIViewAnimationCurveEaseOut
+//                         animations:^{
+//                             [BlockBackground sharedInstance].alpha = 0.0f;
+//                         } 
+//                         completion:^(BOOL finished){
+//                             [[BlockBackground sharedInstance] removeView:_view];
+//                             [_view release]; _view = nil;
+//                             [self autorelease];
+//                         }];
         
-//        [[BlockBackground sharedInstance] removeView:_view];
-//        [_view release]; _view = nil;
-//        [self autorelease];
+        [[BlockBackground sharedInstance] removeView:_view];
+        [_view release]; _view = nil;
+        [self autorelease];
     }
 }
 

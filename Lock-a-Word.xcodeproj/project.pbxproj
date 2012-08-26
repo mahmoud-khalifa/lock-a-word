@@ -2872,8 +2872,8 @@
 					armv7,
 					armv6,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Con Roditis (VLTMWCEA63)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Con Roditis (VLTMWCEA63)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2895,8 +2895,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35434FA2-2992-4472-B83D-78226FD5C828";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "35434FA2-2992-4472-B83D-78226FD5C828";
+				PROVISIONING_PROFILE = "882FFF1F-82E1-45BD-8FF7-A11C4FBE4BD5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "882FFF1F-82E1-45BD-8FF7-A11C4FBE4BD5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

@@ -16,7 +16,7 @@
                BlueprintIdentifier = "BB2CBF8815A63EAB001CC30F"
                BuildableName = "Lock-A-Word.app"
                BlueprintName = "Lock-A-Word"
-               ReferencedContainer = "container:Lock-A-Word.xcodeproj">
+               ReferencedContainer = "container:Lock-a-Word.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,7 +34,7 @@
             BlueprintIdentifier = "BB2CBF8815A63EAB001CC30F"
             BuildableName = "Lock-A-Word.app"
             BlueprintName = "Lock-A-Word"
-            ReferencedContainer = "container:Lock-A-Word.xcodeproj">
+            ReferencedContainer = "container:Lock-a-Word.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,7 +53,7 @@
             BlueprintIdentifier = "BB2CBF8815A63EAB001CC30F"
             BuildableName = "Lock-A-Word.app"
             BlueprintName = "Lock-A-Word"
-            ReferencedContainer = "container:Lock-A-Word.xcodeproj">
+            ReferencedContainer = "container:Lock-a-Word.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,7 +71,7 @@
             BlueprintIdentifier = "BB2CBF8815A63EAB001CC30F"
             BuildableName = "Lock-A-Word.app"
             BlueprintName = "Lock-A-Word"
-            ReferencedContainer = "container:Lock-A-Word.xcodeproj">
+            ReferencedContainer = "container:Lock-a-Word.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
