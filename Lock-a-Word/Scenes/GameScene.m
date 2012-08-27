@@ -39,6 +39,7 @@
     NSString *boardTrophyName;
     
     CCSprite *starsImage;
+    NSMutableArray *lockedWords;
         
 }
 
@@ -113,6 +114,10 @@
         //Enable Touches
         self.isTouchEnabled=YES;
         
+        CCSpriteFrameCache*frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+        [frameCache  addSpriteFramesWithFile:@"menu_buttons.plist"];
+        [frameCache  addSpriteFramesWithFile:@"tiles.plist"];
+        
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * backgroundImage = [CCSprite spriteWithFile:@"board_bg.png"];
@@ -121,6 +126,8 @@
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
          
         boardLettersColor = ccYELLOW;
+        
+        lockedWords = [[NSMutableArray alloc]init];
         
         // Here the code for the timer
         // schedule timer
@@ -179,13 +186,13 @@
     
     switch (stars) {
         case 1:
-            starsImage =[[CCSprite alloc] initWithFile:@"star1.png"]; 
+            starsImage =[[CCSprite alloc] initWithSpriteFrameName:@"star1.png"]; 
             break;
         case 2:
-            starsImage =[[CCSprite alloc] initWithFile:@"star2.png"]; 
+            starsImage =[[CCSprite alloc] initWithSpriteFrameName:@"star2.png"]; 
             break;
         case 3:
-            starsImage =[[CCSprite alloc] initWithFile:@"star3.png"];
+            starsImage =[[CCSprite alloc] initWithSpriteFrameName:@"star3.png"];
             break;
             
         default:
@@ -204,7 +211,7 @@
     
     // This is for the Trophy image
     boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",gameController.currentGameMode];
-    boardTrophy=[CCSprite spriteWithFile:boardTrophyName];
+    boardTrophy=[CCSprite spriteWithSpriteFrameName:boardTrophyName];
     // This is for positioning the trophy in Ipad version and in Iphone  
     if (!IS_IPAD()) {
         boardTrophy.position = ADJUST_XY(250, 436);
@@ -257,7 +264,7 @@
         int row = index/5;
         int column = index%5;
         
-        CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",letter]];
+        CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",letter]];
         letterSprite.userData = letter;
         
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
@@ -288,7 +295,7 @@
     
     currentLetter = [gameController getCurrentLetter];
     
-    [newLetters removeAllObjects];
+//    [newLetters removeAllObjects];
     
     [lettersCountedDownLabel setString:[NSString stringWithFormat:@"%d",lettersCountedDown]];
     
@@ -299,13 +306,13 @@
     
     switch (stars) {
         case 1:
-            starsImage =[[CCSprite alloc] initWithFile:@"star1.png"]; 
+            starsImage =[[CCSprite alloc] initWithSpriteFrameName:@"star1.png"]; 
             break;
         case 2:
-            starsImage =[[CCSprite alloc] initWithFile:@"star2.png"]; 
+            starsImage =[[CCSprite alloc] initWithSpriteFrameName:@"star2.png"]; 
             break;
         case 3:
-            starsImage =[[CCSprite alloc] initWithFile:@"star3.png"];
+            starsImage =[[CCSprite alloc] initWithSpriteFrameName:@"star3.png"];
             break;
             
         default:
@@ -335,7 +342,7 @@
     }
     
     // add the extra column letter
-    [self addCurentLetterToExtraColumnWithBonus:YES];
+    [self addCurentLetterToExtraColumnWithBonus:NO];
 
 }
 
@@ -371,7 +378,7 @@
         //restore the old one to first free space
         int i = [gameController getFirstBonusIndex];
         
-        CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+        CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
 //        letterSprite.color=ccRED;
         letterSprite.color=ccGREEN;
@@ -400,22 +407,23 @@
         }
     }
     
-    [self removeSpritesInArray:newLetters];
-    [newLetters removeAllObjects];
+//    [self removeSpritesInArray:newLetters];
+//    [newLetters removeAllObjects];
     
     // add the grid extra column
-    [self addCurentLetterToExtraColumnWithBonus:NO];
+    [self addCurentLetterToExtraColumnWithBonus:YES];
     
 }
 
 
 - (void)addCurentLetterToExtraColumnWithBonus:(BOOL)bonus
 {
-    if (bonus) {
+    [self removeSpritesInArray:newLetters];
+    if (!bonus) {
         
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
     [actions addObject:@""];
-    CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+    CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
     
     float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
@@ -424,7 +432,7 @@
     for (int j=0; j<5; j++) {
         yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
         
-        letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+        letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
         letterSprite.position=ccp(xPos,yPos);
         if (!isGameCompleted) {
@@ -442,11 +450,11 @@
         
     }
     
-//    if (bonus) {
+    if (![currentLetter isEqualToString:@"lock"]) {
         xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
         yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
         
-        letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+        letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         letterSprite.userData = currentLetter;
         letterSprite.position=ccp(xPos,yPos);
         letterSprite.color=ccGREEN;
@@ -458,7 +466,7 @@
         yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
         CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
         [actions addObject:move];
-//    }
+    }
     
     for (int i = 1; i< [actions count]; i++) {
         
@@ -473,7 +481,7 @@
     
     else {
         
-        CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+        CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
         float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
@@ -481,7 +489,7 @@
         for (int j=0; j<5; j++) {
             yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
             
-            letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+            letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
             letterSprite.userData = currentLetter;
             letterSprite.position=ccp(xPos,yPos);
             if (!isGameCompleted) {
@@ -504,7 +512,7 @@
     [self removeSpritesInArray:newLetters];
     [gameController addLetterAtIndex:row*5+column];
     
-    CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+    CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
     letterSprite.userData = currentLetter;
     float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*column);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
@@ -547,7 +555,6 @@
         [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     }
     
-    
     [self checkLockedRow:row];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
     
@@ -562,15 +569,13 @@
     [self removeSpritesInArray:newLetters];
     int i = 5;
     
-    CCSprite* letterSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",currentLetter]];
+    CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
     letterSprite.userData = currentLetter;
     float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*i)+(kLETTERS_SPACING*i);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
 //    letterSprite.color=ccc3(128, 0, 128); 
     letterSprite.color = ccGREEN; 
     letterSprite.position = ccp(xPos,yPos);
-    
-    
     
     i = [gameController getFirstBonusIndex];
     
@@ -618,12 +623,11 @@
 }
 
 
-
 - (void)checkLockedRow:(int)row
 {
     NSString *word = @"";
     NSMutableArray *collWord = [[NSMutableArray alloc]init];
-    for (int i=row*5; i< (row+1)*5; i++) {
+    for (int i=row*5; i < (row+1)*5; i++) {
         CCSprite* sprite = (CCSprite*)[self getChildByTag:i];
         if (sprite != nil) {
             word = [word stringByAppendingString:sprite.userData];
@@ -632,8 +636,22 @@
     }
     
     if ([word length] == 5 && [gameController isCorrectWord:word]) {
-        [gameController lockRow:row];
-        [self performSelector:@selector(lockRow:) withObject:collWord afterDelay:2*kANIMATION_DURATION];
+        //check if repeated in the scene
+        if (![lockedWords containsObject:word]) {
+            [lockedWords addObject:word];
+            [gameController lockRow:row];
+            [self performSelector:@selector(lockRow:) withObject:collWord afterDelay:2*kANIMATION_DURATION];
+        }
+        else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locking prohibited" message:@"Duplicate words not allowed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//            [alert show];
+//            [alert release];
+            
+            BlockAlertView* alert=[BlockAlertView alertWithTitle:@"Locking prohibited" message:@"Duplicate words not allowed" andLoadingviewEnabled:NO];
+            [alert setCancelButtonWithTitle:@"OK" block:nil];
+            
+            [alert show];
+        }
     } 
 }
 
@@ -703,28 +721,33 @@
             word = [word stringByAppendingString:[letterSprite userData]];
         }
         NSLog(@"word:%@",word);
+        
         if ([gameController isCorrectWord:word]) {
-            NSLog(@"correct word");
-            correctWordFound = YES;
-            for (CCSprite* collectedLetter in collectedWord) {
-                collectedLetter.color=ccGREEN;
+            
+            if (![lockedWords containsObject:word]) {
+                NSLog(@"correct word");
+                correctWordFound = YES;
+                for (CCSprite* collectedLetter in collectedWord) {
+                    collectedLetter.color=ccGREEN;
 //                 collectedLetter.color=ccRED;
-                
-//                CCSprite* redSprite = (CCSprite*)[self getChildByTag:collectedLetter.tag + 300];
-//                redSprite.visible = NO;
+                }
+                [self performSelector:@selector(removeCorrectWord) withObject:nil afterDelay:2];
+                return;
             }
-            [self performSelector:@selector(removeCorrectWord) withObject:nil afterDelay:2];
-            return;
+            else {
+                BlockAlertView* alert=[BlockAlertView alertWithTitle:@"Locking prohibited" message:@"Duplicate words not allowed" andLoadingviewEnabled:NO];
+                [alert setCancelButtonWithTitle:@"OK" block:nil];
+                
+                [alert show];
+            }
+            
         }
     }
+    
     for (CCSprite* collectedLetter in collectedWord) {
-        
-//        CCSprite* redSprite = (CCSprite*)[self getChildByTag:collectedLetter.tag + 300];
-//        redSprite.visible = NO;
-        
         collectedLetter.color = boardLettersColor; //yellow
-        
     }
+    
     [collectedWord removeAllObjects];
 }
 
@@ -829,6 +852,7 @@
             letterSprite.color = ccc3(255, 255, 255);
         }
         
+//        [newLetters removeAllObjects];
         currentLetter = @"lock";
         [self addCurentLetterToExtraColumnWithBonus:NO];
         
@@ -863,9 +887,14 @@
             [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
         }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",newStars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",newStars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alert show];
+//        [alert release];
+        
+        BlockAlertView* alert=[BlockAlertView alertWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",newStars] andLoadingviewEnabled:NO];
+        [alert setCancelButtonWithTitle:@"OK" block:nil];
+        
         [alert show];
-        [alert release];
     }
     
 }

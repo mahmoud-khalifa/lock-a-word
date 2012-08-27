@@ -78,8 +78,6 @@
 //        CCMenuItemImage *menuItem4 =[CCMenuItemImage itemWithNormalImage:
 //            @"main_btn_gold.png" selectedImage:@"main_btn_gold.png" target:self selector:@selector(goToGoldLock:)];
      
-        
-        
         // Adding items to the menu
         CCMenu *gameModesSceneMenu = [CCMenu menuWithItems:menuItem1,menuItem2,menuItem3,menuItem4,nil];
        
@@ -156,7 +154,6 @@
 
 -(CCMenuItemImage *) showStars :(int)gameMode 
 {   
-    
     int numberOfStars = [controller getModeStars:gameMode];    
     CCMenuItemImage *stars;
     CCMenuItemImage *gameModeItemImage; 
@@ -164,32 +161,43 @@
     // This will get the stars images
                 switch (numberOfStars) {
                     case 0:
-                        stars =[CCMenuItemImage itemWithNormalImage:@"stars.png" selectedImage:@"stars.png" ];
+//                        stars =[CCMenuItemImage itemWithNormalImage:@"stars.png" selectedImage:@"stars.png" ];
+                        stars =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"stars.png"] 
+                                                      selectedSprite:[CCSprite spriteWithSpriteFrameName:@"stars.png"]];
                         break;
+                        
                     case 1:
-                        stars =[CCMenuItemImage itemWithNormalImage:@"star1.png" selectedImage:@"star1.png"]; 
+//                        stars =[CCMenuItemImage itemWithNormalImage:@"star1.png" selectedImage:@"star1.png"];
+                        stars =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"star1.png"] 
+                                                      selectedSprite:[CCSprite spriteWithSpriteFrameName:@"star1.png"]];
                         break;
+                        
                     case 2:
-                        stars =[CCMenuItemImage itemWithNormalImage:@"star2.png" selectedImage:@"star2.png"]; 
+//                        stars =[CCMenuItemImage itemWithNormalImage:@"star2.png" selectedImage:@"star2.png"];
+                        stars =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"star2.png"] 
+                                                      selectedSprite:[CCSprite spriteWithSpriteFrameName:@"star2.png"]];
                        break;
+                        
                     case 3:
-                        stars =[CCMenuItemImage itemWithNormalImage:@"star3.png" selectedImage:@"star3.png"];
+//                        stars =[CCMenuItemImage itemWithNormalImage:@"star3.png" selectedImage:@"star3.png"];
+                        stars =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"star3.png"] 
+                                                      selectedSprite:[CCSprite spriteWithSpriteFrameName:@"star3.png"]];
                         break;                     
+                        
                     default:
                         break;
                 }
   
     // This will get the image item for the mode only without stars
-    
             if (gameMode == PlasticLock)
             {
-                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_plastic_new.png" selectedImage:@"btn_plastic_new.png" target:self selector:@selector(goToPlasticLock:)];
+                gameModeItemImage =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_plastic_new.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_plastic_new.png"] target:self selector:@selector(goToPlasticLock:)];
             } else if (gameMode == BronzeLock) {
-                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_bronze_new.png" selectedImage:@"btn_bronze_new.png" target:self selector:@selector(goToBronzeLock:)];
+                gameModeItemImage =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_bronze_new.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_bronze_new.png"] target:self selector:@selector(goToBronzeLock:)];
             } else if (gameMode == SilverLock){
-                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_silver_new.png" selectedImage:@"btn_silver_new.png" target:self selector:@selector(goToSilverLock:)];
+                gameModeItemImage =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_silver_new.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_silver_new.png"]  target:self selector:@selector(goToSilverLock:)];
             } else {
-                gameModeItemImage =[CCMenuItemImage itemWithNormalImage:@"btn_gold_new.png" selectedImage:@"btn_gold_new.png"  target:self selector:@selector(goToGoldLock:)]; 
+                gameModeItemImage =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_gold_new.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_gold_new.png"] target:self selector:@selector(goToGoldLock:)];  
             }
     
     

@@ -51,7 +51,6 @@
         
         self.device = (IS_IPAD() == YES) ?  @"iPad" : @"iPhone";
         
-        
         //Enable Touches
         self.isTouchEnabled=YES;
         
@@ -79,10 +78,11 @@
         }
         
         // This is for the Trophy image
-        trophyImage = [CCSprite spriteWithFile:@"board_trophy.png"];
-        
-        boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",controller.currentGameMode];
-        boardTrophy = [CCSprite spriteWithFile:boardTrophyName];
+//        spriteWithSpriteFrame:[frameCache spriteFrameByName:@"horizontal.png"]
+        trophyImage = [CCSprite spriteWithSpriteFrameName:@"board_trophy.png"];
+                
+        boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png", controller.currentGameMode];
+        boardTrophy = [CCSprite spriteWithSpriteFrameName:boardTrophyName];
         // This is for positioning the trophy in Ipad version and in Iphone  
         if (!IS_IPAD()) {
             trophyImage.position = ADJUST_XY(250, 436);
@@ -106,10 +106,10 @@
         
          for (Level *level in selectedLevels.levels) {
              NSString *normal =   [NSString stringWithFormat:@"%@.png", level.name];
-             NSString *selected = [NSString stringWithFormat:@"%@.png", level.name];
+//             NSString *selected = [NSString stringWithFormat:@"%@.png", level.name];
              
-             CCMenuItemImage *item = [CCMenuItemImage itemWithNormalImage:normal
-                                                            selectedImage:selected
+             CCMenuItemImage *item = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:normal] 
+                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:normal]
                                                                    target:self 
                                                                  selector:@selector(onPlay:)];
              item.rotation=-10;
@@ -141,12 +141,11 @@
              if (level.stars) {
                  NSString *stars = [[NSNumber numberWithInt:level.stars] stringValue];
                  NSString *overlayImage = [NSString stringWithFormat:@"%@Star-Normal-%@.png",stars, self.device];
-                 CCSprite *overlaySprite = [CCSprite spriteWithFile:overlayImage];
+                 CCSprite *overlaySprite = [CCSprite spriteWithSpriteFrameName:overlayImage];
                  [overlaySprite setTag:level.number];
                  [overlay addObject:overlaySprite];
 
              }
-
              
          }
         

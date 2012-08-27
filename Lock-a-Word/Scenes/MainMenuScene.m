@@ -67,8 +67,30 @@
         // Get the screen size
         size =[[CCDirector sharedDirector] winSize];
         
+        
+        CCSpriteFrameCache*frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+        [frameCache  addSpriteFramesWithFile:@"menu_buttons.plist"];
+        [frameCache  addSpriteFramesWithFile:@"tiles.plist"];
+        
+        // load resources
+		ResourcesLoader *loader = [ResourcesLoader sharedLoader];
+		NSArray *extensions = [NSArray arrayWithObjects:@"png", @"mp3", nil];
+		
+		for (NSString *extension in extensions) {
+			NSArray *paths = [[NSBundle mainBundle] pathsForResourcesOfType:extension inDirectory:nil];
+			for (NSString *filename in paths) {
+                filename = [[filename componentsSeparatedByString:@"/"] lastObject];
+                
+                if( [filename rangeOfString:@"-hd"].location==NSNotFound &&[filename rangeOfString:@"@2x"].location==NSNotFound){
+                    [loader addResources:filename, nil];
+                }
+				
+			}
+		}
+        
         // Creating an entry background image
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+        
         CCSprite * entrybackgroundImage = [CCSprite spriteWithFile:@"main_bg.png"];
         entrybackgroundImage.position =ccp(size.width/2, size.height/2);
         [self addChild:entrybackgroundImage];
@@ -82,7 +104,6 @@
         [self performSelector:@selector(hideMenuItems) withObject:nil afterDelay:3.0f];
         [self performSelector:@selector(showMainMenu) withObject:nil afterDelay:5.0f];   
        
-        
         
         // Creating Menu Items
         // Normal images and selected are the same 
@@ -108,16 +129,12 @@
 	return self;
 }
 
-
 // This method will push our Game Mode Scene
 - (void)goToGameModeScene:(id) sender 
 {
      [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-    
     [[CCDirector sharedDirector] pushScene:[GameModesScene scene]];
 }
-
-
 
 -(void)hideMenuItems {
     menuItemAnimate1.visible=NO;
@@ -129,10 +146,19 @@
 -(void)animateMenuItems
 {
     // Here I will add my begining of the intro animation "LOCK - A - WORD"
-    menuItemAnimate1 =[CCMenuItemImage itemWithNormalImage:@"btn_lock.png" selectedImage:@"btn_lock.png"];
-    menuItemAnimate2 =[CCMenuItemImage itemWithNormalImage:@"btn_a.png" selectedImage:@"btn_a.png"];
-    menuItemAnimate3 =[CCMenuItemImage itemWithNormalImage:@"btn_word.png" selectedImage:@"btn_word.png"];
+//    menuItemAnimate1 =[CCMenuItemImage itemWithNormalImage:@"btn_lock.png" selectedImage:@"btn_lock.png"];
+//    menuItemAnimate2 =[CCMenuItemImage itemWithNormalImage:@"btn_a.png" selectedImage:@"btn_a.png"];
+//    menuItemAnimate3 =[CCMenuItemImage itemWithNormalImage:@"btn_word.png" selectedImage:@"btn_word.png"];
     
+    menuItemAnimate1 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_lock.png"] 
+                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_lock.png"]];
+    
+    menuItemAnimate2 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_a.png"] 
+                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_a.png"]];
+                       
+    menuItemAnimate3 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_word.png"] 
+                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_word.png"]];
+                    
     
     // Adding "LOCK - A - WORD" items to the menu
     CCMenu *introMenu = [CCMenu menuWithItems:menuItemAnimate1,menuItemAnimate2,menuItemAnimate3, nil];
@@ -172,11 +198,16 @@
 -(void)showMainMenu 
 {
     // Here I will add my begining of the intro animation "PLAY - INSTRUCTION - FULL"
-    CCMenuItemImage* mainMenuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_play.png" selectedImage:@"main_btn_play.png" target:self selector:@selector(goToGameModeScene:)];
-    CCMenuItemImage* mainMenuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_instr.png" selectedImage:@"main_btn_instr.png" target:self selector:@selector(goToInstructions)];
-    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_upgr.png" selectedImage:@"main_btn_upgr.png" target:self selector:@selector(goTofull)];
+//    CCMenuItemImage* mainMenuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_play.png" selectedImage:@"main_btn_play.png" target:self selector:@selector(goToGameModeScene:)];
+//    CCMenuItemImage* mainMenuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_instr.png" selectedImage:@"main_btn_instr.png" target:self selector:@selector(goToInstructions)];
+//    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_upgr.png" selectedImage:@"main_btn_upgr.png" target:self selector:@selector(goTofull)];
     
-    
+    CCMenuItemImage* mainMenuItem1 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_play.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_play.png"] target:self selector:@selector(goToGameModeScene:)];
+                                     
+    CCMenuItemImage* mainMenuItem2 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_instr.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_instr.png"] target:self selector:@selector(goToInstructions)];
+                                     
+    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_upgr.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_upgr.png"] target:self selector:@selector(goTofull)];
+                                     
     // Adding "PLAY - INSTRUCTION - FULL" items to the menu
     CCMenu *mainMenu = [CCMenu menuWithItems:mainMenuItem1,mainMenuItem2,mainMenuItem3, nil];
     // gameMenu.anchorPoint=CGPointZero;

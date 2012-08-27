@@ -46,6 +46,9 @@ static Controller *instanceOfController;
     
     GameKitHelper* gkHelper;
     
+    int testIndex;
+    NSArray *testArray;
+    
 }
 
 @synthesize secondLetters;
@@ -185,6 +188,10 @@ static Controller *instanceOfController;
 
 -(void)newGame
     {
+        testIndex = 0;
+        testArray = 
+        [[NSArray alloc] initWithObjects: @"t", @"o", @"t", @"a", @"l", @"s", @"c", @"e", @"n", @"e", @"q", @"u", @"e", @"e", @"n", @"t", @"i", @"t", @"l", @"e", @"c", @"o", @"a", @"s", @"t", nil];
+        
     [self resetBoard];
     NSLog(@"NewGame");
     
@@ -363,15 +370,24 @@ static Controller *instanceOfController;
 }
 
 - (void)prepareCurrentLetterWithRestrictions:(NSString*)restriction {
+    
     currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
-    while ([restriction rangeOfString:currentLetter].location != NSNotFound && ![currentLetter isEqualToString:lastLetter]) {
+    
+//    while ( ([restriction rangeOfString:currentLetter].location != NSNotFound) && (![currentLetter isEqualToString:lastLetter]) ) {
+    while ( ([restriction rangeOfString:currentLetter].location != NSNotFound) || ([currentLetter isEqualToString:lastLetter]) ) {
         currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
     }
     lastLetter = currentLetter;
+//    if (testIndex < 25) {
+//        currentLetter = [testArray objectAtIndex:testIndex++];
+//    }
+    
 }
+
 - (NSString*)getCurrentLetter {
     return currentLetter;
 }
+
 #pragma mark - locking & board management
 
 - (BOOL)isLockedPosition:(int)index {
@@ -381,7 +397,6 @@ static Controller *instanceOfController;
 - (void)lockRow:(int)row {
     for (int i=0; i<5; i++) {
         lockedBoard[row*5+i] = 1;
-        
     }
 }
 
