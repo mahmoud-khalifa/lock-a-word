@@ -12,13 +12,15 @@
 //  license holder(s).  Contact control.support@lucidvapor.com for any support 
 
 #import "EZToastView.h"
+#import "GameConfig.h"
 
 #define DEFAULT_SHOW_DURATION 2.0f
 #define DEFAULT_ALPHA_ANIMATION_DURATION 0.5f
 #define DEFAULT_TOAST_VERITCAL_PADDING 5.0f
 #define DEFAULT_TOAST_HORIZONTAL_PADDING 5.0f
 #define DEFAULT_ALIGNMENT_MARGIN 50.0f
-#define DEFAULT_MAXIMUM_WIDTH 290.0f
+//#define DEFAULT_MAXIMUM_WIDTH 290.0f
+#define DEFAULT_MAXIMUM_WIDTH 400.0f
 #define DEFAULT_TOAST_ALIGNMENT EZToastViewAlignmentBottom
 
 
@@ -61,11 +63,19 @@ messageFont,showDuration,toastAlignment,messageAlignment;
 	self.toastAlignment = DEFAULT_TOAST_ALIGNMENT;
 	self.toastAlignmentMargin = DEFAULT_ALIGNMENT_MARGIN;
 	self.maximumWidth = DEFAULT_MAXIMUM_WIDTH;
-	self.borderWidth = 2.0f;
+//	self.borderWidth = 2.0f;
+    self.borderWidth = 3.0f;
 	self.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
 	self.toastBackgroundColor = [UIColor colorWithWhite:0.0f alpha:0.7f];
 	self.messageColor = [UIColor whiteColor];
-	self.messageFont = [UIFont systemFontOfSize:15.0f];
+//	self.messageFont = [UIFont systemFontOfSize:15.0f];
+    if (IS_IPAD()) {
+        self.messageFont = [UIFont systemFontOfSize:40.0f];
+    }
+    else {
+        self.messageFont = [UIFont systemFontOfSize:20.0f];
+    }
+    
 	self.messageAlignment = UITextAlignmentCenter;
 }
 

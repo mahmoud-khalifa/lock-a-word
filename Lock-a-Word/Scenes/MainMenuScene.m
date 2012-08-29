@@ -96,7 +96,10 @@
         [self addChild:entrybackgroundImage];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
-        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
+//        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
+//        [self performSelector:@selector(playApplause) withObject:nil afterDelay:1.3];
+        
+        [[SimpleAudioEngine sharedEngine]playEffect:@"Fanfare.mp3"];
         [self performSelector:@selector(playApplause) withObject:nil afterDelay:1.3];
         
         [self animateMenuItems];        

@@ -149,6 +149,9 @@
 		34CEDF7B15E51F0F00E77A0D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF7715E51F0F00E77A0D /* LICENSE.txt */; };
 		34CEDF7C15E51F0F00E77A0D /* README.mdown in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF7815E51F0F00E77A0D /* README.mdown */; };
 		34CEDF8015E5351E00E77A0D /* EZToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CEDF7F15E5351E00E77A0D /* EZToastView.m */; };
+		34D0EA6015EE18CC001C75C6 /* keydoor2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34D0EA5D15EE18CC001C75C6 /* keydoor2.mp3 */; };
+		34D0EA6115EE18CC001C75C6 /* keydoor3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34D0EA5E15EE18CC001C75C6 /* keydoor3.mp3 */; };
+		34D0EA6215EE18CC001C75C6 /* lettertap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34D0EA5F15EE18CC001C75C6 /* lettertap.mp3 */; };
 		34DB2F6F15A8BB9400998A76 /* main_bg-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 34DB2F5C15A8BB9400998A76 /* main_bg-ipad.png */; };
 		34DB2F7315A8BB9400998A76 /* main_bg-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 34DB2F6115A8BB9400998A76 /* main_bg-ipadhd.png */; };
 		34DB2F7B15A8BB9400998A76 /* main_bg-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 34DB2F6B15A8BB9400998A76 /* main_bg-hd.png */; };
@@ -464,6 +467,9 @@
 		34CEDF7815E51F0F00E77A0D /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mdown; sourceTree = "<group>"; };
 		34CEDF7E15E5351E00E77A0D /* EZToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZToastView.h; sourceTree = "<group>"; };
 		34CEDF7F15E5351E00E77A0D /* EZToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZToastView.m; sourceTree = "<group>"; };
+		34D0EA5D15EE18CC001C75C6 /* keydoor2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = keydoor2.mp3; sourceTree = "<group>"; };
+		34D0EA5E15EE18CC001C75C6 /* keydoor3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = keydoor3.mp3; sourceTree = "<group>"; };
+		34D0EA5F15EE18CC001C75C6 /* lettertap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lettertap.mp3; sourceTree = "<group>"; };
 		34DB2F5C15A8BB9400998A76 /* main_bg-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_bg-ipad.png"; sourceTree = "<group>"; };
 		34DB2F6115A8BB9400998A76 /* main_bg-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_bg-ipadhd.png"; sourceTree = "<group>"; };
 		34DB2F6B15A8BB9400998A76 /* main_bg-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_bg-hd.png"; sourceTree = "<group>"; };
@@ -1007,6 +1013,9 @@
 		347D27D915DCE3AC005DA374 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				34D0EA5D15EE18CC001C75C6 /* keydoor2.mp3 */,
+				34D0EA5E15EE18CC001C75C6 /* keydoor3.mp3 */,
+				34D0EA5F15EE18CC001C75C6 /* lettertap.mp3 */,
 				347D27DA15DCE3AC005DA374 /* Applause.mp3 */,
 				347D27DB15DCE3AC005DA374 /* Button.mp3 */,
 				347D27DC15DCE3AC005DA374 /* Fanfare.mp3 */,
@@ -1800,6 +1809,9 @@
 				347AEDFD15EBC6B900789370 /* clean_bg.png in Resources */,
 				347AEDFE15EBC6B900789370 /* instructions_bg.png in Resources */,
 				347AEDFF15EBC6B900789370 /* main_bg.png in Resources */,
+				34D0EA6015EE18CC001C75C6 /* keydoor2.mp3 in Resources */,
+				34D0EA6115EE18CC001C75C6 /* keydoor3.mp3 in Resources */,
+				34D0EA6215EE18CC001C75C6 /* lettertap.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1997,8 +2009,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35434FA2-2992-4472-B83D-78226FD5C828";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "35434FA2-2992-4472-B83D-78226FD5C828";
+				PROVISIONING_PROFILE = "9DA6CE71-FB32-4871-BAEF-3A551D8966B7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DA6CE71-FB32-4871-BAEF-3A551D8966B7";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

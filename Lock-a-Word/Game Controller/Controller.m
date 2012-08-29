@@ -228,7 +228,7 @@ static Controller *instanceOfController;
     
     lastLetter = @"";
     [self printBoard];
-    [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
+//    [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
 }
 
 - (NSArray*)getLockedLetters {

@@ -40,6 +40,7 @@
     
     CCSprite *starsImage;
     NSMutableArray *lockedWords;
+    int numOfStars;
         
 }
 
@@ -183,6 +184,11 @@
     
     //STARS IMAGE
     int stars = [gameController calculateLevelStars:lettersCountedDown];
+    numOfStars = stars;
+//    if (stars != numOfStars) {
+//        [[SimpleAudioEngine sharedEngine]playEffect:@"Mhmm.mp3"];
+//        numOfStars = stars;
+//    }
     
     switch (stars) {
         case 1:
@@ -291,7 +297,7 @@
         return;
     }
     
-    [self newLetterSounds];
+//    [self newLetterSounds];
     
     currentLetter = [gameController getCurrentLetter];
     
@@ -303,6 +309,10 @@
     [self removeChildByTag:500 cleanup:YES];
     
     int stars = [gameController calculateLevelStars:lettersCountedDown];
+    if (stars != numOfStars) {
+        [[SimpleAudioEngine sharedEngine]playEffect:@"Mhmm.mp3"];
+        numOfStars = stars;
+    }
     
     switch (stars) {
         case 1:
@@ -339,6 +349,13 @@
 //        ALToastView *toastView = [[ALToastView alloc] initWithFrame: CGRectMake(0,60, 350, 100)];
 //        toastView.center = CGPointMake(200, 460);
 //        [[[CCDirector sharedDirector] view] addSubview:toastView];
+    }
+    else if(lettersCountedDown == 5){
+        EZToastView *toastView = [[EZToastView alloc] init];
+        toastView.message = @"5 Letters to Go";
+        toastView.showDuration = 2;
+        toastView.toastAlignment = EZToastViewAlignmentCenter;
+        [toastView show];
     }
     
     // add the extra column letter
@@ -419,67 +436,75 @@
 - (void)addCurentLetterToExtraColumnWithBonus:(BOOL)bonus
 {
     [self removeSpritesInArray:newLetters];
+    
     if (!bonus) {
         
-    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
-    [actions addObject:@""];
-    CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
-    
-    float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
-    float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
-    
-    
-    for (int j=0; j<5; j++) {
-        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+        NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
+        [actions addObject:@""];
+        CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         
-        letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
-        letterSprite.userData = currentLetter;
-        letterSprite.position=ccp(xPos,yPos);
-        if (!isGameCompleted) {
-            letterSprite.color=ccGREEN;
+        float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
+        float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+        
+        
+        for (int j=0; j<5; j++) {
+            yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+            
+            letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
+            letterSprite.userData = currentLetter;
+            letterSprite.position=ccp(xPos,yPos);
+            if (!isGameCompleted) {
+                letterSprite.color=ccGREEN;
+            }
+    //        letterSprite.scale = .75;
+            [newLetters addObject:letterSprite];
+            [self addChild:letterSprite z:100 tag:j+105];
+            
+            if (j>0) {
+                yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
+                CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
+                [actions addObject:move];
+            }
+            
         }
-//        letterSprite.scale = .75;
-        [newLetters addObject:letterSprite];
-        [self addChild:letterSprite z:100 tag:j+105];
         
-        if (j>0) {
-            yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*j)+(letterSprite.contentSize.height*j));
+        if (![currentLetter isEqualToString:@"lock"]) {
+            xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
+            yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
+            
+            letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
+            letterSprite.userData = currentLetter;
+            letterSprite.position=ccp(xPos,yPos);
+            letterSprite.color=ccGREEN;
+    //        letterSprite.scale = .75;
+            [newLetters addObject:letterSprite];
+            [self addChild:letterSprite z:100 tag:5+105];
+            letterSprite.position=ccp(xPos,yPos);
+            
+            yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
             CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
             [actions addObject:move];
         }
         
-    }
-    
-    if (![currentLetter isEqualToString:@"lock"]) {
-        xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
-        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
-        
-        letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
-        letterSprite.userData = currentLetter;
-        letterSprite.position=ccp(xPos,yPos);
-        letterSprite.color=ccGREEN;
-//        letterSprite.scale = .75;
-        [newLetters addObject:letterSprite];
-        [self addChild:letterSprite z:100 tag:5+105];
-        letterSprite.position=ccp(xPos,yPos);
-        
-        yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*5.5)+(letterSprite.contentSize.height*5.5));
-        CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
-        [actions addObject:move];
-    }
-    
-    for (int i = 1; i< [actions count]; i++) {
-        
-        for (int j=i; j<[newLetters count]; j++)  {
-            letterSprite = [newLetters objectAtIndex:j];
-            CCMoveTo* move = [[actions objectAtIndex:i] copy];
-            [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:2.5*i*kANIMATION_DURATION];
+        //Sound of lock graphics
+        if ([currentLetter isEqualToString:@"lock"]) {
+            for (int i = 0; i < 5; i ++) {
+                [self performSelector:@selector(playKeydoor3) withObject:nil afterDelay:2.5*i*kANIMATION_DURATION];
+            }
+            [self performSelector:@selector(playKeydoor3) withObject:nil afterDelay:2.5*kANIMATION_DURATION];
         }
-    }
+        
+        for (int i = 1; i< [actions count]; i++) {
+            for (int j=i; j<[newLetters count]; j++)  {
+                letterSprite = [newLetters objectAtIndex:j];
+                CCMoveTo* move = [[actions objectAtIndex:i] copy];
+                [letterSprite performSelector:@selector(runAction:) withObject:move afterDelay:2.5*i*kANIMATION_DURATION];
+            }
+        }
         
     }//END IF BONUS
     
-    else {
+    else { //Bonus letter selected, so appear without falling action
         
         CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         
@@ -659,8 +684,10 @@
     
     if([gameController isGameCompleted]){
         
-        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
-        [self performSelector:@selector(playRandom) withObject:nil afterDelay:1.5];
+//        [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
+        
+//        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
+//        [self performSelector:@selector(playRandom) withObject:nil afterDelay:1.5];
         
         [self gameCompleted];
     } else {
@@ -673,10 +700,21 @@
         
         [self performSelector:@selector(changeColor:) withObject:word afterDelay:2];
         
-        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
-        [self performSelector:@selector(playRandom) withObject:nil afterDelay:1.5];
+//        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
+//        [self performSelector:@selector(playRandom) withObject:nil afterDelay:1.5];
+        
+        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor2.mp3"];
+        [self performSelector:@selector(playApplause) withObject:nil afterDelay:0.4];
     }
     
+}
+
+-(void)playApplause{
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
+}
+
+-(void)playKeydoor3{
+    [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor3.mp3"];
 }
 
 -(void)reScale:(NSArray*)word {
@@ -849,7 +887,7 @@
         isGameCompleted=YES;
         
         for (CCSprite* letterSprite in boardLetters) {
-            letterSprite.color = ccc3(255, 255, 255);
+            letterSprite.color = ccc3(255, 255, 255); //return to original color
         }
         
 //        [newLetters removeAllObjects];
@@ -878,14 +916,14 @@
     if(currentLevelStars < newStars){
         [gameController updateLevelStars:newStars];
         
-        if (newStars < 3) {
-            [[SimpleAudioEngine sharedEngine]playEffect:@"Whoa_2.mp3"];
-            [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
-        }
-        else {
+//        if (newStars < 3) {
+//            [[SimpleAudioEngine sharedEngine]playEffect:@"Whoa_2.mp3"];
+//            [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
+//        }
+//        else {
             [[SimpleAudioEngine sharedEngine]playEffect:@"Fanfare.mp3"];
             [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
-        }
+//        }
         
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",newStars] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //        [alert show];
@@ -895,6 +933,9 @@
         [alert setCancelButtonWithTitle:@"OK" block:nil];
         
         [alert show];
+    }
+    else {
+        [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
     }
     
 }
@@ -1011,7 +1052,7 @@
         for (CCSprite* letterSprite in newLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
             if (CGRectContainsPoint(letterArea, location)) {
-//                [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+                [[SimpleAudioEngine sharedEngine]playEffect:@"lettertap.mp3"];
                 [self performSelector:@selector(extraColumnLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-105] afterDelay:.01 ];
                 return;
             }
@@ -1021,7 +1062,7 @@
         for (CCSprite* letterSprite in bonusLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
             if (CGRectContainsPoint(letterArea, location)) {
-//                [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+                [[SimpleAudioEngine sharedEngine]playEffect:@"lettertap.mp3"];
                 [self performSelector:@selector(bounsLetterTouchedAtRow:) withObject:[NSNumber numberWithInt:letterSprite.tag-200] afterDelay:.01 ];
                 return;
             }
@@ -1036,7 +1077,7 @@
                 int index = 5*row + colunm;
                 if (colunm != 0) {
                     if (!([gameController isLockedPosition:index] || [gameController isLockedPosition:index-1])) {
-//                        [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+                        [[SimpleAudioEngine sharedEngine]playEffect:@"lettertap.mp3"];
                         [self shiftSprite:letterSprite];
                     } 
                 }
