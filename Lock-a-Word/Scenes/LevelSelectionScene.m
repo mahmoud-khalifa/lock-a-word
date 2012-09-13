@@ -141,7 +141,7 @@
              if (level.stars) {
                  NSString *stars = [[NSNumber numberWithInt:level.stars] stringValue];
                  NSString *overlayImage = [NSString stringWithFormat:@"%@Star-Normal-%@.png",stars, self.device];
-                 CCSprite *overlaySprite = [CCSprite spriteWithSpriteFrameName:overlayImage];
+                 CCSprite *overlaySprite = [CCSprite spriteWithFile:overlayImage];
                  [overlaySprite setTag:level.number];
                  [overlay addObject:overlaySprite];
 
@@ -243,7 +243,7 @@
         [controller selectLevel:selectedLevel];
         [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     }else {
-        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:YES];
+        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
         [alertView addButtonWithTitle:@"Upgrade" block:^{
             [controller unlockAllGameModes];
         }];
