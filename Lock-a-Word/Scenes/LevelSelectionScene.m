@@ -62,7 +62,6 @@
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
             
 		       
-        int smallFont = [CCDirector sharedDirector].winSize.height / 12; 
         GameData *gameData = [GameDataParser loadData];        
         int selectedChapter = gameData.selectedChapter;
         
@@ -78,7 +77,6 @@
         }
         
         // This is for the Trophy image
-//        spriteWithSpriteFrame:[frameCache spriteFrameByName:@"horizontal.png"]
         trophyImage = [CCSprite spriteWithSpriteFrameName:@"board_trophy.png"];
                 
         boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png", controller.currentGameMode];
@@ -86,11 +84,9 @@
         // This is for positioning the trophy in Ipad version and in Iphone  
         if (!IS_IPAD()) {
             trophyImage.position = ADJUST_XY(250, 436);
-//            boardTrophy.position = ADJUST_XY(250, 436);
             boardTrophy.position = ADJUST_XY(250, 426);
         } else {
             trophyImage.position = ccp(.78*screenSize.width, .898*screenSize.height);
-//            boardTrophy.position = ccp(.78*screenSize.width, .898*screenSize.height);
             boardTrophy.position = ccp(.78*screenSize.width, .876*screenSize.height);
         }
         
@@ -101,12 +97,9 @@
         NSMutableArray *overlay = [NSMutableArray new];
         
         Levels *selectedLevels = [LevelParser loadLevelsForChapter:gameData.selectedChapter];
-//        NSString *normal =   [NSString stringWithFormat:@"%@-Normal-%@.png", selectedChapterName, self.device];
-//        NSString *selected = [NSString stringWithFormat:@"%@-Selected-%@.png", selectedChapterName, self.device];
         
          for (Level *level in selectedLevels.levels) {
              NSString *normal =   [NSString stringWithFormat:@"%@.png", level.name];
-//             NSString *selected = [NSString stringWithFormat:@"%@.png", level.name];
              
              CCMenuItemImage *item = [CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:normal] 
                                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:normal]
@@ -114,38 +107,17 @@
                                                                  selector:@selector(onPlay:)];
              item.rotation=-10;
              [item setTag:level.number]; // note the number in a tag for later usage
-             
-//             // This will change each level sprite color in RGB
-//             switch (selectedChapter) {
-//                 case 1:
-//                     item.color=ccc3(228,228,228) ;
-//                     break;
-//                 case 2:
-////                     item.color=ccc3(216,74,2) ;
-//                     item.color=ccc3(227,117,61) ;
-//                     break;
-//                 case 3:
-////                     item.color=ccc3(118,128,137) ;
-//                     item.color=ccc3(160,160,160) ;
-//                     break;
-//                 case 4:
-//                     item.color=ccc3(252,141,0) ;
-//                     break;                     
-//                 default:
-//                     break;
-//             }   
 
              [item setIsEnabled:level.unlocked];  // ensure locked levels are inaccessible
              [levelMenu addChild:item];
-//             level.stars = arc4random()%3;
-             if (level.stars) {
+//             if (level.stars) {
                  NSString *stars = [[NSNumber numberWithInt:level.stars] stringValue];
                  NSString *overlayImage = [NSString stringWithFormat:@"%@Star-Normal-%@.png",stars, self.device];
                  CCSprite *overlaySprite = [CCSprite spriteWithFile:overlayImage];
                  [overlaySprite setTag:level.number];
                  [overlay addObject:overlaySprite];
 
-             }
+//             }
              
          }
         
@@ -160,21 +132,9 @@
         [self addChild:levelMenu z:-3];
         
         CCLayer *overlays = [[CCLayer alloc] init];
-//        CCLayer *labels = [[CCLayer alloc] init];
         
         for (int i=0 ; i<[selectedLevels.levels count]; i++) {
-//            Level *level = [selectedLevels.levels objectAtIndex:i];
             CCMenuItem *item = [levelMenu.children objectAtIndex:i];
-            
-//            CCLabelTTF *label = [CCLabelTTF labelWithString:[[NSString stringWithFormat:@"%@",level.name]uppercaseString]
-//                                                   fontName:@"Marker Felt" 
-//                                                   fontSize:smallFont];
-//            
-//            [label setAnchorPoint:item.anchorPoint];
-//            [label setPosition:item.position];
-//            [labels addChild:label];
-            
-            
             // set position of overlay sprites
             
             for (CCSprite *overlaySprite in overlay) {
@@ -190,14 +150,10 @@
         // Put the overlays and labels layers on the screen at the same position as the levelMenu
         
         [overlays setAnchorPoint:levelMenu.anchorPoint];
-//        [labels setAnchorPoint:levelMenu.anchorPoint];
         [overlays setPosition:levelMenu.position];
-//        [labels setPosition:levelMenu.position];
         [self addChild:overlays];
-//        [self addChild:labels];
         [overlay release];
         [overlays release];
-//        [labels release];
         [gameData release];
 	}
 	return self;
