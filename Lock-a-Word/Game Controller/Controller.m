@@ -488,16 +488,16 @@ static Controller *instanceOfController;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     switch (currentGameMode) {
         case PlasticLock:
-            [params setObject:@"GameMode" forKey:@"PlasticLock"];
+            [params setObject:@"PlasticLock" forKey:@"GameMode"];
             break;
         case BronzeLock:
-            [params setObject:@"GameMode" forKey:@"BronzeLock"];
+            [params setObject:@"BronzeLock" forKey:@"GameMode"];
             break;
         case SilverLock:
-            [params setObject:@"GameMode" forKey:@"SilverLock"];
+            [params setObject:@"SilverLock" forKey:@"GameMode"];
             break;
         case GoldLock:
-            [params setObject:@"GameMode" forKey:@"GoldLock"];
+            [params setObject:@"GoldLock" forKey:@"GameMode"];
             break;
                 
         default:
@@ -516,16 +516,16 @@ static Controller *instanceOfController;
     
     switch (currentGameMode) {
         case PlasticLock:
-            [params setObject:@"GameMode" forKey:@"PlasticLock"];
+            [params setObject:@"PlasticLock" forKey:@"GameMode"];
             break;
         case BronzeLock:
-            [params setObject:@"GameMode" forKey:@"BronzeLock"];
+            [params setObject:@"BronzeLock" forKey:@"GameMode"];
             break;
         case SilverLock:
-            [params setObject:@"GameMode" forKey:@"SilverLock"];
+            [params setObject:@"SilverLock" forKey:@"GameMode"];
             break;
         case GoldLock:
-            [params setObject:@"GameMode" forKey:@"GoldLock"];
+            [params setObject:@"GoldLock" forKey:@"GameMode"];
             break;
             
         default:
@@ -543,16 +543,16 @@ static Controller *instanceOfController;
     
     switch (currentGameMode) {
         case PlasticLock:
-            [params setObject:@"GameMode" forKey:@"PlasticLock"];
+            [params setObject:@"PlasticLock" forKey:@"GameMode"];
             break;
         case BronzeLock:
-            [params setObject:@"GameMode" forKey:@"BronzeLock"];
+            [params setObject:@"BronzeLock" forKey:@"GameMode"];
             break;
         case SilverLock:
-            [params setObject:@"GameMode" forKey:@"SilverLock"];
+            [params setObject:@"SilverLock" forKey:@"GameMode"];
             break;
         case GoldLock:
-            [params setObject:@"GameMode" forKey:@"GoldLock"];
+            [params setObject:@"GoldLock" forKey:@"GameMode"];
             break;
             
         default:
