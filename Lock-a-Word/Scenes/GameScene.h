@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "Controller.h"
 
-@interface GameScene : CCLayer 
+@interface GameScene : CCLayer <GameKitHelperProtocol>
 
 + (id)scene;
  

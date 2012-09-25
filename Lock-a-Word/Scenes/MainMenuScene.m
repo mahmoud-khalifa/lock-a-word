@@ -22,12 +22,15 @@
 //Needed for Sound effects
 #import "SimpleAudioEngine.h"
 
+
 @interface MainMenuScene()
 {
     CCMenuItemImage *menuItemAnimate1; 
     CCMenuItemImage *menuItemAnimate2;
     CCMenuItemImage *menuItemAnimate3;
     CGSize size;
+    
+    Controller* controller;
 }
 
 -(void) animateMenuItems;
@@ -63,10 +66,11 @@
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
+        
+        controller = [Controller sharedController];
 		
         // Get the screen size
         size =[[CCDirector sharedDirector] winSize];
-        
         
         CCSpriteFrameCache*frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
         [frameCache  addSpriteFramesWithFile:@"menu_buttons.plist"];
@@ -209,7 +213,7 @@
                                      
     CCMenuItemImage* mainMenuItem2 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_instr.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_instr.png"] target:self selector:@selector(goToInstructions)];
                                      
-    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_upgr.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_upgr.png"] target:self selector:@selector(goTofull)];
+    CCMenuItemImage* mainMenuItem3 =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_upgr.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"main_btn_upgr.png"] target:self selector:@selector(goToFull)];
                                      
     // Adding "PLAY - INSTRUCTION - FULL" items to the menu
     CCMenu *mainMenu = [CCMenu menuWithItems:mainMenuItem1,mainMenuItem2,mainMenuItem3, nil];
@@ -248,8 +252,21 @@
     CCLOG(@"Instruction button has been pressed!!");   
 }
 
-
-
+-(void) goToFull
+{
+    if ([controller isGameModesUnlocked]) {
+        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"You are already upgraded to full version." andLoadingviewEnabled:NO];
+        [alertView setCancelButtonWithTitle:@"OK" block:nil];
+        [alertView show];
+    }else {
+        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
+        [alertView addButtonWithTitle:@"Upgrade" block:^{
+            [controller unlockAllGameModes];
+        }];
+        [alertView addButtonWithTitle:@"No" block:nil];
+        [alertView show];
+    }
+}
 
 #pragma mark GameKit delegate
 

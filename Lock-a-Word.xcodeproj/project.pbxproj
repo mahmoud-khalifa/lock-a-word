@@ -1219,7 +1219,6 @@
 				34778D4E15DA860100856034 /* Game Center */,
 				BB9BFAA915C1955E003ABDD2 /* TapForTap */,
 				3106A67515B6D551000EA482 /* Leveling */,
-				BBF9083015A9EC2E009BDB13 /* Game Controller */,
 				34DB2F8215A8BC9700998A76 /* Application */,
 				34DB2F8715A8BC9700998A76 /* Scenes */,
 				BB2CBFA015A63EAB001CC30F /* Resources */,
@@ -1608,6 +1607,7 @@
 		BB9BFAA915C1955E003ABDD2 /* TapForTap */ = {
 			isa = PBXGroup;
 			children = (
+				BBF9083015A9EC2E009BDB13 /* Game Controller */,
 				BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */,
 				BB9BFAAB15C1955E003ABDD2 /* TapForTap.h */,
 				BB9BFAAC15C1955E003ABDD2 /* TapForTapAdView.h */,
@@ -1621,7 +1621,8 @@
 				BBF9083115A9EC3C009BDB13 /* Controller.h */,
 				BBF9083215A9EC3C009BDB13 /* Controller.m */,
 			);
-			path = "Game Controller";
+			name = "Game Controller";
+			path = "../Game Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

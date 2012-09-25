@@ -69,6 +69,8 @@ typedef enum
 
 - (int)calculateLevelStars:(int)lettersCountedDown;
 - (int)getcurrentLevelStars;
+- (int)getAchievementStars;
+- (int)getLevelStars:(int)level;
 - (void)updateLevelStars:(int)stars;
 
 //Flurry methods

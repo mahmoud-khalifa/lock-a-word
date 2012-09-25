@@ -794,7 +794,7 @@
     CCLOG(@"removeCorrectWord");
     @synchronized (collectedWord) {
         CCLOG(@"removeCorrectWord->synchronized");
-        if (correctWordFound) {
+        if (correctWordFound && [collectedWord count] >0) {
             correctWordFound = NO;
             int wordLength = [collectedWord count];
             int firstIndex = [[collectedWord objectAtIndex:0] tag];
@@ -843,7 +843,7 @@
 - (void)cancelRemoveCorrectWord {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(removeCorrectWord) object:nil];
     CCLOG(@"cancelRemoveCorrectWord");
-    @synchronized (collectedWord) {
+//    @synchronized (collectedWord) {
         CCLOG(@"cancelRemoveCorrectWord->synchronized");
         
         correctWordFound = NO;
@@ -851,7 +851,7 @@
             collectedLetter.color=boardLettersColor; //yellow
         }
         [collectedWord removeAllObjects];
-    }
+//    }
     
 }
 
@@ -929,10 +929,36 @@
 //        [alert show];
 //        [alert release];
         
-        BlockAlertView* alert=[BlockAlertView alertWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained a %d Star achievement",newStars] andLoadingviewEnabled:NO];
-        [alert setCancelButtonWithTitle:@"OK" block:nil];
-        
-        [alert show];
+        //Achievements
+        int achievStars = [gameController getAchievementStars];
+        if (achievStars > 0){
+            NSString* achiev = @"";
+            switch (gameController.currentGameMode) {
+                case PlasticLock:
+                    achiev = @"Plastic Lock Trophy";
+                    break;
+                case BronzeLock:
+                    achiev = @"Bronze Lock Trophy";
+                    break;
+                case SilverLock:
+                    achiev = @"Silver Lock Trophy";
+                    break;
+                case GoldLock:
+                    achiev = @"Gold Lock Trophy";
+                    break;
+                default:
+                    break;
+            }
+            
+            BlockAlertView* alert=[BlockAlertView alertWithTitle:achiev message:[NSString stringWithFormat:@"Congratulations, you have rewarded %d star Trophy.", achievStars] andLoadingviewEnabled:NO];
+            [alert setCancelButtonWithTitle:@"OK" block:nil];
+            [alert show];
+        }
+        else{
+            BlockAlertView* alert=[BlockAlertView alertWithTitle:@"New Star Ranking" message:[NSString stringWithFormat:@"Congratulations, you have gained %d stars",newStars] andLoadingviewEnabled:NO];
+            [alert setCancelButtonWithTitle:@"OK" block:nil];
+            [alert show];
+        }
     }
     else {
         [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
@@ -953,10 +979,12 @@
 
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    
     CGPoint location = [touch locationInView:[touch view]]; 
     location = [[CCDirector sharedDirector] convertToGL:location];         
     
     selectingWord = YES;
+    
     CGRect letterArea;
     for (CCSprite* letterSprite in boardLetters) {
         letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
@@ -1004,6 +1032,7 @@
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    
     CGPoint location = [touch locationInView:[touch view]];     
     location = [[CCDirector sharedDirector] convertToGL:location];
     
@@ -1027,7 +1056,7 @@
         return;
     }
     
-    if (correctWordFound) { //without selection ??
+    if (correctWordFound) { //remove previous selected word
         @synchronized (collectedWord) {
             CCLOG(@"ccTouchEnded->synchronized");
             CGPoint location = [touch locationInView:[touch view]]; 
@@ -1035,8 +1064,10 @@
             CGRect letterArea;
             for (CCSprite* letterSprite in collectedWord) {
                 letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
+                
                 if (CGRectContainsPoint(letterArea, location)) {
                     [self cancelRemoveCorrectWord];
+                    break;
                 }
             }
         }

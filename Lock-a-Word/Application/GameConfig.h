@@ -65,4 +65,9 @@ __x__)
 
 #define KTapForTapID @"e9ffe670-c8e0-012f-fb9d-4040d804a637"
 
+//related to achievements
+#define kAchievementID_WinPlasticMode @"Plastic_Lock"
+#define kAchievementID_WinBronzeMode @"Bronze_Lock"
+#define kAchievementID_WinSilverMode @"Silver_Lock"
+#define kAchievementID_WinGoldMode @"Gold_Lock"
 #endif

@@ -12,6 +12,7 @@
 #import "Level.h"
 #import "Levels.h"
 #import "LevelParser.h"
+#import "GameConfig.h"
 //#import "cocos2d.h"
 
 #import "StatisticsCollector.h"
@@ -167,6 +168,51 @@ static Controller *instanceOfController;
         if (gameLevel.number == currentLevel) {
             return gameLevel.stars;
         } 
+    }
+    return 0;
+}
+
+- (int)getAchievementStars{
+    int modStars = [self getModeStars:currentGameMode];
+    if (modStars>0) {
+        NSString *achievementID = @"";
+        switch (currentGameMode) {
+            case PlasticLock:
+                achievementID = kAchievementID_WinPlasticMode;
+                break;
+            case BronzeLock:
+                achievementID = kAchievementID_WinBronzeMode;
+                break;
+            case SilverLock:
+                achievementID = kAchievementID_WinSilverMode;
+                break;
+            case GoldLock:
+                achievementID = kAchievementID_WinGoldMode;
+                break;
+            default:
+                break;
+        }
+        achievementID = [achievementID stringByAppendingFormat:@"_%d",modStars];
+        if ([[NSUserDefaults standardUserDefaults]boolForKey:achievementID] == YES){
+            return 0;
+        }
+        else{
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:achievementID];
+            [gkHelper reportAchievementWithID:achievementID percentComplete:100.0f];
+            return modStars;
+        }
+    }
+    return 0;
+}
+
+- (int)getLevelStars:(int)level
+{
+    Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
+    Level *gameLevel;
+    for (gameLevel in levels.levels) {
+        if (gameLevel.number == level) {
+            return gameLevel.stars;
+        }
     }
     return 0;
 }
@@ -350,7 +396,6 @@ static Controller *instanceOfController;
 
 #pragma mark - validation
 - (BOOL)isCorrectWord:(NSString*)word {
-//    return YES;
     UITextChecker *checker = [[UITextChecker alloc] init];
     NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
     NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
@@ -630,7 +675,6 @@ static Controller *instanceOfController;
 }
 
 -(bool)isFeaturePurchased:(NSString*)featureId{
-    
     if ([self connectedToWeb]) {
         bool isFeaturePurchasedBefore=[MKStoreManager  isFeaturePurchased:featureId];
         [[NSUserDefaults standardUserDefaults] setBool:isFeaturePurchasedBefore forKey:featureId];
