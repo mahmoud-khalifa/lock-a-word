@@ -15,6 +15,8 @@
 #import "TapForTap.h"
 #import "EZToastView.h"
 
+#import "InstructionsScene.h"
+
 #define KStartingLetterCountedDown 50 
 
 //#define KStartingLetterCountedDown 20
@@ -41,7 +43,8 @@
     CCSprite *starsImage;
     NSMutableArray *lockedWords;
     int numOfStars;
-        
+    
+    UIButton *infoButton;
 }
 
 @property (nonatomic, retain) NSMutableArray *newLetters;
@@ -147,10 +150,22 @@
             [adView loadAds];
         }
         
+        infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+        infoButton.frame = CGRectMake(273, -7, 55, 55);
+        [infoButton addTarget:self action:@selector(infoButtonAction) forControlEvents:UIControlEventTouchDown];
+        [[[CCDirector sharedDirector] view] addSubview:infoButton];
+        
 	}
 	return self;
 }
 
+-(void)infoButtonAction{
+    infoButton.hidden = YES;
+    [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
+
+    [[CCDirector sharedDirector] pushScene:[InstructionsScene scene]];
+    CCLOG(@"Instruction button has been pressed!!");
+}
 
 #pragma mark - initialization
 - (void)newGame {
@@ -161,7 +176,6 @@
     lettersCountedDown=KStartingLetterCountedDown;
     countTimerSeconds=0;
     countTimerMinutes=0;
-    
     
     self.newLetters = [[NSMutableArray alloc] init];
     self.bonusLetters = [[NSMutableArray alloc] init];
@@ -225,9 +239,7 @@
         boardTrophy.position = ccp(.78*screenSize.width, .898*screenSize.height);
     }
     
-    
     [self addChild:boardTrophy];
-    
     
     [self drawBoard];
 //    lettersLoaded++;
@@ -241,8 +253,6 @@
     [self insertNewLetter];
     
 }
-
-
 
 -(void)countUp:(ccTime)delta {
     
@@ -1165,14 +1175,19 @@
 #pragma mark - UI Events
 
 - (void)onEnterTransitionDidFinish {
-    [self newGame];
+    if (lettersCountedDown==0) {
+        [self newGame];
+    }
+
 }
 
 - (void)onEnter {
     [super onEnter];
+    infoButton.hidden = NO;
 }
 
 - (void)onExit {
+    infoButton.hidden = YES;
     adView.hidden=YES;
     
     [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
