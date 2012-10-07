@@ -92,6 +92,7 @@
 		314CC2C515B41E8B00E65F85 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C415B41E8B00E65F85 /* Accounts.framework */; };
 		314CC2C715B41E9A00E65F85 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */; };
 		31CEA2BD15AB3C3F00A6512D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */; };
+		3474D1A51621795800F7D7E1 /* WordDeleted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3474D1A41621795800F7D7E1 /* WordDeleted.mp3 */; };
 		34778D5115DA860100856034 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 34778D5015DA860100856034 /* GameKitHelper.m */; };
 		3479707D15D7F7D900D49618 /* score-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 3479707515D7F7D900D49618 /* score-hd.fnt */; };
 		3479707E15D7F7D900D49618 /* score-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3479707615D7F7D900D49618 /* score-hd.png */; };
@@ -397,6 +398,7 @@
 		314CC2C415B41E8B00E65F85 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		3474D1A41621795800F7D7E1 /* WordDeleted.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WordDeleted.mp3; path = "Lock-a-Word/sounds/WordDeleted.mp3"; sourceTree = SOURCE_ROOT; };
 		34778D4F15DA860100856034 /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
 		34778D5015DA860100856034 /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		3479707515D7F7D900D49618 /* score-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "score-hd.fnt"; sourceTree = "<group>"; };
@@ -1013,6 +1015,7 @@
 		347D27D915DCE3AC005DA374 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				3474D1A41621795800F7D7E1 /* WordDeleted.mp3 */,
 				34D0EA5D15EE18CC001C75C6 /* keydoor2.mp3 */,
 				34D0EA5E15EE18CC001C75C6 /* keydoor3.mp3 */,
 				34D0EA5F15EE18CC001C75C6 /* lettertap.mp3 */,
@@ -1813,6 +1816,7 @@
 				34D0EA6015EE18CC001C75C6 /* keydoor2.mp3 in Resources */,
 				34D0EA6115EE18CC001C75C6 /* keydoor3.mp3 in Resources */,
 				34D0EA6215EE18CC001C75C6 /* lettertap.mp3 in Resources */,
+				3474D1A51621795800F7D7E1 /* WordDeleted.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

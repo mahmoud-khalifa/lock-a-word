@@ -194,19 +194,19 @@
 //    // load the game scene
 //    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     
-    if ([controller isGameModesUnlocked]) {
+//    if ([controller isGameModesUnlocked]) {
         int selectedLevel = sender.tag;
         [controller selectLevel:selectedLevel];
         [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
-    }else {
-        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
-        [alertView addButtonWithTitle:@"Upgrade" block:^{
-            [controller unlockAllGameModes];
-        }];
-        [alertView addButtonWithTitle:@"No" block:nil];
-        
-        [alertView show];
-    }
+//    }else {
+//        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
+//        [alertView addButtonWithTitle:@"Upgrade" block:^{
+//            [controller unlockAllGameModes];
+//        }];
+//        [alertView addButtonWithTitle:@"No" block:nil];
+//        
+//        [alertView show];
+//    }
     
 }
 

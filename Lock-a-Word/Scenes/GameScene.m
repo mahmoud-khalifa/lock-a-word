@@ -111,7 +111,6 @@
 
 - (id)init {    
 	if(self=[super init]) {
-        
         // get shared controller
         gameController = [Controller sharedController];
         
@@ -137,7 +136,6 @@
         // schedule timer
         [self schedule:@selector(countUp:) interval:1.0f]; 
        
-        
         // Check if it isn't an Ipad and it is in PlasticLock mode
         
         if (!IS_IPAD() && gameController.currentGameMode == PlasticLock ) {
@@ -149,12 +147,10 @@
             
             [adView loadAds];
         }
-        
         infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
         infoButton.frame = CGRectMake(273, -7, 55, 55);
         [infoButton addTarget:self action:@selector(infoButtonAction) forControlEvents:UIControlEventTouchDown];
         [[[CCDirector sharedDirector] view] addSubview:infoButton];
-        
 	}
 	return self;
 }
@@ -228,7 +224,6 @@
     [self addChild:starsImage];
     //END OF STARS IMAGE
 
-    
     // This is for the Trophy image
     boardTrophyName = [NSString stringWithFormat:@"board_trophy_%d.png",gameController.currentGameMode];
     boardTrophy=[CCSprite spriteWithSpriteFrameName:boardTrophyName];
@@ -240,22 +235,17 @@
     }
     
     [self addChild:boardTrophy];
-    
     [self drawBoard];
 //    lettersLoaded++;
     if (lettersCountedDown > 0) {
         lettersCountedDown--;
     }
-    
     [gameController logGameStart];
-    
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self insertNewLetter];
-    
 }
 
 -(void)countUp:(ccTime)delta {
-    
      countTimerSeconds++;
     [countTimerLabel setString:[NSString stringWithFormat:@"%02d:%02d", countTimerMinutes,countTimerSeconds]];
     
@@ -291,7 +281,6 @@
         
         [self addChild:letterSprite z:100 tag:(row*5+column)];
         [boardLetters addObject:letterSprite];
-                
     }
 }
 
@@ -308,13 +297,9 @@
     }
     
 //    [self newLetterSounds];
-    
     currentLetter = [gameController getCurrentLetter];
-    
 //    [newLetters removeAllObjects];
-    
     [lettersCountedDownLabel setString:[NSString stringWithFormat:@"%d",lettersCountedDown]];
-    
     
     [self removeChildByTag:500 cleanup:YES];
     
@@ -367,10 +352,8 @@
         toastView.toastAlignment = EZToastViewAlignmentCenter;
         [toastView show];
     }
-    
     // add the extra column letter
     [self addCurentLetterToExtraColumnWithBonus:NO];
-
 }
 
 -(void) newLetterSounds
@@ -433,13 +416,11 @@
             break;
         }
     }
-    
 //    [self removeSpritesInArray:newLetters];
 //    [newLetters removeAllObjects];
     
     // add the grid extra column
     [self addCurentLetterToExtraColumnWithBonus:YES];
-    
 }
 
 
@@ -448,14 +429,12 @@
     [self removeSpritesInArray:newLetters];
     
     if (!bonus) {
-        
         NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:6];
         [actions addObject:@""];
         CCSprite* letterSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",currentLetter]];
         
         float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET+8)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*kEXTRA_COLUMN_SPACING);
         float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
-        
         
         for (int j=0; j<5; j++) {
             yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*0)+(letterSprite.contentSize.height*0));
@@ -475,7 +454,6 @@
                 CCMoveTo* move=[CCMoveTo actionWithDuration:kANIMATION_DURATION/2 position:ccp(xPos, yPos)];
                 [actions addObject:move];
             }
-            
         }
         
         if (![currentLetter isEqualToString:@"lock"]) {
@@ -534,7 +512,6 @@
             [self addChild:letterSprite z:100 tag:j+105];
         }
     }
-    
     //    [self performSelector:@selector(enableTouches) withObject:nil afterDelay:5*[actions count]*kANIMATION_DURATION ];
 }
 
@@ -552,12 +529,10 @@
     float xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*5)+(kLETTERS_SPACING*column);
     float yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
     
-    
     letterSprite.color=ccYELLOW;
     letterSprite.position=ccp(xPos,yPos);
     [self addChild:letterSprite z:100 tag:(row*5+column)];
     [boardLetters addObject:letterSprite];
-    
     
     xPos=ADJUST_X( kBOARD_LETTERS_X_OFFSET)+(letterSprite.contentSize.width*0.5)+(letterSprite.contentSize.width*column)+(kLETTERS_SPACING*column);
     yPos=screenSize.height-(ADJUST_Y(kBOARD_LETTERS_Y_OFFSET)+(kLETTERS_SPACING*row)+(letterSprite.contentSize.height*row));
@@ -592,7 +567,6 @@
     
     [self checkLockedRow:row];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
-    
 }
 
 
@@ -628,7 +602,6 @@
     lettersCountedDown--;
     [gameController prepareCurrentLetterWithRestrictions:[self getBonusString]];
     [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:.5];
-    
 }
 
 
@@ -654,7 +627,6 @@
     [self checkLockedRow:row];
     [self performSelector:@selector(enableTouches) withObject:nil afterDelay:2*kANIMATION_DURATION ];
     //    [self enableTouches];
-    
 }
 
 
@@ -691,9 +663,7 @@
 }
 
 - (void)lockRow:(NSArray*)word {
-    
     if([gameController isGameCompleted]){
-        
 //        [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
         
 //        [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor.mp3"];
@@ -716,7 +686,6 @@
         [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor2.mp3"];
         [self performSelector:@selector(playApplause) withObject:nil afterDelay:0.4];
     }
-    
 }
 
 -(void)playApplause{
@@ -762,7 +731,7 @@
     }
 }
 
--(void)checkIsWordCorrect { 
+-(void)checkIsWordCorrect {
     if ([collectedWord count]>2) {
         NSString *word = @"";
         for (CCSprite* letterSprite in collectedWord) {
@@ -771,7 +740,6 @@
         NSLog(@"word:%@",word);
         
         if ([gameController isCorrectWord:word]) {
-            
             if (![lockedWords containsObject:word]) {
                 NSLog(@"correct word");
                 correctWordFound = YES;
@@ -791,20 +759,18 @@
             
         }
     }
-    
     for (CCSprite* collectedLetter in collectedWord) {
         collectedLetter.color = boardLettersColor; //yellow
     }
-    
     [collectedWord removeAllObjects];
 }
-
 
 - (void)removeCorrectWord {
     CCLOG(@"removeCorrectWord");
     @synchronized (collectedWord) {
         CCLOG(@"removeCorrectWord->synchronized");
         if (correctWordFound && [collectedWord count] >0) {
+            [[SimpleAudioEngine sharedEngine]playEffect:@"WordDeleted.mp3"];
             correctWordFound = NO;
             int wordLength = [collectedWord count];
             int firstIndex = [[collectedWord objectAtIndex:0] tag];
@@ -835,8 +801,6 @@
                     float duration = kANIMATION_DURATION*wordLength;
                     CCMoveTo* move=[CCMoveTo actionWithDuration:duration position:ccp(xPos, yPos)];
                     [letterSprite runAction:move];
-                    
-                    
                 }
             }
             [gameController removeWordAtIndex:firstIndex lenght:wordLength];
@@ -846,8 +810,6 @@
 //            [self performSelector:@selector(insertNewLetter) withObject:nil afterDelay:kANIMATION_DURATION];
         }
     }
-    
-    
 }
 
 - (void)cancelRemoveCorrectWord {
@@ -862,7 +824,6 @@
         }
         [collectedWord removeAllObjects];
 //    }
-    
 }
 
 - (NSString*)getBonusString {
@@ -903,15 +864,12 @@
 //        [newLetters removeAllObjects];
         currentLetter = @"lock";
         [self addCurentLetterToExtraColumnWithBonus:NO];
-        
         [self performSelector:@selector(showShareAlert) withObject:nil afterDelay:12*kANIMATION_DURATION];
-        
         //    [self performSelector:@selector(disableTouches) withObject:nil afterDelay:0.05 ];
         [self unscheduleAllSelectors];
         
         [gameController logGameCompleted];
     }
-    
 }
 
 
@@ -973,7 +931,6 @@
     else {
         [[SimpleAudioEngine sharedEngine]playEffect:@"Applause.mp3"];
     }
-    
 }
 
 
@@ -989,7 +946,6 @@
 
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    
     CGPoint location = [touch locationInView:[touch view]]; 
     location = [[CCDirector sharedDirector] convertToGL:location];         
     
@@ -1042,27 +998,21 @@
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    
     CGPoint location = [touch locationInView:[touch view]];     
     location = [[CCDirector sharedDirector] convertToGL:location];
     
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
 //        [[CCDirector sharedDirector] popScene];
-        
         [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
         
-        if (gameController.currentGameMode == PlasticLock) 
-        {
+        if (gameController.currentGameMode == PlasticLock) {
              [[CCDirector sharedDirector] replaceScene:[GameModesScene scene]];
         } 
-        else
-        {
+        else{
             [[CCDirector sharedDirector] replaceScene:[LevelSelectionScene scene]];
         }
-            
         [gameController logGameEnd];
-        
         return;
     }
     
@@ -1084,11 +1034,8 @@
     } else if (selectingWord) { //word collected
         selectingWord = NO;
         [self checkIsWordCorrect];
-        
     } else { //letter pressed
-        
         CGRect letterArea;
-        
         // select a tile at the extra column -> insert the letter at the selected row
         for (CCSprite* letterSprite in newLetters) {
             letterArea=CGRectMake(letterSprite.position.x-letterSprite.contentSize.width*0.5, letterSprite.position.y-letterSprite.contentSize.height*0.5, letterSprite.contentSize.width, letterSprite.contentSize.height);
@@ -1128,9 +1075,6 @@
     }
 }
 
-
-
-
 - (void)extraColumnLetterTouchedAtRow:(NSNumber*)row {
     int rowValue = [row intValue];
     if (rowValue < 5){
@@ -1140,11 +1084,9 @@
     }
 }
 
-
 - (void)bounsLetterTouchedAtRow:(NSNumber*)row {
     [self useBonusLetter:[row intValue]];
 }
-
 
 
 #pragma Enable/Disable Touches
@@ -1160,16 +1102,13 @@
 }
 
 
-
 #pragma mark Utils
 
 - (void)removeSpritesInArray:(NSMutableArray*)spritesArray {
-    
     for (CCSprite* letter in spritesArray) {
         [letter removeFromParentAndCleanup:YES];
     }
     [spritesArray removeAllObjects];
-    
 }
 
 #pragma mark - UI Events
@@ -1178,7 +1117,6 @@
     if (lettersCountedDown==0) {
         [self newGame];
     }
-
 }
 
 - (void)onEnter {
@@ -1200,14 +1138,11 @@
 	// in case you have something to dealloc, do it in this method
 	// in this particular example nothing needs to be released.
 	// cocos2d will automatically release all the children (Label)
-	
     
     //    [droppedLettersSprites release];
     //    [droppedLettersImages release];
     
 	// don't forget to call "super dealloc"
-    
-    
     [newLetters release];
     [bonusLetters release];
     [boardLetters release];

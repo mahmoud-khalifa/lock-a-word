@@ -396,6 +396,7 @@ static Controller *instanceOfController;
 
 #pragma mark - validation
 - (BOOL)isCorrectWord:(NSString*)word {
+//    return YES;
     UITextChecker *checker = [[UITextChecker alloc] init];
     NSLocale *currentLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en-US"];
     NSString *currentLanguage = [currentLocale objectForKey:NSLocaleLanguageCode];
@@ -403,7 +404,6 @@ static Controller *instanceOfController;
     
     NSRange misspelledRange = [checker rangeOfMisspelledWordInString:word range:searchRange startingAt:0 wrap:NO language: currentLanguage];
     return misspelledRange.location == NSNotFound;
-
 }
 
 
