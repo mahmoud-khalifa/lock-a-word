@@ -127,8 +127,6 @@ static Controller *instanceOfController;
     currentGameMode = chapter;
 }
 
-
-
 - (void)selectLevel:(int)level {
     GameData *gameData = [GameDataParser loadData];
     [gameData setSelectedLevel:level];
@@ -143,12 +141,10 @@ static Controller *instanceOfController;
             self.secondLetters = [gameLevel.data componentsSeparatedByString:@","];
         }
     }
-    
     [self newGame];
 }
 
-- (int)calculateLevelStars:(int)lettersCountedDown 
-{
+- (int)calculateLevelStars:(int)lettersCountedDown {
     int stars = 1;
     if (lettersCountedDown >= 20){
         stars=3;        
@@ -157,11 +153,9 @@ static Controller *instanceOfController;
         stars=2;
     }
     return stars;
-
 }
 
-- (int)getcurrentLevelStars 
-{
+- (int)getcurrentLevelStars {
     Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
     Level *gameLevel;
     for (gameLevel in levels.levels) {
@@ -205,8 +199,7 @@ static Controller *instanceOfController;
     return 0;
 }
 
-- (int)getLevelStars:(int)level
-{
+- (int)getLevelStars:(int)level{
     Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
     Level *gameLevel;
     for (gameLevel in levels.levels) {
@@ -217,8 +210,7 @@ static Controller *instanceOfController;
     return 0;
 }
 
-- (void)updateLevelStars:(int)stars 
-{
+- (void)updateLevelStars:(int)stars {
     Levels *levels = [LevelParser loadLevelsForChapter:currentGameMode];
     Level *gameLevel;
     for (gameLevel in levels.levels) {
@@ -232,17 +224,16 @@ static Controller *instanceOfController;
 
 #pragma mark init/preparations 
 
--(void)newGame
-    {
-        testIndex = 0;
-        testArray = 
-        [[NSArray alloc] initWithObjects: @"t", @"o", @"t", @"a", @"l", @"s", @"c", @"e", @"n", @"e", @"q", @"u", @"e", @"e", @"n", @"t", @"i", @"t", @"l", @"e", @"c", @"o", @"a", @"s", @"t", nil];
-        
+-(void)newGame{
+    testIndex = 0;
+    testArray = 
+    [[NSArray alloc] initWithObjects: @"t", @"o", @"t", @"a", @"l", @"s", @"c", @"e", @"n", @"e", @"q", @"u", @"e", @"e", @"n", @"t", @"i", @"t", @"l", @"e", @"c", @"o", @"a", @"s", @"t", nil];
+    
     [self resetBoard];
     NSLog(@"NewGame");
     
-        switch (currentGameMode) 
-        {
+    switch (currentGameMode) 
+    {
         case BronzeLock:
             NSLog(@"BronzeLock");
             board[0]=1;board[6]=1;board[12]=1;
@@ -270,7 +261,7 @@ static Controller *instanceOfController;
         default:
             NSLog(@"PlasticLock");
             break;
-        }
+    }
     
     lastLetter = @"";
     [self printBoard];
@@ -287,14 +278,11 @@ static Controller *instanceOfController;
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"6", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"12", @"index", nil];
         [lockedLetters addObject:dic];
-        
     } else if (currentGameMode == SilverLock) {
         //At index 0, 5, 10 are the same. At index 1, 6, 11 are not
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
@@ -302,10 +290,8 @@ static Controller *instanceOfController;
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"5", @"index", nil];
         [lockedLetters addObject:dic];
-        
         
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"10", @"index", nil];
         [lockedLetters addObject:dic];
@@ -316,17 +302,13 @@ static Controller *instanceOfController;
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"1", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"6", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"11", @"index", nil];
         [lockedLetters addObject:dic];
-        
-        
     } else if (currentGameMode == GoldLock) {
         //At index 0, 5, 10 are the same. At index 4, 9, 14 are not
         lockedLetters = [[NSMutableArray alloc] initWithCapacity:6];
@@ -334,10 +316,8 @@ static Controller *instanceOfController;
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"0", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"5", @"index", nil];
         [lockedLetters addObject:dic];
-        
         
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:lockedLetter, @"letter", @"10", @"index", nil];
         [lockedLetters addObject:dic];
@@ -347,11 +327,9 @@ static Controller *instanceOfController;
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"4", @"index", nil];
         [lockedLetters addObject:dic];
         
-        
         secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"9", @"index", nil];
         [lockedLetters addObject:dic];
-        
         
         secondLetter = [secondLetters objectAtIndex:arc4random()%secondLetterscount];
         dic = [[NSDictionary alloc] initWithObjectsAndKeys:secondLetter, @"letter", @"14", @"index", nil];
@@ -371,7 +349,6 @@ static Controller *instanceOfController;
 
 
 - (void)resetBoard {
-    
     //initialize with free labels
     board[0]=0;board[1]=0;board[2]=0;board[3]=0;board[4]=0;
     board[5]=0;board[6]=0;board[7]=0;board[8]=0;board[9]=0;
@@ -415,18 +392,18 @@ static Controller *instanceOfController;
 }
 
 - (void)prepareCurrentLetterWithRestrictions:(NSString*)restriction {
-    
-    currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
-    
-//    while ( ([restriction rangeOfString:currentLetter].location != NSNotFound) && (![currentLetter isEqualToString:lastLetter]) ) {
-    while ( ([restriction rangeOfString:currentLetter].location != NSNotFound) || ([currentLetter isEqualToString:lastLetter]) ) {
+    if ([lastLetter isEqualToString:@"q"]) {
+        currentLetter = @"u";
+    }else{
         currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
+        while ( ([restriction rangeOfString:currentLetter].location != NSNotFound) || ([currentLetter isEqualToString:lastLetter]) ) {
+            currentLetter = [allLetters objectAtIndex:arc4random()%[allLetters count]];
+        }
     }
     lastLetter = currentLetter;
 //    if (testIndex < 25) {
 //        currentLetter = [testArray objectAtIndex:testIndex++];
 //    }
-    
 }
 
 - (NSString*)getCurrentLetter {
@@ -443,6 +420,10 @@ static Controller *instanceOfController;
     for (int i=0; i<5; i++) {
         lockedBoard[row*5+i] = 1;
     }
+}
+
+- (void)lockLetter:(int)row andColumn:(int)column{
+    lockedBoard[row*5+column] = 1;
 }
 
 - (void)addLetterAtIndex:(int)index {
@@ -609,13 +590,11 @@ static Controller *instanceOfController;
 
 #pragma in-App Purchase
 
--(void)unlockAllGameModes
-{
+-(void)unlockAllGameModes{
     [self buyFeature:kUNLOCK_ALL_MODES_ID];
 }
 
 -(void)buyFeature:(NSString*)featureId{
-    
     if ([self connectedToWeb]) {
         [[MKStoreManager sharedManager] buyFeature:featureId 
                                         onComplete:^(NSString* purchasedFeature)
@@ -628,12 +607,9 @@ static Controller *instanceOfController;
              //         [alert show];
              //         [alert release];
              
-             
              BlockAlertView* alert=[BlockAlertView alertWithTitle:@"Success" message:@"Transaction was completed" andLoadingviewEnabled:NO];
              [alert setCancelButtonWithTitle:@"OK" block:nil];
-             
              [alert show];
-             
 //             [delegatoe onPurchaseFeatureCompleted:featureId];
              
              [[NSUserDefaults standardUserDefaults]setBool:YES forKey:featureId];
@@ -641,7 +617,6 @@ static Controller *instanceOfController;
                                        onCancelled:^
          {
              CCLOG(@"User Cancelled Transaction");
-             
              
              [loadingView dismissWithClickedButtonIndex:-1 animated:NO];
              
@@ -651,22 +626,16 @@ static Controller *instanceOfController;
              
              BlockAlertView* alert=[BlockAlertView alertWithTitle:@"Operation Cancelled" message:@"" andLoadingviewEnabled:NO];
              [alert setCancelButtonWithTitle:@"Close" block:nil];
-             
              [alert show];
-             
          }];
            
         loadingView=[BlockAlertView alertWithTitle:nil message:@"Please wait..." andLoadingviewEnabled:YES];
         [loadingView show];
-        
     }else {
         BlockAlertView* alert=[BlockAlertView alertWithTitle:@"No Internet Connection" message:@"Please Connect to the Internet then try again" andLoadingviewEnabled:NO];
         [alert setCancelButtonWithTitle:@"OK" block:nil];
-        
         [alert show];
-        
     }
-    
 }
 
 -(bool)isGameModesUnlocked
@@ -684,5 +653,6 @@ static Controller *instanceOfController;
     }
 
 }
+
 
 @end

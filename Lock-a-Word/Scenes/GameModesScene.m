@@ -14,8 +14,7 @@
 #import "TapForTap.h"
 #import "SimpleAudioEngine.h"
 
-@interface GameModesScene()
-{
+@interface GameModesScene(){
     
 }
 
@@ -27,7 +26,6 @@
 @implementation GameModesScene {
     Controller *controller;
     UITextView* t;
-    
 }
 
 +(id)scene {
@@ -44,7 +42,6 @@
 //    t.hidden = YES;
 //}
 -(id) init {
-    
 	if( (self=[super init] )) {
         // get shared controller
         controller = [Controller sharedController];
@@ -71,7 +68,6 @@
             menuItem4.scale = 1.10;
         }
         
-        
 //        CCMenuItemImage *menuItem1 =[CCMenuItemImage itemWithNormalImage:@"main_btn_plast.png" selectedImage:@"main_btn_plast.png" target:self selector:@selector(goToPlasticLock:)];
 //        CCMenuItemImage *menuItem2 =[CCMenuItemImage itemWithNormalImage:@"main_btn_bronz.png" selectedImage:@"main_btn_bronz.png" target:self selector:@selector(goToBronzeLock:)];
 //        CCMenuItemImage *menuItem3 =[CCMenuItemImage itemWithNormalImage:@"main_btn_silver.png" selectedImage:@"main_btn_silver.png" target:self selector:@selector(goToSilverLock:)];
@@ -80,24 +76,19 @@
      
         // Adding items to the menu
         CCMenu *gameModesSceneMenu = [CCMenu menuWithItems:menuItem1,menuItem2,menuItem3,menuItem4,nil];
-       
         [gameModesSceneMenu alignItemsVerticallyWithPadding:0];
         gameModesSceneMenu.position=ccp(screenSize.width/2,screenSize.height/2 - (.380 *screenSize.height/2));   
         
         [self addChild:gameModesSceneMenu];
-        
 	}
 	return self;
 }
-
 
 // implementing our selector methods
 // the Go to free plastic lock levels [free]
 
 - (void) goToPlasticLock : (id) sender {
-    
     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-    
     [self performSelector:@selector(plasticLock) withObject:nil afterDelay:0.6];
 }
 
@@ -111,9 +102,7 @@
 // the Go to Bronze lock levels [free]
 
 - (void) goToBronzeLock: (id) sender {
-    
     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-    
     [self performSelector:@selector(bronzeLock) withObject:nil afterDelay:0.6];
 }
 
@@ -126,9 +115,7 @@
 // the Go to Silver lock levels [free]
 
 - (void) goToSilverLock: (id) sender {
-    
     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-    
     [self performSelector:@selector(silverLock) withObject:nil afterDelay:0.6];
 }
 
@@ -140,9 +127,7 @@
 // the Go to Gold lock levels [free]
 
 - (void) goToGoldLock: (id) sender {
-    
     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-    
     [self performSelector:@selector(goldLock) withObject:nil afterDelay:0.6];
 }
 
@@ -200,14 +185,12 @@
                 gameModeItemImage =[CCMenuItemImage itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"btn_gold_new.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"btn_gold_new.png"] target:self selector:@selector(goToGoldLock:)];  
             }
     
-    
     stars.anchorPoint=ccp(1,.5);
     stars.position=ccp(gameModeItemImage.contentSize.width - stars.contentSize.width/3, gameModeItemImage.contentSize.height);
 //    gameModeItemImage.anchorPoint=ccp(1,.5);/
     finalItemImage = gameModeItemImage;
     [finalItemImage addChild:stars];    
     return finalItemImage;
-       
 }                                  
 
 @end

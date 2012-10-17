@@ -54,6 +54,7 @@ typedef enum
 
 - (BOOL)isLockedPosition:(int)index;
 - (void)lockRow:(int)row;
+- (void)lockLetter:(int)row andColumn:(int)column;
 - (void)addLetterAtIndex:(int)index;
 - (void)removeWordAtIndex:(int)index lenght:(int)lenght;
 - (int)getFirstColumnIndexOfRow:(int)row;
@@ -84,7 +85,6 @@ typedef enum
 
 -(bool)isGameModesUnlocked;
 -(bool)isFeaturePurchased:(NSString*)featureId; -(BOOL)connectedToWeb;
-
 
 @end
 

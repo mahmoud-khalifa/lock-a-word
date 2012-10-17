@@ -61,10 +61,8 @@
         [self addChild:backgroundImage z:-4];      
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
             
-		       
         GameData *gameData = [GameDataParser loadData];        
         int selectedChapter = gameData.selectedChapter;
-        
         
         // Read in selected chapter name (use to load custom background later):
         NSString *selectedChapterName = nil;        
@@ -116,9 +114,7 @@
                  CCSprite *overlaySprite = [CCSprite spriteWithFile:overlayImage];
                  [overlaySprite setTag:level.number];
                  [overlay addObject:overlaySprite];
-
 //             }
-             
          }
         
         [levelMenu alignItemsInColumns:
@@ -146,7 +142,6 @@
             }
         }
 
-
         // Put the overlays and labels layers on the screen at the same position as the levelMenu
         
         [overlays setAnchorPoint:levelMenu.anchorPoint];
@@ -159,8 +154,6 @@
 	return self;
 }
 
-
-
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];     
@@ -169,18 +162,14 @@
     // Back button tapped
     if (CGRectContainsPoint(backButtonRect, location)) {
         [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-        
         [[CCDirector sharedDirector] replaceScene:[GameModesScene scene]];
     }
 }
 
 
 - (void) onPlay: (CCMenuItemImage*) sender {
-    
     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
-    
     [self performSelector:@selector(onPlay2:) withObject:sender afterDelay:0.6];
-    
 }
 
 - (void) onPlay2: (CCMenuItemImage*) sender {
@@ -194,19 +183,19 @@
 //    // load the game scene
 //    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     
-//    if ([controller isGameModesUnlocked]) {
+    if ([controller isGameModesUnlocked]) {
         int selectedLevel = sender.tag;
         [controller selectLevel:selectedLevel];
         [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
-//    }else {
-//        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
-//        [alertView addButtonWithTitle:@"Upgrade" block:^{
-//            [controller unlockAllGameModes];
-//        }];
-//        [alertView addButtonWithTitle:@"No" block:nil];
-//        
-//        [alertView show];
-//    }
+    }else {
+        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
+        [alertView addButtonWithTitle:@"Upgrade" block:^{
+            [controller unlockAllGameModes];
+        }];
+        [alertView addButtonWithTitle:@"No" block:nil];
+        
+        [alertView show];
+    }
     
 }
 
