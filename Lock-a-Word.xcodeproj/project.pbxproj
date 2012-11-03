@@ -93,6 +93,7 @@
 		314CC2C715B41E9A00E65F85 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */; };
 		31CEA2BD15AB3C3F00A6512D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */; };
 		3474D1A51621795800F7D7E1 /* WordDeleted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3474D1A41621795800F7D7E1 /* WordDeleted.mp3 */; };
+		347591011637FB2400632634 /* libTapForTapAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 347590FC1637FB2400632634 /* libTapForTapAds.a */; };
 		34778D5115DA860100856034 /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 34778D5015DA860100856034 /* GameKitHelper.m */; };
 		34794A98162ABB0E0010BB08 /* instructions_bg-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 34794A97162ABB0E0010BB08 /* instructions_bg-ipad.png */; };
 		34794A9A162ABB1F0010BB08 /* instructions_bg-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 34794A99162ABB1F0010BB08 /* instructions_bg-ipadhd.png */; };
@@ -284,7 +285,6 @@
 		BB2F31E815CD79080028E999 /* clean_bg-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2F31E715CD79080028E999 /* clean_bg-ipadhd.png */; };
 		BB2F31EA15CD79430028E999 /* clean_bg-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2F31E915CD79430028E999 /* clean_bg-ipad.png */; };
 		BB2F31EE15CD79900028E999 /* clean_bg-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2F31ED15CD79900028E999 /* clean_bg-hd.png */; };
-		BB9BFAAD15C1955E003ABDD2 /* libTapForTapAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */; };
 		BBCA5A5315A653D000D0B4A8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BBCA5A5215A653D000D0B4A8 /* iTunesArtwork */; };
 		BBCA5A5715A65BD600D0B4A8 /* Default-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCA5A5415A65BD600D0B4A8 /* Default-portrait.png */; };
 		BBCA5A5815A65BD600D0B4A8 /* Default-portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBCA5A5515A65BD600D0B4A8 /* Default-portrait@2x.png */; };
@@ -400,6 +400,11 @@
 		314CC2C615B41E9A00E65F85 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3474D1A41621795800F7D7E1 /* WordDeleted.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WordDeleted.mp3; path = "Lock-a-Word/sounds/WordDeleted.mp3"; sourceTree = SOURCE_ROOT; };
+		347590FC1637FB2400632634 /* libTapForTapAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTapForTapAds.a; sourceTree = "<group>"; };
+		347590FD1637FB2400632634 /* TapForTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTap.h; sourceTree = "<group>"; };
+		347590FE1637FB2400632634 /* TapForTapAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTapAdView.h; sourceTree = "<group>"; };
+		347590FF1637FB2400632634 /* TapForTapAppWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTapAppWall.h; sourceTree = "<group>"; };
+		347591001637FB2400632634 /* TapForTapInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTapInterstitial.h; sourceTree = "<group>"; };
 		34778D4F15DA860100856034 /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
 		34778D5015DA860100856034 /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		34794A97162ABB0E0010BB08 /* instructions_bg-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions_bg-ipad.png"; sourceTree = "<group>"; };
@@ -740,9 +745,6 @@
 		BB2F31E715CD79080028E999 /* clean_bg-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clean_bg-ipadhd.png"; sourceTree = "<group>"; };
 		BB2F31E915CD79430028E999 /* clean_bg-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clean_bg-ipad.png"; sourceTree = "<group>"; };
 		BB2F31ED15CD79900028E999 /* clean_bg-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clean_bg-hd.png"; sourceTree = "<group>"; };
-		BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTapForTapAds.a; sourceTree = "<group>"; };
-		BB9BFAAB15C1955E003ABDD2 /* TapForTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTap.h; sourceTree = "<group>"; };
-		BB9BFAAC15C1955E003ABDD2 /* TapForTapAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapForTapAdView.h; sourceTree = "<group>"; };
 		BBCA5A5215A653D000D0B4A8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		BBCA5A5415A65BD600D0B4A8 /* Default-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-portrait.png"; path = "Resources/Default-portrait.png"; sourceTree = "<group>"; };
 		BBCA5A5515A65BD600D0B4A8 /* Default-portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-portrait@2x.png"; path = "Resources/Default-portrait@2x.png"; sourceTree = "<group>"; };
@@ -779,8 +781,8 @@
 				BB2CBF9A15A63EAB001CC30F /* Foundation.framework in Frameworks */,
 				BB2CBF9C15A63EAB001CC30F /* CoreGraphics.framework in Frameworks */,
 				BB2CBF9E15A63EAB001CC30F /* GameKit.framework in Frameworks */,
-				BB9BFAAD15C1955E003ABDD2 /* libTapForTapAds.a in Frameworks */,
 				1EC4471B15DD8D6700C50ADE /* libFlurryAnalytics.a in Frameworks */,
+				347591011637FB2400632634 /* libTapForTapAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +978,18 @@
 				3106A71215B6D585000EA482 /* GDataXMLNode.h */,
 			);
 			path = XMLSupport;
+			sourceTree = "<group>";
+		};
+		347590FB1637FB2400632634 /* TapForTap */ = {
+			isa = PBXGroup;
+			children = (
+				347590FC1637FB2400632634 /* libTapForTapAds.a */,
+				347590FD1637FB2400632634 /* TapForTap.h */,
+				347590FE1637FB2400632634 /* TapForTapAdView.h */,
+				347590FF1637FB2400632634 /* TapForTapAppWall.h */,
+				347591001637FB2400632634 /* TapForTapInterstitial.h */,
+			);
+			path = TapForTap;
 			sourceTree = "<group>";
 		};
 		34778D4E15DA860100856034 /* Game Center */ = {
@@ -1220,12 +1234,13 @@
 		BB2CBF9F15A63EAB001CC30F /* Lock-A-Word */ = {
 			isa = PBXGroup;
 			children = (
+				347590FB1637FB2400632634 /* TapForTap */,
 				347AEDC715EBBBC900789370 /* Resource Loader */,
 				348B0E8A15EA628100DB065D /* MKStoreKit */,
 				34778D4E15DA860100856034 /* Game Center */,
-				BB9BFAA915C1955E003ABDD2 /* TapForTap */,
 				3106A67515B6D551000EA482 /* Leveling */,
 				34DB2F8215A8BC9700998A76 /* Application */,
+				BBF9083015A9EC2E009BDB13 /* Game Controller */,
 				34DB2F8715A8BC9700998A76 /* Scenes */,
 				BB2CBFA015A63EAB001CC30F /* Resources */,
 				BB2CBFB815A63EAB001CC30F /* libs */,
@@ -1610,25 +1625,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BB9BFAA915C1955E003ABDD2 /* TapForTap */ = {
-			isa = PBXGroup;
-			children = (
-				BBF9083015A9EC2E009BDB13 /* Game Controller */,
-				BB9BFAAA15C1955E003ABDD2 /* libTapForTapAds.a */,
-				BB9BFAAB15C1955E003ABDD2 /* TapForTap.h */,
-				BB9BFAAC15C1955E003ABDD2 /* TapForTapAdView.h */,
-			);
-			path = TapForTap;
-			sourceTree = "<group>";
-		};
 		BBF9083015A9EC2E009BDB13 /* Game Controller */ = {
 			isa = PBXGroup;
 			children = (
 				BBF9083115A9EC3C009BDB13 /* Controller.h */,
 				BBF9083215A9EC3C009BDB13 /* Controller.m */,
 			);
-			name = "Game Controller";
-			path = "../Game Controller";
+			path = "Game Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1999,6 +2002,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lock-A-Word/Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2012,6 +2019,8 @@
 					"\"$(SRCROOT)/Lock-A-Word/TapForTap\"",
 					"\"$(SRCROOT)/Lock-A-Word/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Lock-a-Word/libs/FlurryAnalytics\"",
+					"\"$(SRCROOT)/TapForTap\"",
+					"\"$(SRCROOT)/Lock-a-Word/TapForTap\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -2076,6 +2085,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Con Roditis (VLTMWCEA63)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Con Roditis (VLTMWCEA63)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lock-A-Word/Prefix.pch";
@@ -2090,6 +2103,8 @@
 					"\"$(SRCROOT)/Lock-A-Word/TapForTap\"",
 					"\"$(SRCROOT)/Lock-A-Word/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Lock-a-Word/libs/FlurryAnalytics\"",
+					"\"$(SRCROOT)/TapForTap\"",
+					"\"$(SRCROOT)/Lock-a-Word/TapForTap\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -2113,6 +2128,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Con Roditis";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Con Roditis";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lock-A-Word/Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2126,6 +2145,8 @@
 					"\"$(SRCROOT)/Lock-A-Word/TapForTap\"",
 					"\"$(SRCROOT)/Lock-A-Word/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Lock-a-Word/libs/FlurryAnalytics\"",
+					"\"$(SRCROOT)/TapForTap\"",
+					"\"$(SRCROOT)/Lock-a-Word/TapForTap\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",

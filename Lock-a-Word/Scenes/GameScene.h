@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Controller.h"
+#import "TapForTap.h"
 
-@interface GameScene : CCLayer <GameKitHelperProtocol>
+@interface GameScene : CCLayer <GameKitHelperProtocol, TapForTapAdViewDelegate>
 
 + (id)scene;
  

@@ -12,7 +12,6 @@
 #import "Controller.h"
 #import "GameConfig.h"
 #import "SimpleAudioEngine.h"
-#import "TapForTap.h"
 #import "EZToastView.h"
 
 #import "InstructionsScene.h"
@@ -148,11 +147,14 @@
         
         if (!IS_IPAD() && gameController.currentGameMode == PlasticLock ) {
             // This is for TapforTap
-            adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0,60, 320, 50)];
-            [[[CCDirector sharedDirector] view] addSubview:adView];       
-            // You don't have to do this if you set the default app ID in your app delegate
-            adView.appId = KTapForTapID;
+            adView = [[TapForTapAdView alloc] initWithFrame: CGRectMake(0,60, 320, 50) delegate:self];
+            [[[CCDirector sharedDirector] view] addSubview:adView];
+                    
             [adView loadAds];
+            
+            //Full screen ads
+//            [TapForTapInterstitial prepare];
+//            [self showInterstitial:self];
         }
         
         infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
@@ -169,6 +171,12 @@
         vowelString = [vowelString stringByAppendingString:@"u"];
 	}
 	return self;
+}
+
+- (IBAction) showInterstitial: (id)sender
+{
+    // Show an Interstitial  (UIViewController*) [UIApplication sharedApplication].keyWindow.rootViewController
+    [TapForTapInterstitial showWithRootViewController: (CCDirectorIOS*) [CCDirector sharedDirector]];
 }
 
 -(void)infoButtonAction{
@@ -1252,10 +1260,11 @@
 
 - (void)onExit {
     infoButton.hidden = YES;
-    adView.hidden=YES;
+    if (adView != nil) {
+        [adView removeFromSuperview];
+    }
     
     [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
-//    [[CDAudioManager sharedManager]stopBackgroundMusic];
     [super onExit];
 }
 
@@ -1275,5 +1284,29 @@
     [collectedWord release];
 	[super dealloc];
 }
+
+#pragma mark - TapForTapAdViewDelegate methods
+
+- (UIViewController *) rootViewController
+{
+    return (UIViewController*) [UIApplication sharedApplication].keyWindow.rootViewController; // or possibly self.navigationController
+}
+
+- (void) tapForTapAdViewDidReceiveAd: (TapForTapAdView *)adView
+{
+    NSLog(@"ad view did receive ad");
+}
+
+- (void) tapForTapAdView: (TapForTapAdView *)adView didFailToReceiveAd: (NSString *)reason
+{
+    NSLog(@"ad view failed to load ads: %@", reason);
+}
+
+- (void) tapForTapAdViewWasTapped: (TapForTapAdView *)adView
+{
+    NSLog(@"ad view tapped");
+}
+
+
 
 @end

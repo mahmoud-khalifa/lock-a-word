@@ -38,11 +38,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 {
 	
     // this is method for TapforTap
-//    [TapForTap setDefaultAppId: @"c91a3680-b956-012f-f6ff-4040d804a637"];
-    
-    //update id
-    [TapForTap setDefaultAppId: @"c91a3680-b956-012f-f6ff-4040d804a637"];
-    [TapForTap checkIn];
+    [TapForTap initializeWithAPIKey: KTapForTapAPIKey];
     
     // Create the main window
 
