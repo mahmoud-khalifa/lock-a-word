@@ -147,6 +147,7 @@
 		348B0EA115EA628100DB065D /* MKStoreKitConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 348B0E9715EA628100DB065D /* MKStoreKitConfigs.plist */; };
 		348B0EA215EA628100DB065D /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9915EA628100DB065D /* MKStoreManager.m */; };
 		348B0EA315EA628100DB065D /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 348B0E9B15EA628100DB065D /* MKStoreObserver.m */; };
+		34AE22ED16457FBD0013D11A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AE22EC16457FBD0013D11A /* Crashlytics.framework */; };
 		34CEDF7915E51F0F00E77A0D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF7415E51F0F00E77A0D /* .gitignore */; };
 		34CEDF7A15E51F0F00E77A0D /* ALToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 34CEDF7615E51F0F00E77A0D /* ALToastView.m */; };
 		34CEDF7B15E51F0F00E77A0D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 34CEDF7715E51F0F00E77A0D /* LICENSE.txt */; };
@@ -469,6 +470,7 @@
 		348B0E9915EA628100DB065D /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreManager.m; sourceTree = "<group>"; };
 		348B0E9A15EA628100DB065D /* MKStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKStoreObserver.h; sourceTree = "<group>"; };
 		348B0E9B15EA628100DB065D /* MKStoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKStoreObserver.m; sourceTree = "<group>"; };
+		34AE22EC16457FBD0013D11A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		34CEDF7415E51F0F00E77A0D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		34CEDF7515E51F0F00E77A0D /* ALToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALToastView.h; sourceTree = "<group>"; };
 		34CEDF7615E51F0F00E77A0D /* ALToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALToastView.m; sourceTree = "<group>"; };
@@ -783,6 +785,7 @@
 				BB2CBF9E15A63EAB001CC30F /* GameKit.framework in Frameworks */,
 				1EC4471B15DD8D6700C50ADE /* libFlurryAnalytics.a in Frameworks */,
 				347591011637FB2400632634 /* libTapForTapAds.a in Frameworks */,
+				34AE22ED16457FBD0013D11A /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1212,6 +1215,7 @@
 		BB2CBF8C15A63EAB001CC30F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34AE22EC16457FBD0013D11A /* Crashlytics.framework */,
 				31CEA2BC15AB3C3F00A6512D /* libxml2.dylib */,
 				348B0E8515EA61FD00DB065D /* Security.framework */,
 				348B0E8815EA620700DB065D /* StoreKit.framework */,
@@ -1644,6 +1648,7 @@
 				BB2CBF8515A63EAB001CC30F /* Sources */,
 				BB2CBF8615A63EAB001CC30F /* Frameworks */,
 				BB2CBF8715A63EAB001CC30F /* Resources */,
+				34AE22EA16457F840013D11A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1828,6 +1833,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34AE22EA16457F840013D11A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run fd5c0556f2d2dfa0a11cd2f8e4050bf86c6b798a";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BB2CBF8515A63EAB001CC30F /* Sources */ = {

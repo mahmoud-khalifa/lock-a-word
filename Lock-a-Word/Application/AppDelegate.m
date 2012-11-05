@@ -14,7 +14,7 @@
 
 #import "GameConfig.h"
 #import "StatisticsCollector.h"
-
+#import <Crashlytics/Crashlytics.h>
 #import "Appirater.h"
 
 @implementation AppController
@@ -37,6 +37,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	
+    [Crashlytics startWithAPIKey:@"fd5c0556f2d2dfa0a11cd2f8e4050bf86c6b798a"];
+    
     // this is method for TapforTap
     [TapForTap initializeWithAPIKey: KTapForTapAPIKey];
     
