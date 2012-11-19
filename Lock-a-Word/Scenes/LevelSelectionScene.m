@@ -12,7 +12,6 @@
 #import "SimpleAudioEngine.h"
 
 #import "GameConfig.h"
-
 #import "GameData.h"
 #import "GameDataParser.h"
 
@@ -31,7 +30,7 @@
 @synthesize device;
 
 
-+(id)scene {
++ (id)scene {
     CCScene *scene = [CCScene node];
     
     LevelSelectionScene *layer = [LevelSelectionScene node];
@@ -42,9 +41,9 @@
 }
 
 
--(id) init{
+- (id)init{
     
-	if( (self=[super init] )) {
+	if( (self = [super init]) ) {
         
         // get shared controller
         controller = [Controller sharedController];
@@ -132,7 +131,6 @@
         for (int i=0 ; i<[selectedLevels.levels count]; i++) {
             CCMenuItem *item = [levelMenu.children objectAtIndex:i];
             // set position of overlay sprites
-            
             for (CCSprite *overlaySprite in overlay) {
                 if (overlaySprite.tag == item.tag) {
                     [overlaySprite setAnchorPoint:item.anchorPoint];
@@ -143,7 +141,6 @@
         }
 
         // Put the overlays and labels layers on the screen at the same position as the levelMenu
-        
         [overlays setAnchorPoint:levelMenu.anchorPoint];
         [overlays setPosition:levelMenu.position];
         [self addChild:overlays];
@@ -154,7 +151,7 @@
 	return self;
 }
 
--(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];     
     location = [[CCDirector sharedDirector] convertToGL:location];
@@ -166,37 +163,24 @@
     }
 }
 
-
-- (void) onPlay: (CCMenuItemImage*) sender {
+- (void)onPlay:(CCMenuItemImage*)sender {
     [[SimpleAudioEngine sharedEngine]playEffect:@"Button.mp3"];
     [self performSelector:@selector(onPlay2:) withObject:sender afterDelay:0.6];
 }
 
-- (void) onPlay2: (CCMenuItemImage*) sender {
-    
-//    // the selected level is determined by the tag in the menu item 
-//    int selectedLevel = sender.tag;
-//    
-//    // store the selected level in GameData
-//    [controller selectLevel:selectedLevel];
-//    
-//    // load the game scene
-//    [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
-    
+- (void)onPlay2:(CCMenuItemImage*)sender {
     if ([controller isGameModesUnlocked]) {
         int selectedLevel = sender.tag;
         [controller selectLevel:selectedLevel];
         [[CCDirector sharedDirector] replaceScene:[GameScene scene]];
     }else {
-        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Do you want to upgrade to full version?" andLoadingviewEnabled:NO];
+        BlockAlertView *alertView=[BlockAlertView alertWithTitle:@"Upgrade" message:@"Play 60 new levels at any time. Engaging new challenges in all 3 remaining modes." andLoadingviewEnabled:NO];
         [alertView addButtonWithTitle:@"Upgrade" block:^{
             [controller unlockAllGameModes];
         }];
-        [alertView addButtonWithTitle:@"No" block:nil];
-        
+        [alertView addButtonWithTitle:@"Exit" block:nil];
         [alertView show];
     }
-
 }
 
 @end

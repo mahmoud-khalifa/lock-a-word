@@ -188,6 +188,8 @@ messageFont,showDuration,toastAlignment,messageAlignment;
 		[self willChangeValueForKey:@"message"];
 		_message = [message retain];
 		[self didChangeValueForKey:@"message"];
+        
+        _messageColor = [UIColor redColor];
 	}
 	[self readjustSize];
 }
