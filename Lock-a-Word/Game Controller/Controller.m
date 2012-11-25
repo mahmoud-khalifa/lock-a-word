@@ -422,6 +422,12 @@ static Controller *instanceOfController;
     }
 }
 
+- (void)unLockRow:(int)row {
+    for (int i=0; i<5; i++) {
+        lockedBoard[row*5+i] = 0;
+    }
+}
+
 - (void)lockLetter:(int)row andColumn:(int)column{
     lockedBoard[row*5+column] = 1;
 }

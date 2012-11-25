@@ -37,6 +37,7 @@
     CCSprite *boardTrophy;
     NSString *boardTrophyName;
     
+    NSMutableArray *lockedLettersInBoard;
     CCSprite *starsImage;
     NSMutableArray *lockedWords;
     int numOfStars;
@@ -287,7 +288,8 @@
 }
 
 - (void)drawBoard {
-    NSArray * lockedLetters = [gameController getLockedLetters];
+    lockedLettersInBoard = [[NSMutableArray alloc] init];
+    NSArray *lockedLetters = [gameController getLockedLetters];
     if (lockedLetters == nil) { //Plastic mode
         [self enableTouches];
         return;
@@ -313,14 +315,16 @@
         
         [self spinLetter:letterSprite];
         [self performSelector:@selector(changeLockedLetterColor:) withObject:letterSprite afterDelay:1];
+        
+        [lockedLettersInBoard addObject:letterSprite];
     }
 }
 
 - (void)spinLetter:(CCSprite*)letterSprite{
-    CCSprite* tempSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",@"a"]];
-    float xPos = letterSprite.position.x - (letterSprite.position.x / 10);
-    float yPos = letterSprite.position.y - (letterSprite.position.y / 10);
-    tempSprite.position = ccp(xPos, yPos);
+//    CCSprite* tempSprite = [CCSprite spriteWithSpriteFrameName:[NSString stringWithFormat:@"%@.png",@"a"]];
+//    float xPos = letterSprite.position.x - (letterSprite.position.x / 10);
+//    float yPos = letterSprite.position.y - (letterSprite.position.y / 10);
+//    tempSprite.position = ccp(xPos, yPos);
 
     [[SimpleAudioEngine sharedEngine]playEffect:@"LetterSpin.aiff"];
     
@@ -561,7 +565,10 @@
 
 - (BOOL)canSwapLetterAtRow:(int)row{
     int column = [gameController getFirstColumnIndexOfRow:row];
-    if ( (column > 4) && (([self isVowel:currentLetter])||(numOfSwaps < 3)) && (![self isRowLocked:column]) ) {
+//    if ( (column > 4) && (([self isVowel:currentLetter])||(numOfSwaps < 3)) && (![self isRowLocked:column]) ) {
+//        return YES;
+//    }
+    if ( (column > 4) && (([self isVowel:currentLetter])||(numOfSwaps < 3)) ) {
         return YES;
     }
     return NO;
@@ -572,6 +579,9 @@
     
     if ( (column <= 4) || ([self canSwapLetterAtRow:row]) ) {
         if (column > 4) {
+            if ([self isRowLocked:row]) {
+                [self unlockRow:row];
+            }
             if ( ([gameController currentGameMode] == GoldLock) && (row < 3) ) {
                 column = 3;
                 CCSprite* oldSprite = (CCSprite*)[self getChildByTag:(row*5+3)];
@@ -755,6 +765,30 @@
         [self performSelector:@selector(changeColor:) withObject:word afterDelay:2];
         [[SimpleAudioEngine sharedEngine]playEffect:@"keydoor2.mp3"];
         [self performSelector:@selector(playApplause) withObject:nil afterDelay:0.4];
+    }
+}
+
+- (void)unlockRow:(int)row {
+    NSString *word = @"";
+    NSMutableArray *collWord = [[NSMutableArray alloc]init];
+    for (int i=row*5; i < (row+1)*5; i++) {
+        CCSprite* sprite = (CCSprite*)[self getChildByTag:i];
+        if (sprite != nil) {
+            word = [word stringByAppendingString:sprite.userData];
+            [collWord addObject:sprite];
+        }
+    }
+    
+    if([gameController isGameCompleted]){
+        [self gameCompleted];
+    } else {
+        for (CCSprite* collectedLetter in collWord) {
+            if (![lockedLettersInBoard containsObject:collectedLetter]) {
+                collectedLetter.color = ccYELLOW;
+            }
+        }
+        [lockedWords removeObject:word];
+        [gameController unLockRow:row];
     }
 }
 
